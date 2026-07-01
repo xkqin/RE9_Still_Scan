@@ -1,0 +1,56 @@
+game:
+  lua_path: "D:/steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem/reframework/autorun/RE9FreeCam.lua"
+  reframework_dir: "D:/steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem/reframework"
+  reframework_data_dir: "D:/steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem/reframework/data"
+
+lua_logger:
+  control_file: "D:/steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem/reframework/data/re9_pose_control.json"
+  status_file: "D:/steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem/reframework/data/re9_pose_status.json"
+  pose_log_file: "D:/steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem/reframework/data/re9_freecam_pose_log.csv"
+  default_interval_sec: 0.033333
+  backup_dir: "backups/lua"
+
+obs:
+  host: "localhost"
+  port: 4455
+  password: ""
+  recording_output_dir: "data/videos"
+
+video:
+  fps: 2.0
+  jpeg_quality: 95
+  overwrite: false
+  supported_video_extensions:
+    - ".mp4"
+    - ".mkv"
+    - ".mov"
+    - ".flv"
+    - ".avi"
+
+laion:
+  repo_url: "https://github.com/LAION-AI/aesthetic-predictor.git"
+  repo_dir: "third_party/aesthetic-predictor"
+  model: "vit_l_14"
+  device: "auto"
+  batch_size: 32
+  cache_dir: "~/.cache/re9_pose_recorder"
+  hf_cache_dir: "third_party/huggingface_cache"
+
+alignment:
+  method: "nearest"
+  max_time_diff_sec: 0.25
+
+report:
+  top_k: 50
+  output_dir: "outputs"
+  copy_top_frames: true
+  smooth_window: 0
+
+live_score:
+  enabled: true
+  interval_sec: 2.0
+  summary_window_sec: 10.0
+  segment_window_sec: 5.0
+  screenshot_width: 512
+  screenshot_height: 288
+  screenshot_quality: 80

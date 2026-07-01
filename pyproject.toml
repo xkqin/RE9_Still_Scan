@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "re9-freecam-aesthetic-pose-recorder"
+version = "0.1.0"
+description = "Manual RE9 FreeCam OBS recording with LAION aesthetic scoring and pose alignment."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "typer",
+  "rich",
+  "pyyaml",
+  "pandas",
+  "numpy",
+  "pillow",
+  "opencv-python",
+  "torch",
+  "torchvision",
+  "open_clip_torch",
+  "tqdm",
+  "matplotlib",
+  "jinja2",
+  "obsws-python",
+  "requests",
+]
+
+[project.scripts]
+re9-pose-recorder = "re9_pose_recorder.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+re9_pose_recorder = ["py.typed"]

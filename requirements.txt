@@ -1,0 +1,16 @@
+typer
+rich
+pyyaml
+pandas
+numpy
+pillow
+opencv-python
+torch
+torchvision
+open_clip_torch
+tqdm
+matplotlib
+jinja2
+obsws-python
+requests
+-e .

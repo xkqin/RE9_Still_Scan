@@ -1,0 +1,48 @@
+layers:
+  - id: scene01_plane01
+    y: 13.91
+    point_a:
+      x: -5.07
+      y: 12.53
+      z: -262.11
+    point_b:
+      x: 24.01
+      y: 13.91
+      z: -324.49
+    zones:
+      - id: dense
+        y: 13.91
+        points_x: 12
+        points_z: 12
+        point_a:
+          x: -5.07
+          y: 12.53
+          z: -262.11
+        point_b:
+          x: 24.01
+          y: 13.91
+          z: -324.49
+
+  - id: scene02_plane01
+    y: 6.15
+    point_a:
+      x: 135.87
+      y: 5.93
+      z: -310.39
+    point_b:
+      x: 90.06
+      y: 6.15
+      z: -349.16
+    zones:
+      - id: dense
+        y: 6.15
+        points_x: 12
+        points_z: 12
+        point_a:
+          x: 135.87
+          y: 5.93
+          z: -310.39
+        point_b:
+          x: 90.06
+          y: 6.15
+          z: -349.16

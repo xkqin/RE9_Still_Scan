@@ -1,0 +1,45 @@
+layers:
+  - id: y01_street
+    point_a:
+      x: -15.79
+      y: 4.32
+      z: 10.04
+    point_b:
+      x: 96.96
+      y: 4.32
+      z: -7.20
+    zones:
+      - id: street_dense
+        points_x: 10
+        points_z: 16
+        point_a:
+          x: -15.79
+          y: 4.32
+          z: 10.04
+        point_b:
+          x: 96.96
+          y: 4.32
+          z: -7.20
+
+  - id: y02_upper
+    point_a:
+      x: 96.95
+      y: 13.71
+      z: -7.15
+    point_b:
+      x: 0.67
+      y: 13.71
+      z: 10.68
+    zones:
+      - id: feasible
+        points_x: 6
+        points_z: 8
+        point_a:
+          x: 96.95
+          y: 13.71
+          z: -7.15
+        point_b:
+          x: 0.67
+          y: 13.71
+          z: 10.68
+
