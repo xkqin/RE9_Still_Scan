@@ -184,6 +184,120 @@ layers:
         points_z: 12
 ```
 
+### How to define scan regions
+
+Edit one of these YAML files:
+
+```text
+configs/still_scan_layers.yaml
+configs/new_scene_scan_layers.yaml
+```
+
+Use the FreeCam UI in REFramework to read the camera position. The FreeCam panel shows a line like:
+
+```text
+Pos: [x, y, z]
+```
+
+Choose two opposite corners of the region you want to scan, then copy those values into `point_a` and `point_b`.
+
+Example:
+
+```text
+Corner A from FreeCam UI:
+Pos: [-5.07, 12.53, -262.11]
+
+Corner B from FreeCam UI:
+Pos: [24.01, 13.91, -324.49]
+```
+
+Put them into YAML like this:
+
+```yaml
+layers:
+  - id: scene01_plane01
+    y: 13.91
+    point_a:
+      x: -5.07
+      y: 12.53
+      z: -262.11
+    point_b:
+      x: 24.01
+      y: 13.91
+      z: -324.49
+    zones:
+      - id: dense
+        y: 13.91
+        points_x: 12
+        points_z: 12
+        point_a:
+          x: -5.07
+          y: 12.53
+          z: -262.11
+        point_b:
+          x: 24.01
+          y: 13.91
+          z: -324.49
+```
+
+Field meanings:
+
+- `id`: name used in output folder names and CSV rows.
+- `y`: the fixed scan height. In RE Engine coordinates here, `y` is vertical height.
+- `point_a` / `point_b`: two diagonal corners of the rectangular scan area. The scanner uses their `x` and `z` values as the horizontal bounds.
+- `zones`: one layer can contain one or more scan zones. Use this when you want a broad low-density area plus a smaller high-density focus area.
+- `points_x`: number of sampled positions along the x axis.
+- `points_z`: number of sampled positions along the z axis.
+
+Image count formula:
+
+```text
+total_images = points_x * points_z * 22
+```
+
+For example:
+
+```text
+12 x 12 x 22 = 3168 images
+10 x 16 x 22 = 3520 images
+```
+
+If a layer's two measured corners have slightly different `y` values, set the layer and zone `y` explicitly to the height you want to scan. The scanner will keep all positions on that fixed plane.
+
+To add a second scene, add another item under `layers`:
+
+```yaml
+layers:
+  - id: scene01_plane01
+    ...
+
+  - id: scene02_plane01
+    y: 6.15
+    point_a:
+      x: 135.87
+      y: 5.93
+      z: -310.39
+    point_b:
+      x: 90.06
+      y: 6.15
+      z: -349.16
+    zones:
+      - id: dense
+        y: 6.15
+        points_x: 12
+        points_z: 12
+        point_a:
+          x: 135.87
+          y: 5.93
+          z: -310.39
+        point_b:
+          x: 90.06
+          y: 6.15
+          z: -349.16
+```
+
+The two scenes will be saved to separate dataset folders under the same scan session.
+
 For each position, the scanner captures 22 views:
 
 - `pitch = 0`, yaw every 45 degrees: 8 images.
