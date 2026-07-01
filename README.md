@@ -1,4 +1,4 @@
-# RE9 Still Scan
+# RE9 FreeCam Dataset Capture Toolkit
 
 Tools for collecting reproducible Resident Evil Requiem / Resident Evil 9 FreeCam still-image datasets with OBS, plus optional video recording, pose logging, LAION aesthetic scoring, and pose/score reports.
 
