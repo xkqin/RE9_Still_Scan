@@ -166,7 +166,15 @@ def physics_probe(
     table = Table(title="Lua Physics Probe")
     table.add_column("Field")
     table.add_column("Value")
-    for key in ["physics_probe_status", "physics_probe_contacts", "physics_probe_rays", "physics_probe_error", "last_error"]:
+    for key in [
+        "physics_probe_status",
+        "physics_probe_pose_valid",
+        "physics_probe_contacts",
+        "physics_probe_rays",
+        "physics_probe_details",
+        "physics_probe_error",
+        "last_error",
+    ]:
         table.add_row(key, str(status.get(key, "")))
     console.print(table)
 
