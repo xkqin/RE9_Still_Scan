@@ -317,6 +317,34 @@ Generated still images are ignored by Git. Do not commit game screenshots or dat
 
 By default, the scanner captures the current OBS Program scene as PNG at the OBS Base Canvas resolution. For highest quality, set OBS `Settings -> Video -> Base Canvas Resolution` to the resolution you want before scanning. If your OBS Program scene includes overlays, menus, or display-capture artifacts, those will be saved too; use a clean Game Capture scene and close the REFramework UI with `Insert` before starting.
 
+### Post-scan bad image QA
+
+After a scan finishes, run the bad-image detector on the session-level `samples.csv`.
+
+```powershell
+python -m re9_pose_recorder.cli detect-inaccessible-points --samples data/stills/scans/SESSION/samples.csv
+```
+
+The detector is image-based. It does not read game memory and does not know the collision mesh. It looks for suspicious stills using simple visual metrics such as low entropy, low contrast, low edge density, mostly black frames, mostly white frames, or unreadable image files.
+
+Important behavior:
+
+- If one image from a camera point is flagged as bad, the whole point is marked as inaccessible.
+- Original images are not deleted.
+- Use `valid_samples.csv` when you want a filtered dataset.
+- Use `inaccessible_points.csv` when you want to identify points or regions to avoid in future scans.
+
+Outputs are written to:
+
+```text
+data/stills/scans/SESSION/qa/
+  still_quality.csv
+  bad_views.csv
+  inaccessible_points.csv
+  invalid_samples_by_point.csv
+  valid_samples.csv
+```
+
 ## Record and score
 
 Start the game, enable/use the FreeCam manually, make sure OBS capture is configured, then run:

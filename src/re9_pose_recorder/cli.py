@@ -431,6 +431,36 @@ def scan_stills_gui(
     )
 
 
+@app.command("detect-inaccessible-points")
+def detect_inaccessible_points_command(
+    samples: Path = typer.Option(..., "--samples"),
+    out: Optional[Path] = typer.Option(None, "--out"),
+    entropy_threshold: float = typer.Option(3.0, "--entropy-threshold"),
+    std_threshold: float = typer.Option(8.0, "--std-threshold"),
+    edge_density_threshold: float = typer.Option(0.004, "--edge-density-threshold"),
+    dark_ratio_threshold: float = typer.Option(0.85, "--dark-ratio-threshold"),
+    bright_ratio_threshold: float = typer.Option(0.92, "--bright-ratio-threshold"),
+) -> None:
+    """After a scan finishes, flag bad stills and exclude whole bad camera points."""
+    from .bad_still_detector import detect_inaccessible_points
+
+    outputs = detect_inaccessible_points(
+        samples,
+        output_dir=out,
+        entropy_threshold=entropy_threshold,
+        std_threshold=std_threshold,
+        edge_density_threshold=edge_density_threshold,
+        dark_ratio_threshold=dark_ratio_threshold,
+        bright_ratio_threshold=bright_ratio_threshold,
+    )
+    table = Table(title="Inaccessible point QA outputs")
+    table.add_column("Name")
+    table.add_column("Path")
+    for name, path in outputs.items():
+        table.add_row(name, str(path))
+    console.print(table)
+
+
 @app.command("warmup-laion")
 def warmup_laion(
     model: Optional[str] = typer.Option(None, "--model"),
