@@ -1,0 +1,48 @@
+layers:
+  - id: scene04_indoor_room01
+    y: 6.20
+    point_a:
+      x: 3.48
+      y: 4.13
+      z: 46.29
+    point_b:
+      x: -3.74
+      y: 6.20
+      z: 31.79
+    zones:
+      - id: dense
+        y: 6.20
+        points_x: 8
+        points_z: 8
+        point_a:
+          x: 3.48
+          y: 4.13
+          z: 46.29
+        point_b:
+          x: -3.74
+          y: 6.20
+          z: 31.79
+
+  - id: scene04_indoor_room02
+    y: 4.44
+    point_a:
+      x: 21.19
+      y: 4.19
+      z: 35.00
+    point_b:
+      x: 33.02
+      y: 4.44
+      z: 44.93
+    zones:
+      - id: dense
+        y: 4.44
+        points_x: 8
+        points_z: 8
+        point_a:
+          x: 21.19
+          y: 4.19
+          z: 35.00
+        point_b:
+          x: 33.02
+          y: 4.44
+          z: 44.93
