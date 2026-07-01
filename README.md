@@ -1,14 +1,31 @@
-# re9-freecam-aesthetic-pose-recorder
+# RE9 Still Scan
 
-Manual Resident Evil Requiem / Resident Evil 9 FreeCam recording with OBS, LAION aesthetic frame scoring, and timestamp-based camera pose alignment.
+Tools for collecting reproducible Resident Evil Requiem / Resident Evil 9 FreeCam still-image datasets with OBS, plus optional video recording, pose logging, LAION aesthetic scoring, and pose/score reports.
 
-This project assumes you manually control the FreeCam in-game. Python starts and stops OBS recording, asks the Lua logger to write camera pose rows, extracts frames from the resulting video, scores those frames with the official LAION-AI `aesthetic-predictor` repo, aligns scores to pose timestamps, and produces CSVs, plots, top frames, and an HTML report.
+The main workflow is:
+
+1. Install Resident Evil Requiem, REFramework, and the RE9 FREECAM CED mod yourself.
+2. Patch the FreeCam Lua script with this project's reversible logger/control block.
+3. Use OBS WebSocket as the capture backend.
+4. Define scan regions as `x/y/z` planes in YAML.
+5. Let Python move the FreeCam through the scan grid and save high-quality still images plus CSV metadata.
+
+The repository is intentionally code-only. It does not include game files, mod files, screenshots, videos, generated datasets, model weights, or Nexus mod downloads.
+
+## Who this is for
+
+- Researchers or artists who want reproducible FreeCam image datasets from manually installed mods.
+- People who want each captured image paired with `x`, `y`, `z`, `yaw`, `pitch`, and source metadata.
+- Users who want to compare viewpoints later with optional LAION aesthetic scoring.
+- Anyone who wants a configurable OBS + FreeCam capture pipeline without modifying the game executable or FreeCam DLL.
 
 ## What this project does
 
 - Backs up and minimally patches `RE9FreeCam.lua` with a reversible pose logger block.
 - Communicates with Lua only through JSON files in `reframework/data`.
 - Controls OBS through OBS WebSocket.
+- Captures still images from OBS using configurable scan planes and view patterns.
+- Writes per-image CSV metadata for position, yaw, pitch, dataset, and file path.
 - Extracts video frames at a configured FPS.
 - Scores frames using CLIP embeddings plus LAION aesthetic predictor weights.
 - Aligns frame timestamps to camera pose timestamps.
@@ -16,11 +33,12 @@ This project assumes you manually control the FreeCam in-game. Python starts and
 
 ## What this project does not do
 
-- It does not automate camera movement.
+- It does not control player movement or gameplay.
+- It does not know the map collision mesh, so scan regions must be chosen by the user.
 - It does not modify `RE9FreeCamPlugin.dll`.
 - It does not read game memory from Python.
 - It does not modify the game executable.
-- It does not redistribute the Nexus mod.
+- It does not redistribute Nexus mods.
 - It does not include game assets, videos, screenshots, or mod files.
 
 ## Installation
@@ -41,6 +59,37 @@ D:\steam\steamapps\common\RESIDENT EVIL requiem BIOHAZARD requiem\reframework\au
    Password: set one.
 7. Install Python 3.10+.
 8. Install Git.
+
+## Required Nexus Mods
+
+This repository does not include or redistribute Nexus mod files. Download and install these manually from Nexus Mods:
+
+- [REFramework](https://www.nexusmods.com/residentevilrequiem/mods/13): a scripting/API framework for RE Engine games. This project relies on REFramework's Lua runtime, `reframework/autorun` script loading, and `reframework/data` file access so Python can communicate with Lua by JSON files.
+- [RE9 FREECAM CED](https://www.nexusmods.com/residentevilrequiem/mods/1147): the Resident Evil Requiem FreeCam mod used to manually or scriptedly position the camera. The Nexus page lists REFramework as a requirement.
+
+Install summary:
+
+1. Install REFramework for Resident Evil Requiem following the Nexus mod instructions.
+2. Install RE9 FREECAM CED after REFramework.
+3. The FreeCam plugin DLL should be placed under:
+
+```text
+<game folder>/reframework/plugins/
+```
+
+4. The FreeCam Lua script should be placed under:
+
+```text
+<game folder>/reframework/autorun/
+```
+
+5. Confirm this file exists before patching:
+
+```text
+D:\steam\steamapps\common\RESIDENT EVIL requiem BIOHAZARD requiem\reframework\autorun\RE9FreeCam.lua
+```
+
+The Python patcher only backs up and modifies `RE9FreeCam.lua`. It never modifies the game executable, never modifies the FreeCam DLL, and never reads game memory from Python.
 
 ## Python setup
 
@@ -86,6 +135,69 @@ python -m re9_pose_recorder.cli obs-test --obs-password YOUR_PASSWORD
 ```
 
 If OBS is not running, WebSocket is disabled, the port is wrong, or the password is wrong, the command prints connection guidance.
+
+## Still image scan datasets
+
+This is the current primary workflow. The scanner moves the FreeCam through configured `x/y/z` scan regions, captures OBS still images, and writes a CSV row for every image.
+
+Before starting:
+
+1. Start the game.
+2. Enable FreeCam.
+3. Open OBS and make sure the current Program scene captures the game cleanly.
+4. Close the REFramework menu before capture begins. If the REFramework overlay is visible in OBS, it will be visible in the saved images.
+
+Run the default street/upper-plane scan:
+
+```powershell
+python scripts\scan_stills_gui.py
+```
+
+Run the two-scene scan example:
+
+```powershell
+python scripts\scan_new_scenes_gui.py
+```
+
+The scan definitions live in:
+
+```text
+configs/still_scan_layers.yaml
+configs/new_scene_scan_layers.yaml
+```
+
+Each layer/zone defines a rectangular region using two diagonal points and a sampling density:
+
+```yaml
+layers:
+  - id: scene01_plane01
+    y: 13.91
+    point_a: {x: -5.07, y: 12.53, z: -262.11}
+    point_b: {x: 24.01, y: 13.91, z: -324.49}
+    zones:
+      - id: dense
+        points_x: 12
+        points_z: 12
+```
+
+For each position, the scanner captures 22 views:
+
+- `pitch = 0`, yaw every 45 degrees: 8 images.
+- `pitch = +45`, yaw every 60 degrees: 6 images.
+- `pitch = -45`, yaw every 60 degrees: 6 images.
+- `pitch = +90` and `-90`: 2 images.
+
+Outputs are saved under:
+
+```text
+data/stills/scans/<session>/datasets/<dataset_id>/images/
+data/stills/scans/<session>/datasets/<dataset_id>/samples.csv
+data/stills/scans/<session>/samples.csv
+```
+
+Generated still images are ignored by Git. Do not commit game screenshots or datasets to this repository.
+
+By default, the scanner captures the current OBS Program scene as PNG at the OBS Base Canvas resolution. For highest quality, set OBS `Settings -> Video -> Base Canvas Resolution` to the resolution you want before scanning. If your OBS Program scene includes overlays, menus, or display-capture artifacts, those will be saved too; use a clean Game Capture scene and close the REFramework UI with `Insert` before starting.
 
 ## Record and score
 
