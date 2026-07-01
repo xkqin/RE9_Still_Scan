@@ -74,6 +74,11 @@ class LuaControl:
             {"command": "clear_pose", "command_id": f"clear_pose:{session_id}:{time.time():.6f}", "session_id": session_id}
         )
 
+    def write_physics_probe_control(self, session_id: str = "manual") -> Path:
+        return self._write_control(
+            {"command": "physics_probe", "command_id": f"physics_probe:{session_id}:{time.time():.6f}", "session_id": session_id}
+        )
+
     def read_status(self) -> dict[str, Any] | None:
         if not self.status_file.exists():
             return None

@@ -143,6 +143,34 @@ def stop_pose_log(
     console.print(f"[green]Wrote stop control:[/green] {path}")
 
 
+@app.command("physics-probe")
+def physics_probe(
+    session_id: str = typer.Option("manual", "--session-id"),
+    wait_sec: float = typer.Option(1.0, "--wait-sec"),
+    config: Optional[Path] = typer.Option(None, "--config"),
+) -> None:
+    """Ask the Lua patch to run a small via.physics castRay probe at the current FreeCam pose."""
+    cfg = _config(config)
+    control = LuaControl(cfg)
+    path = control.write_physics_probe_control(session_id)
+    console.print(f"[green]Wrote physics probe control:[/green] {path}")
+    deadline = time.monotonic() + wait_sec
+    status = control.read_status() or {}
+    while time.monotonic() < deadline:
+        current = control.read_status() or {}
+        if current.get("physics_probe_status") != status.get("physics_probe_status") or current.get("physics_probe_rays"):
+            status = current
+            break
+        status = current
+        time.sleep(0.1)
+    table = Table(title="Lua Physics Probe")
+    table.add_column("Field")
+    table.add_column("Value")
+    for key in ["physics_probe_status", "physics_probe_contacts", "physics_probe_rays", "physics_probe_error", "last_error"]:
+        table.add_row(key, str(status.get(key, "")))
+    console.print(table)
+
+
 @app.command("interactive-record")
 def interactive_record(
     obs_password: str = typer.Option("", "--obs-password"),
@@ -436,12 +464,13 @@ def detect_inaccessible_points_command(
     samples: Path = typer.Option(..., "--samples"),
     out: Optional[Path] = typer.Option(None, "--out"),
     entropy_threshold: float = typer.Option(3.0, "--entropy-threshold"),
-    std_threshold: float = typer.Option(8.0, "--std-threshold"),
+    std_threshold: float = typer.Option(3.0, "--std-threshold"),
     edge_density_threshold: float = typer.Option(0.004, "--edge-density-threshold"),
-    dark_ratio_threshold: float = typer.Option(0.85, "--dark-ratio-threshold"),
-    bright_ratio_threshold: float = typer.Option(0.92, "--bright-ratio-threshold"),
+    dark_ratio_threshold: float = typer.Option(0.98, "--dark-ratio-threshold"),
+    bright_ratio_threshold: float = typer.Option(0.995, "--bright-ratio-threshold"),
+    delete_images: bool = typer.Option(False, "--delete-images/--keep-images"),
 ) -> None:
-    """After a scan finishes, flag bad stills and exclude whole bad camera points."""
+    """After a scan finishes, flag bad stills and optionally delete whole bad camera points."""
     from .bad_still_detector import detect_inaccessible_points
 
     outputs = detect_inaccessible_points(
@@ -452,6 +481,7 @@ def detect_inaccessible_points_command(
         edge_density_threshold=edge_density_threshold,
         dark_ratio_threshold=dark_ratio_threshold,
         bright_ratio_threshold=bright_ratio_threshold,
+        delete_invalid_images=delete_images,
     )
     table = Table(title="Inaccessible point QA outputs")
     table.add_column("Name")

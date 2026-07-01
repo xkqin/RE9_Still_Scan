@@ -317,22 +317,36 @@ Generated still images are ignored by Git. Do not commit game screenshots or dat
 
 By default, the scanner captures the current OBS Program scene as PNG at the OBS Base Canvas resolution. For highest quality, set OBS `Settings -> Video -> Base Canvas Resolution` to the resolution you want before scanning. If your OBS Program scene includes overlays, menus, or display-capture artifacts, those will be saved too; use a clean Game Capture scene and close the REFramework UI with `Insert` before starting.
 
-### Post-scan bad image QA
+### Post-scan capture QA
 
-After a scan finishes, run the bad-image detector on the session-level `samples.csv`.
+After a scan finishes in the still-scan GUI, click `Delete Broken Capture Images`.
+The GUI runs conservative capture QA on the session-level `samples.csv` and deletes
+only obvious broken capture files.
+
+You can also run the detector from the command line. By default, the CLI only
+writes QA reports:
 
 ```powershell
 python -m re9_pose_recorder.cli detect-inaccessible-points --samples data/stills/scans/SESSION/samples.csv
 ```
 
-The detector is image-based. It does not read game memory and does not know the collision mesh. It looks for suspicious stills using simple visual metrics such as low entropy, low contrast, low edge density, mostly black frames, mostly white frames, or unreadable image files.
+To delete the original image files for bad camera points from the CLI, add
+`--delete-images`:
+
+```powershell
+python -m re9_pose_recorder.cli detect-inaccessible-points --samples data/stills/scans/SESSION/samples.csv --delete-images
+```
+
+The detector is image-based. It does not read game memory, does not know the collision mesh, and does not reliably detect clipping. It is intentionally conservative: sky, fog, walls, close surfaces, and other low-detail but valid views should be kept. It only flags obvious capture failures such as unreadable image files and nearly uniform black/white frames.
 
 Important behavior:
 
-- If one image from a camera point is flagged as bad, the whole point is marked as inaccessible.
-- Original images are not deleted.
+- If one image from a camera point is flagged as a broken capture, the whole point is marked in the QA CSVs.
+- The GUI cleanup button deletes original images for the broken capture point.
+- The CLI deletes original images only when `--delete-images` is used.
 - Use `valid_samples.csv` when you want a filtered dataset.
-- Use `inaccessible_points.csv` when you want to identify points or regions to avoid in future scans.
+- Use `inaccessible_points.csv` as a legacy-named report of points that had broken captures.
+- Use `deleted_images.csv` to audit exactly which original files were deleted.
 
 Outputs are written to:
 
@@ -343,7 +357,40 @@ data/stills/scans/SESSION/qa/
   inaccessible_points.csv
   invalid_samples_by_point.csv
   valid_samples.csv
+  deleted_images.csv
 ```
+
+### Experimental Physics Probe
+
+The Lua patch includes an experimental REFramework-side physics probe. This is
+the first step toward real clipping detection. It uses RE Engine physics APIs
+found in the local SDK dump, including `via.physics.System.castRay` and
+`via.physics.CastRayQuery`.
+
+This probe does not read game memory from Python. Python only writes a JSON
+control command; the Lua patch runs the physics query inside REFramework.
+
+After patching Lua, restart the game or reload REFramework scripts, enable
+FreeCam, then either click `Test Physics Probe` in `RE9 Aesthetic Pose Logger`
+or run:
+
+```powershell
+python -m re9_pose_recorder.cli physics-probe --wait-sec 2
+```
+
+The status file will include:
+
+```text
+physics_probe_status
+physics_probe_contacts
+physics_probe_rays
+physics_probe_error
+```
+
+If the probe returns `ok`, the next step is to use the contact count to skip or
+blacklist candidate camera points before OBS captures them. The current probe is
+intentionally diagnostic; it should be validated in-game before being used as a
+hard dataset filter.
 
 ## Record and score
 

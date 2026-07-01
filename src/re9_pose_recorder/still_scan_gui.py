@@ -64,6 +64,7 @@ class StillScanApp:
         self.layers_config = layers_config
         self.stop_event = threading.Event()
         self.running = False
+        self.qa_running = False
         self.output_dir: Path | None = None
         self.captured_count = 0
 
@@ -101,6 +102,13 @@ class StillScanApp:
         self.start_button.pack(fill="x", pady=4)
         self.stop_button = ttk.Button(frame, text="Stop After Current Shot", command=self.stop, state="disabled")
         self.stop_button.pack(fill="x", pady=4)
+        self.qa_button = ttk.Button(
+            frame,
+            text="Delete Broken Capture Images",
+            command=self.run_bad_image_cleanup,
+            state="disabled",
+        )
+        self.qa_button.pack(fill="x", pady=4)
 
         ttk.Label(frame, textvariable=self.status_var, font=("Segoe UI", 11, "bold"), wraplength=720).pack(anchor="w", pady=5)
         ttk.Label(frame, textvariable=self.plan_var, wraplength=720).pack(anchor="w", pady=5)
@@ -145,6 +153,22 @@ class StillScanApp:
         self.stop_event.set()
         self.status_var.set("Stopping after the current shot finishes...")
         self.stop_button.configure(state="disabled")
+
+    def run_bad_image_cleanup(self) -> None:
+        if self.running or self.qa_running:
+            return
+        if self.output_dir is None:
+            messagebox.showerror("QA unavailable", "No scan output folder is available yet.")
+            return
+        samples_csv = self.output_dir / "samples.csv"
+        if not samples_csv.exists():
+            messagebox.showerror("QA unavailable", f"samples.csv was not found:\n{samples_csv}")
+            return
+        self.qa_running = True
+        self.start_button.configure(state="disabled")
+        self.qa_button.configure(state="disabled")
+        self.status_var.set("Checking for broken capture images and deleting only obvious failures...")
+        threading.Thread(target=self._qa_worker, args=(samples_csv,), daemon=True).start()
 
     def on_close(self) -> None:
         if self.running:
@@ -208,6 +232,23 @@ class StillScanApp:
                 handle.write("\n")
             self.root.after(0, lambda: self._set_error(str(exc), error_log))
 
+    def _qa_worker(self, samples_csv: Path) -> None:
+        try:
+            from .bad_still_detector import detect_inaccessible_points
+
+            outputs = detect_inaccessible_points(
+                samples_csv,
+                output_dir=samples_csv.parent / "qa",
+                delete_invalid_images=True,
+            )
+            self.root.after(0, lambda: self._set_qa_done(outputs))
+        except Exception as exc:
+            error_log = ensure_dir(self.config.output_dir) / "still_scan_errors.log"
+            with error_log.open("a", encoding="utf-8") as handle:
+                handle.write(traceback.format_exc())
+                handle.write("\n")
+            self.root.after(0, lambda: self._set_qa_error(str(exc), error_log))
+
     def _progress(self, sample: StillSample, total: int, image_path: Path) -> None:
         self.captured_count = sample.sample_index
 
@@ -231,6 +272,7 @@ class StillScanApp:
             self.output_var.set(f"Output: {output_dir}")
             self.start_button.configure(state="normal")
             self.stop_button.configure(state="disabled")
+            self._refresh_qa_button()
 
         self.root.after(0, apply)
 
@@ -240,7 +282,29 @@ class StillScanApp:
         self.output_var.set(f"Error log: {error_log}")
         self.start_button.configure(state="normal")
         self.stop_button.configure(state="disabled")
+        self._refresh_qa_button()
         messagebox.showerror("Still scan failed", message)
+
+    def _set_qa_done(self, outputs: dict[str, Path]) -> None:
+        self.qa_running = False
+        self.status_var.set("Capture QA done. Broken original images were deleted.")
+        self.file_var.set(f"QA report: {outputs['inaccessible_points_csv']}")
+        self.output_var.set(f"Deleted image log: {outputs['deleted_images_csv']}")
+        self.start_button.configure(state="normal")
+        self._refresh_qa_button()
+
+    def _set_qa_error(self, message: str, error_log: Path) -> None:
+        self.qa_running = False
+        self.status_var.set(f"Bad-image QA failed: {message}")
+        self.output_var.set(f"Error log: {error_log}")
+        self.start_button.configure(state="normal")
+        self._refresh_qa_button()
+        messagebox.showerror("Bad-image QA failed", message)
+
+    def _refresh_qa_button(self) -> None:
+        samples_csv = self.output_dir / "samples.csv" if self.output_dir is not None else None
+        state = "normal" if samples_csv is not None and samples_csv.exists() and not self.running else "disabled"
+        self.qa_button.configure(state=state)
 
 
 def run_still_scan_gui(
