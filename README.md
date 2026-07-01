@@ -2,6 +2,8 @@
 
 Tools for collecting reproducible Resident Evil Requiem / Resident Evil 9 FreeCam still-image datasets with OBS, plus optional video recording, pose logging, LAION aesthetic scoring, and pose/score reports.
 
+> Current platform support: Windows only. The project is developed and tested on Windows with Steam, OBS Studio, REFramework, and PowerShell scripts. Linux/Steam Proton support is not currently tested or documented.
+
 The main workflow is:
 
 1. Install Resident Evil Requiem, REFramework, and the RE9 FREECAM CED mod yourself.
@@ -42,6 +44,8 @@ The repository is intentionally code-only. It does not include game files, mod f
 - It does not include game assets, videos, screenshots, or mod files.
 
 ## Installation
+
+This section assumes Windows. The provided scripts are PowerShell scripts and the default paths use a Windows Steam install location.
 
 1. Install Resident Evil Requiem.
 2. Install REFramework manually.
