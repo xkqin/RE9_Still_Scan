@@ -15,9 +15,9 @@ try {
         --points-x 5 `
         --points-z 6 `
         --settle-seconds 0.4 `
-        --image-format png `
-        --image-width 0 `
-        --image-height 0 `
+        --image-format jpg `
+        --image-width 1920 `
+        --image-height 1080 `
         --image-quality 100
 }
 finally {
