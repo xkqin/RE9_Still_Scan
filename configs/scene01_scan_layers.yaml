@@ -1,0 +1,108 @@
+layers:
+  - id: scene_1.1_y01
+    group_id: scene_1.1
+    y: 0.60
+    point_a: {x: -9.97, y: 0.60, z: -1.81}
+    point_b: {x: 93.48, y: 0.60, z: 5.72}
+    zones:
+      - id: medium_dense
+        points_x: 22
+        points_z: 6
+        point_a: {x: -9.97, y: 0.60, z: -1.81}
+        point_b: {x: 93.48, y: 0.60, z: 5.72}
+
+  - id: scene_1.1_y02
+    group_id: scene_1.1
+    y: 2.50
+    point_a: {x: -9.97, y: 2.50, z: -1.81}
+    point_b: {x: 93.48, y: 2.50, z: 5.72}
+    zones:
+      - id: medium_dense
+        points_x: 22
+        points_z: 6
+        point_a: {x: -9.97, y: 2.50, z: -1.81}
+        point_b: {x: 93.48, y: 2.50, z: 5.72}
+
+  - id: scene_1.1_y03
+    group_id: scene_1.1
+    y: 4.39
+    point_a: {x: -9.97, y: 4.39, z: -1.81}
+    point_b: {x: 93.48, y: 4.39, z: 5.72}
+    zones:
+      - id: medium_dense
+        points_x: 22
+        points_z: 6
+        point_a: {x: -9.97, y: 4.39, z: -1.81}
+        point_b: {x: 93.48, y: 4.39, z: 5.72}
+
+  - id: scene_1.2_y01
+    group_id: scene_1.2
+    y: 2.75
+    point_a: {x: 41.63, y: 2.75, z: 9.56}
+    point_b: {x: 121.65, y: 2.75, z: 11.49}
+    zones:
+      - id: dense_strip
+        points_x: 33
+        points_z: 5
+        point_a: {x: 41.63, y: 2.75, z: 9.56}
+        point_b: {x: 121.65, y: 2.75, z: 11.49}
+
+  - id: scene_1.2_y02
+    group_id: scene_1.2
+    y: 4.08
+    point_a: {x: 41.63, y: 4.08, z: 9.56}
+    point_b: {x: 121.65, y: 4.08, z: 11.49}
+    zones:
+      - id: dense_strip
+        points_x: 33
+        points_z: 5
+        point_a: {x: 41.63, y: 4.08, z: 9.56}
+        point_b: {x: 121.65, y: 4.08, z: 11.49}
+
+  - id: scene_1.2_y03
+    group_id: scene_1.2
+    y: 5.40
+    point_a: {x: 41.63, y: 5.40, z: 9.56}
+    point_b: {x: 121.65, y: 5.40, z: 11.49}
+    zones:
+      - id: dense_strip
+        points_x: 33
+        points_z: 5
+        point_a: {x: 41.63, y: 5.40, z: 9.56}
+        point_b: {x: 121.65, y: 5.40, z: 11.49}
+
+  - id: scene_1.3_y01
+    group_id: scene_1.3
+    y: 12.73
+    point_a: {x: 16.46, y: 12.73, z: -3.39}
+    point_b: {x: 71.32, y: 12.73, z: 10.77}
+    zones:
+      - id: sparse
+        points_x: 6
+        points_z: 4
+        point_a: {x: 16.46, y: 12.73, z: -3.39}
+        point_b: {x: 71.32, y: 12.73, z: 10.77}
+
+  - id: scene_1.3_y02
+    group_id: scene_1.3
+    y: 15.39
+    point_a: {x: 16.46, y: 15.39, z: -3.39}
+    point_b: {x: 71.32, y: 15.39, z: 10.77}
+    zones:
+      - id: sparse
+        points_x: 6
+        points_z: 4
+        point_a: {x: 16.46, y: 15.39, z: -3.39}
+        point_b: {x: 71.32, y: 15.39, z: 10.77}
+
+  - id: scene_1.3_y03
+    group_id: scene_1.3
+    y: 18.05
+    point_a: {x: 16.46, y: 18.05, z: -3.39}
+    point_b: {x: 71.32, y: 18.05, z: 10.77}
+    zones:
+      - id: sparse
+        points_x: 6
+        points_z: 4
+        point_a: {x: 16.46, y: 18.05, z: -3.39}
+        point_b: {x: 71.32, y: 18.05, z: 10.77}

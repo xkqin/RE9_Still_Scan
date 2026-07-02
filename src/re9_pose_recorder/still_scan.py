@@ -21,6 +21,7 @@ from .utils import console
 class StillSample:
     sample_index: int
     point_index: int
+    group_id: str
     layer_id: str
     zone_id: str
     height_index: int
@@ -36,6 +37,7 @@ class StillSample:
 
 @dataclass(frozen=True)
 class StillLayer:
+    group_id: str
     layer_id: str
     zone_id: str
     height_index: int
@@ -102,6 +104,7 @@ def build_still_scan_plan(
                             StillSample(
                                 sample_index=sample_index,
                                 point_index=point_index,
+                                group_id="full",
                                 layer_id=f"y{height_index:02d}",
                                 zone_id="full",
                                 height_index=height_index,
@@ -146,6 +149,7 @@ def build_layered_still_scan_plan(layers: Iterable[StillLayer], points_x: int = 
                             StillSample(
                                 sample_index=sample_index,
                                 point_index=point_index,
+                                group_id=layer.group_id,
                                 layer_id=layer.layer_id,
                                 zone_id=layer.zone_id,
                                 height_index=layer.height_index,
@@ -181,6 +185,7 @@ def load_still_layers(path: str | Path) -> list[StillLayer]:
         if not isinstance(entry, dict):
             raise ValueError(f"Layer {index} must be a mapping.")
         layer_id = str(entry.get("id") or f"dataset_y{index:02d}")
+        group_id = str(entry.get("group_id") or entry.get("dataset_id") or layer_id)
         layer_point_a = _point(entry.get("point_a"), f"layer {index} point_a")
         layer_point_b = _point(entry.get("point_b"), f"layer {index} point_b")
         layer_y = float(entry.get("y", max(float(layer_point_a["y"]), float(layer_point_b["y"]))))
@@ -205,6 +210,7 @@ def load_still_layers(path: str | Path) -> list[StillLayer]:
             zone_y = float(zone.get("y", layer_y))
             layers.append(
                 StillLayer(
+                    group_id=group_id,
                     layer_id=layer_id,
                     zone_id=str(zone.get("id") or f"zone{zone_index:02d}"),
                     height_index=index,
@@ -339,6 +345,7 @@ def _run_plan(
         "dataset_id",
         "sample_index",
         "point_index",
+        "group_id",
         "layer_id",
         "zone_id",
         "height_index",
@@ -376,7 +383,7 @@ def _run_plan(
                 )
                 time.sleep(max(0.0, settle_seconds))
                 dataset_id = _dataset_id(sample)
-                dataset_dir = ensure_dir(datasets_dir / dataset_id)
+                dataset_dir = ensure_dir(datasets_dir / _safe_name(sample.group_id) / dataset_id)
                 image_dir = ensure_dir(dataset_dir / "images")
                 extension = "jpg" if image_format.lower().lstrip(".") in {"jpg", "jpeg"} else "png"
                 image_path = image_dir / f"{sample_id}.{extension}"
@@ -400,7 +407,7 @@ def _run_plan(
                 dataset_writer = _dataset_writer(dataset_files, dataset_dir, fieldnames)
                 dataset_writer.writerow(row)
                 handle.flush()
-                _flush_dataset(dataset_files, dataset_id)
+                _flush_dataset(dataset_files, str(dataset_dir))
                 if progress_callback is not None:
                     progress_callback(sample, total, image_path)
                 console.print(
@@ -448,7 +455,7 @@ def _dataset_writer(
     dataset_dir: Path,
     fieldnames: list[str],
 ) -> csv.DictWriter:
-    dataset_id = dataset_dir.name
+    dataset_id = str(dataset_dir)
     if dataset_id in dataset_files:
         return dataset_files[dataset_id][1]
     path = dataset_dir / "samples.csv"
@@ -471,7 +478,7 @@ def _num(value: float) -> str:
 
 
 def _safe_name(value: str) -> str:
-    cleaned = "".join(char if char.isalnum() or char in {"_", "-"} else "_" for char in value.strip())
+    cleaned = "".join(char if char.isalnum() or char in {"_", "-", "."} else "_" for char in value.strip())
     return cleaned or "dataset"
 
 
