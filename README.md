@@ -28,20 +28,10 @@ It collects reproducible still-image datasets, records trajectory videos, logs c
 
 ![Interface overview](docs/assets/interface-overview.jpg)
 
-<table>
-  <tr>
-    <td width="50%">
-      <img src="docs/assets/capture-gui.jpg" alt="Still scan and trajectory capture GUI">
-    </td>
-    <td width="50%">
-      <img src="docs/assets/trajectory-replay.jpg" alt="Trajectory replay concept">
-    </td>
-  </tr>
-  <tr>
-    <td><b>One GUI for still scans and replay videos.</b><br>Start scans, remove broken captures, and record selected low-to-high trajectories through OBS.</td>
-    <td><b>Trajectory replay from scored poses.</b><br>Use sampled viewpoints and aesthetic scores to build smooth camera-path videos.</td>
-  </tr>
-</table>
+| Still scan GUI | Trajectory replay |
+| --- | --- |
+| ![Still scan and trajectory capture GUI](docs/assets/capture-gui.jpg) | ![Trajectory replay concept](docs/assets/trajectory-panel.jpg) |
+| **One GUI for still scans and replay videos.** Start scans, remove broken captures, and record selected low-to-high trajectories through OBS. | **Trajectory replay from scored poses.** Use sampled viewpoints and aesthetic scores to build smooth camera-path videos. |
 
 ## Trajectory Demo
 
