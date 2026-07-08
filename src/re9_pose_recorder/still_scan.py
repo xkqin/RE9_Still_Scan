@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import math
 import time
 from dataclasses import asdict, dataclass
@@ -261,6 +262,99 @@ def run_layered_still_scan(
     )
 
 
+def load_still_pose_plan(path: str | Path, group_id: str = "scene_1_extra") -> list[StillSample]:
+    """Load explicit still poses from a high-score resampling JSON plan."""
+    plan_path = Path(path)
+    with plan_path.open("r", encoding="utf-8") as handle:
+        raw = json.load(handle)
+
+    samples: list[StillSample] = []
+    sample_index = 1
+    point_index_by_layer: dict[str, int] = {}
+    height_index_by_layer: dict[str, int] = {}
+    subscenes = raw.get("subscenes") or []
+    if not isinstance(subscenes, list):
+        raise ValueError(f"Expected subscenes list in {plan_path}")
+
+    for subscene in subscenes:
+        if not isinstance(subscene, dict):
+            continue
+        layer_id = str(subscene.get("subscene_id") or f"subscene_{len(height_index_by_layer) + 1:02d}")
+        if layer_id not in height_index_by_layer:
+            height_index_by_layer[layer_id] = len(height_index_by_layer) + 1
+            point_index_by_layer[layer_id] = 0
+        for item in subscene.get("samples") or []:
+            if not isinstance(item, dict):
+                continue
+            point_index_by_layer[layer_id] += 1
+            yaw_deg = float(item.get("yaw") or 0.0)
+            pitch_deg = float(item.get("pitch") or 0.0)
+            priority = str(item.get("priority") or "normal")
+            kind = str(item.get("kind") or "explicit_pose")
+            kind_short = {
+                "local_high_anchor_refinement": "refine",
+                "bridge_5x_to_high_anchor": "bridge",
+                "bridge_side_probe": "probe",
+            }.get(kind, _safe_name(kind)[:12])
+            samples.append(
+                StillSample(
+                    sample_index=sample_index,
+                    point_index=point_index_by_layer[layer_id],
+                    group_id=group_id,
+                    layer_id=layer_id,
+                    zone_id=f"{_safe_name(priority)[:3]}_{kind_short}",
+                    height_index=height_index_by_layer[layer_id],
+                    pattern=str(item.get("sample_id") or "explicit_pose"),
+                    x=float(item["x"]),
+                    y=float(item["y"]),
+                    z=float(item["z"]),
+                    yaw_deg=yaw_deg,
+                    yaw_rad=math.radians(yaw_deg),
+                    pitch_deg=pitch_deg,
+                    pitch_rad=math.radians(pitch_deg),
+                )
+            )
+            sample_index += 1
+
+    if not samples:
+        raise ValueError(f"No explicit samples found in {plan_path}")
+    return samples
+
+
+def run_still_pose_plan(
+    config: AppConfig,
+    obs_password: str,
+    pose_plan: str | Path,
+    settle_seconds: float = 0.35,
+    source_name: str | None = None,
+    image_format: str = "jpg",
+    image_width: int = 1920,
+    image_height: int = 1080,
+    image_quality: int = 100,
+    session_id: str | None = None,
+    max_samples: int | None = None,
+    progress_callback: Callable[[StillSample, int, Path], None] | None = None,
+    stop_event: Event | None = None,
+) -> dict[str, Path]:
+    """Move FreeCam through explicit poses and save one still per pose."""
+    plan = load_still_pose_plan(pose_plan, group_id=session_id or "scene_1_extra")
+    return _run_plan(
+        config=config,
+        obs_password=obs_password,
+        plan=plan,
+        settle_seconds=settle_seconds,
+        source_name=source_name,
+        image_format=image_format,
+        image_width=image_width,
+        image_height=image_height,
+        image_quality=image_quality,
+        session_id=session_id,
+        max_samples=max_samples,
+        progress_callback=progress_callback,
+        stop_event=stop_event,
+    )
+
+
 def run_still_scan(
     config: AppConfig,
     obs_password: str,
@@ -438,6 +532,8 @@ def _write_plan(path: Path, plan: list[StillSample]) -> None:
 
 
 def _sample_id(sample: StillSample) -> str:
+    if sample.pattern.startswith("scene_") and "_extra_" in sample.pattern:
+        return f"s{sample.sample_index:04d}_{_safe_name(sample.pattern)}"
     return (
         f"s{sample.sample_index:04d}_p{sample.point_index:02d}_h{sample.height_index:02d}_"
         f"{_safe_name(sample.zone_id)}_"

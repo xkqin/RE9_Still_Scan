@@ -1,48 +1,60 @@
 layers:
-  - id: scene01_plane01
-    y: 13.91
-    point_a:
-      x: -5.07
-      y: 12.53
-      z: -262.11
-    point_b:
-      x: 24.01
-      y: 13.91
-      z: -324.49
+  - id: scene_2_y01
+    group_id: scene_2
+    y: 3.17
+    point_a: {x: -4.19, y: 3.17, z: 30.87}
+    point_b: {x: 3.81, y: 3.17, z: 39.70}
     zones:
-      - id: dense
-        y: 13.91
-        points_x: 12
-        points_z: 12
-        point_a:
-          x: -5.07
-          y: 12.53
-          z: -262.11
-        point_b:
-          x: 24.01
-          y: 13.91
-          z: -324.49
+      - id: room_dense
+        points_x: 10
+        points_z: 10
+        point_a: {x: -4.19, y: 3.17, z: 30.87}
+        point_b: {x: 3.81, y: 3.17, z: 39.70}
 
-  - id: scene02_plane01
-    y: 6.15
-    point_a:
-      x: 135.87
-      y: 5.93
-      z: -310.39
-    point_b:
-      x: 90.06
-      y: 6.15
-      z: -349.16
+  - id: scene_2_y02
+    group_id: scene_2
+    y: 5.96
+    point_a: {x: -4.19, y: 5.96, z: 30.87}
+    point_b: {x: 3.81, y: 5.96, z: 39.70}
     zones:
-      - id: dense
-        y: 6.15
-        points_x: 12
-        points_z: 12
-        point_a:
-          x: 135.87
-          y: 5.93
-          z: -310.39
-        point_b:
-          x: 90.06
-          y: 6.15
-          z: -349.16
+      - id: room_dense
+        points_x: 10
+        points_z: 10
+        point_a: {x: -4.19, y: 5.96, z: 30.87}
+        point_b: {x: 3.81, y: 5.96, z: 39.70}
+
+  - id: scene_2_y03
+    group_id: scene_2
+    y: 7.82
+    point_a: {x: -4.19, y: 7.82, z: 30.87}
+    point_b: {x: 3.81, y: 7.82, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 10
+        points_z: 10
+        point_a: {x: -4.19, y: 7.82, z: 30.87}
+        point_b: {x: 3.81, y: 7.82, z: 39.70}
+
+  - id: scene_2_y04
+    group_id: scene_2
+    y: 10.34
+    point_a: {x: -4.19, y: 10.34, z: 30.87}
+    point_b: {x: 3.81, y: 10.34, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 10
+        points_z: 10
+        point_a: {x: -4.19, y: 10.34, z: 30.87}
+        point_b: {x: 3.81, y: 10.34, z: 39.70}
+
+  - id: scene_2_y05
+    group_id: scene_2
+    y: 11.65
+    point_a: {x: -4.19, y: 11.65, z: 30.87}
+    point_b: {x: 3.81, y: 11.65, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 10
+        points_z: 10
+        point_a: {x: -4.19, y: 11.65, z: 30.87}
+        point_b: {x: 3.81, y: 11.65, z: 39.70}

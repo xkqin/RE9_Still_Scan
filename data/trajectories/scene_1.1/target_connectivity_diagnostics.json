@@ -1,0 +1,23 @@
+{
+  "scene_id": "scene_1.1",
+  "raw_target_percentile": 99.0,
+  "raw_target_cutoff": 6.601814126968383,
+  "raw_target_count": 96,
+  "raw_anchor_paths_found": 0,
+  "reachable_raw_target_count": 0,
+  "reachable_raw_target_indices": [],
+  "top_raw_targets_reachable": false,
+  "graph_constraints": {
+    "max_xyz_step": 8.0,
+    "max_yaw_step_final": 60.0,
+    "max_pitch_step_final": 45.0,
+    "graph_edge_score_slack": 1.5,
+    "max_score_step": 0.16,
+    "ramp_power": 1.15
+  },
+  "recommendation": "No true top raw-score anchor was reachable under current local graph and ramp constraints; add still-image samples around bridge regions and high-score neighborhoods, or relax yaw/pitch/score-step constraints.",
+  "selected_fallback_count": 10,
+  "selected_reached_top_region_count": 0,
+  "best_selected_final_raw_percentile": 94.79101029195547,
+  "best_selected_final_raw_score": 6.298805236816406
+}

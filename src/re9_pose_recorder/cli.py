@@ -340,6 +340,7 @@ def scan_stills(
     max_samples: Optional[int] = typer.Option(None, "--max-samples"),
     session_id: Optional[str] = typer.Option(None, "--session-id"),
     layers_config: Optional[Path] = typer.Option(None, "--layers-config"),
+    pose_plan_config: Optional[Path] = typer.Option(None, "--pose-plan-config"),
     config: Optional[Path] = typer.Option(None, "--config"),
 ) -> None:
     """Capture OBS stills on a grid using the 22-view pitch/yaw sampling pattern."""
@@ -348,12 +349,17 @@ def scan_stills(
         build_layered_still_scan_plan,
         build_still_scan_plan,
         load_still_layers,
+        load_still_pose_plan,
         parse_float_list,
         run_layered_still_scan,
+        run_still_pose_plan,
         run_still_scan,
     )
 
-    if layers_config is not None:
+    if pose_plan_config is not None:
+        plan = load_still_pose_plan(pose_plan_config, group_id=session_id or "scene_1_extra")
+        layer_count = len({sample.layer_id for sample in plan})
+    elif layers_config is not None:
         layers = load_still_layers(layers_config)
         plan = build_layered_still_scan_plan(layers, points_x=points_x, points_z=points_z)
         layer_count = len(layers)
@@ -370,11 +376,29 @@ def scan_stills(
         )
         layer_count = len(heights)
     planned_count = len(plan) if max_samples is None else min(len(plan), max_samples)
-    console.print(
-        f"[yellow]Still scan will capture {planned_count} images "
-        f"({points_x * points_z} x/z points per layer, {layer_count} layers, 22 views per point).[/yellow]"
-    )
-    if layers_config is not None:
+    if pose_plan_config is not None:
+        console.print(
+            f"[yellow]Still scan will capture {planned_count} explicit pose images "
+            f"({layer_count} subscenes, 1 view per JSON sample).[/yellow]"
+        )
+        outputs = run_still_pose_plan(
+            cfg,
+            obs_password=obs_password,
+            pose_plan=pose_plan_config,
+            settle_seconds=settle_seconds,
+            source_name=source_name,
+            image_format=image_format,
+            image_width=image_width,
+            image_height=image_height,
+            image_quality=image_quality,
+            session_id=session_id,
+            max_samples=max_samples,
+        )
+    elif layers_config is not None:
+        console.print(
+            f"[yellow]Still scan will capture {planned_count} images "
+            f"({points_x * points_z} x/z points per layer, {layer_count} layers, 22 views per point).[/yellow]"
+        )
         outputs = run_layered_still_scan(
             cfg,
             obs_password=obs_password,
@@ -391,6 +415,10 @@ def scan_stills(
             max_samples=max_samples,
         )
     else:
+        console.print(
+            f"[yellow]Still scan will capture {planned_count} images "
+            f"({points_x * points_z} x/z points per layer, {layer_count} layers, 22 views per point).[/yellow]"
+        )
         outputs = run_still_scan(
             cfg,
             obs_password=obs_password,
@@ -437,6 +465,7 @@ def scan_stills_gui(
     max_samples: Optional[int] = typer.Option(None, "--max-samples"),
     session_id: Optional[str] = typer.Option(None, "--session-id"),
     layers_config: Optional[Path] = typer.Option(None, "--layers-config"),
+    pose_plan_config: Optional[Path] = typer.Option(None, "--pose-plan-config"),
     topmost: bool = typer.Option(True, "--topmost/--no-topmost"),
     config: Optional[Path] = typer.Option(None, "--config"),
 ) -> None:
@@ -463,6 +492,7 @@ def scan_stills_gui(
         max_samples=max_samples,
         session_id=session_id,
         layers_config=layers_config,
+        pose_plan_config=pose_plan_config,
         topmost=topmost,
     )
 
@@ -595,6 +625,94 @@ def build_trajectory(
         f"Best sampled pose: score={float(best['score']):.3f}, "
         f"x={float(best['x']):.3f}, y={float(best['y']):.3f}, z={float(best['z']):.3f}"
     )
+
+
+@app.command("analyze-stutter")
+def analyze_stutter(
+    video: Path = typer.Option(..., "--video"),
+    pose_log: Optional[Path] = typer.Option(None, "--pose-log"),
+    out: Optional[Path] = typer.Option(None, "--out"),
+) -> None:
+    """Estimate video dropped-frame/stutter artifacts and optional pose smoothness."""
+    from .stutter_analyzer import analyze_pose_smoothness, analyze_video_stutter
+
+    video_report = analyze_video_stutter(video, output_json=out)
+    table = Table(title="Video stutter metrics")
+    table.add_column("Metric")
+    table.add_column("Value")
+    for key, value in video_report.to_dict().items():
+        table.add_row(key, f"{value}")
+    console.print(table)
+    if pose_log is not None:
+        pose_out = out.with_name(out.stem + "_pose.json") if out is not None else None
+        pose_report = analyze_pose_smoothness(pose_log, output_json=pose_out)
+        pose_table = Table(title="Pose smoothness metrics")
+        pose_table.add_column("Metric")
+        pose_table.add_column("Value")
+        for key, value in pose_report.items():
+            pose_table.add_row(key, f"{value}")
+        console.print(pose_table)
+
+
+@app.command("replay-trajectory")
+def replay_trajectory(
+    trajectory_json: Path = typer.Option(..., "--trajectory-json"),
+    trajectory_id: Optional[str] = typer.Option(None, "--trajectory-id"),
+    trajectory_index: int = typer.Option(1, "--trajectory-index"),
+    obs_password: str = typer.Option("", "--obs-password"),
+    output_dir: Optional[Path] = typer.Option(None, "--output-dir"),
+    session_id: Optional[str] = typer.Option(None, "--session-id"),
+    angle_unit: str = typer.Option("auto", "--angle-unit"),
+    keyframe_interval_sec: float = typer.Option(0.2, "--keyframe-interval-sec"),
+    countdown_sec: float = typer.Option(3.0, "--countdown-sec"),
+    settle_sec: float = typer.Option(1.0, "--settle-sec"),
+    post_roll_sec: float = typer.Option(1.0, "--post-roll-sec"),
+    speed: float = typer.Option(1.0, "--speed"),
+    duration_sec: Optional[float] = typer.Option(None, "--duration-sec"),
+    record: bool = typer.Option(True, "--record/--no-record"),
+    write_pose_log: bool = typer.Option(True, "--pose-log/--no-pose-log"),
+    unwrap_yaw: bool = typer.Option(True, "--unwrap-yaw/--no-unwrap-yaw"),
+    reverse: bool = typer.Option(False, "--reverse/--forward"),
+    config: Optional[Path] = typer.Option(None, "--config"),
+) -> None:
+    """Replay one trajectory JSON locally through FreeCam and OBS recording."""
+    cfg = _config(config)
+    from .trajectory_replay import load_replay_trajectory, replay_trajectory_to_obs
+
+    trajectory = load_replay_trajectory(
+        trajectory_json,
+        trajectory_id=trajectory_id,
+        trajectory_index=trajectory_index,
+        angle_unit=angle_unit,
+        keyframe_interval_sec=keyframe_interval_sec,
+        unwrap_yaw=unwrap_yaw,
+        reverse=reverse,
+    )
+    console.print(
+        f"[green]Loaded trajectory:[/green] {trajectory.trajectory_id} "
+        f"keyframes={len(trajectory.keyframes)} duration={trajectory.duration_sec:.2f}s"
+    )
+    console.print("[yellow]Make sure the game is open, FreeCam is enabled, and OBS WebSocket is connected.[/yellow]")
+    outputs = replay_trajectory_to_obs(
+        cfg,
+        trajectory,
+        obs_password=obs_password,
+        output_dir=output_dir,
+        session_id=session_id,
+        countdown_sec=countdown_sec,
+        settle_sec=settle_sec,
+        post_roll_sec=post_roll_sec,
+        speed=speed,
+        duration_sec=duration_sec,
+        record=record,
+        write_pose_log=write_pose_log,
+    )
+    table = Table(title="Trajectory replay outputs")
+    table.add_column("Name")
+    table.add_column("Path")
+    for name, path in outputs.items():
+        table.add_row(name, str(path))
+    console.print(table)
 
 
 @app.command("analyze-video")

@@ -47,7 +47,12 @@ class LuaControl:
         pitch: float,
         fov: float | None = None,
         segment_id: str = "",
+        x_end: float | None = None,
+        y_end: float | None = None,
+        z_end: float | None = None,
         yaw_end: float | None = None,
+        pitch_end: float | None = None,
+        fov_end: float | None = None,
         duration_sec: float | None = None,
     ) -> Path:
         payload: dict[str, Any] = {
@@ -61,8 +66,18 @@ class LuaControl:
             "pitch": float(pitch),
             "segment_id": segment_id,
         }
+        if x_end is not None:
+            payload["x_end"] = float(x_end)
+        if y_end is not None:
+            payload["y_end"] = float(y_end)
+        if z_end is not None:
+            payload["z_end"] = float(z_end)
         if yaw_end is not None:
             payload["yaw_end"] = float(yaw_end)
+        if pitch_end is not None:
+            payload["pitch_end"] = float(pitch_end)
+        if fov_end is not None:
+            payload["fov_end"] = float(fov_end)
         if duration_sec is not None:
             payload["duration_sec"] = float(duration_sec)
         if fov is not None:
@@ -73,6 +88,21 @@ class LuaControl:
         return self._write_control(
             {"command": "clear_pose", "command_id": f"clear_pose:{session_id}:{time.time():.6f}", "session_id": session_id}
         )
+
+    def write_play_trajectory_control(
+        self,
+        session_id: str,
+        keyframes: list[dict[str, float | int | None]],
+        trajectory_id: str = "",
+    ) -> Path:
+        payload = {
+            "command": "play_trajectory",
+            "command_id": f"play_trajectory:{session_id}:{trajectory_id}:{time.time():.6f}",
+            "session_id": session_id,
+            "trajectory_id": trajectory_id,
+            "keyframes": keyframes,
+        }
+        return self._write_control(payload)
 
     def write_physics_probe_control(self, session_id: str = "manual") -> Path:
         return self._write_control(
