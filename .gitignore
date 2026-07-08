@@ -5,6 +5,7 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 *.egg-info/
+configs/linux.local.yaml
 
 third_party/aesthetic-predictor/
 third_party/huggingface_cache/

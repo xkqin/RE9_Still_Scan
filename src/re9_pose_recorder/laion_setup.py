@@ -10,7 +10,7 @@ from .paths import resolve_project_path
 def _require_git() -> str:
     git = shutil.which("git")
     if not git:
-        raise RuntimeError("Git was not found. Install Git for Windows and make sure git.exe is on PATH.")
+        raise RuntimeError("Git was not found. Install Git and make sure it is on PATH.")
     return git
 
 

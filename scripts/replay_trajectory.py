@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import os
 from pathlib import Path
 
 
 def main() -> int:
     project_root = Path(__file__).resolve().parents[1]
-    python = project_root / ".venv" / "Scripts" / "python.exe"
+    venv_python = "Scripts/python.exe" if os.name == "nt" else "bin/python"
+    python = project_root / ".venv" / venv_python
     if not python.exists():
         python = Path(sys.executable)
 

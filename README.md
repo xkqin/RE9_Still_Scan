@@ -2,7 +2,7 @@
 
 Tools for collecting reproducible Resident Evil Requiem / Resident Evil 9 FreeCam still-image datasets with OBS, plus optional video recording, pose logging, LAION aesthetic scoring, and pose/score reports.
 
-> Current platform support: Windows only. The project is developed and tested on Windows with Steam, OBS Studio, REFramework, and PowerShell scripts. Linux/Steam Proton support is not currently tested or documented.
+> Platform support: Windows is the primary tested setup. Linux is supported for Python, OBS WebSocket capture, still scans, trajectory replay, and LAION scoring when the game, REFramework, and FreeCam mod are installed through Steam Proton and configured with `configs/linux.yaml`.
 
 The main workflow is:
 
@@ -45,7 +45,7 @@ The repository is intentionally code-only. It does not include game files, mod f
 
 ## Installation
 
-This section assumes Windows. The provided scripts are PowerShell scripts and the default paths use a Windows Steam install location.
+Windows is the primary tested setup and uses `configs/default.yaml`. Linux/Steam Proton users should use `configs/linux.yaml` or a local copy named `configs/linux.local.yaml`.
 
 1. Install Resident Evil Requiem.
 2. Install REFramework manually.
@@ -63,6 +63,29 @@ D:\steam\steamapps\common\RESIDENT EVIL requiem BIOHAZARD requiem\reframework\au
    Password: set one.
 7. Install Python 3.10+.
 8. Install Git.
+
+Linux system packages:
+
+```bash
+# Ubuntu/Debian
+sudo apt update
+sudo apt install -y git python3 python3-venv python3-pip obs-studio libgl1 libglib2.0-0
+
+# Fedora
+sudo dnf install -y git python3 python3-pip obs-studio mesa-libGL glib2
+
+# Arch
+sudo pacman -S git python python-pip obs-studio
+```
+
+Linux game paths are usually one of:
+
+```text
+~/.steam/steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem
+~/.local/share/Steam/steamapps/common/RESIDENT EVIL requiem BIOHAZARD requiem
+```
+
+If Steam uses another library, right-click the game in Steam, open `Manage -> Browse local files`, and use that path.
 
 ## Required Nexus Mods
 
@@ -97,6 +120,8 @@ The Python patcher only backs up and modifies `RE9FreeCam.lua`. It never modifie
 
 ## Python setup
 
+Windows:
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\activate
@@ -111,6 +136,36 @@ Or use:
 ```powershell
 .\scripts\setup_windows.ps1
 .\scripts\setup_laion_repo.ps1
+```
+
+Linux:
+
+```bash
+bash scripts/setup_linux.sh
+source .venv/bin/activate
+cp configs/linux.yaml configs/linux.local.yaml
+```
+
+Then edit `configs/linux.local.yaml` and update the REFramework paths:
+
+```yaml
+game:
+  lua_path: "/absolute/path/to/game/reframework/autorun/RE9FreeCam.lua"
+  reframework_dir: "/absolute/path/to/game/reframework"
+  reframework_data_dir: "/absolute/path/to/game/reframework/data"
+
+lua_logger:
+  control_file: "/absolute/path/to/game/reframework/data/re9_pose_control.json"
+  status_file: "/absolute/path/to/game/reframework/data/re9_pose_status.json"
+  pose_log_file: "/absolute/path/to/game/reframework/data/re9_freecam_pose_log.csv"
+```
+
+Use forward slashes. `~` is supported, but `$HOME` inside YAML is not expanded by the config loader.
+
+Download/update the official LAION aesthetic-predictor repo:
+
+```bash
+python -m re9_pose_recorder.cli setup-laion --config configs/linux.local.yaml
 ```
 
 ## Patch Lua
@@ -132,13 +187,35 @@ python -m re9_pose_recorder.cli patch-lua-logger
 python -m re9_pose_recorder.cli verify-lua-patch
 ```
 
+Linux:
+
+```bash
+python -m re9_pose_recorder.cli check-lua --config configs/linux.local.yaml
+python -m re9_pose_recorder.cli backup-lua --config configs/linux.local.yaml
+python -m re9_pose_recorder.cli patch-lua-logger --config configs/linux.local.yaml
+python -m re9_pose_recorder.cli verify-lua-patch --config configs/linux.local.yaml
+```
+
 ## Test OBS
 
 ```powershell
 python -m re9_pose_recorder.cli obs-test --obs-password YOUR_PASSWORD
 ```
 
+Linux:
+
+```bash
+python -m re9_pose_recorder.cli obs-test --config configs/linux.local.yaml --obs-password YOUR_PASSWORD
+```
+
 If OBS is not running, WebSocket is disabled, the port is wrong, or the password is wrong, the command prints connection guidance.
+
+Linux OBS capture notes:
+
+- X11 users can usually use Window Capture or Game Capture if available.
+- Wayland users usually need PipeWire Window Capture or Screen Capture.
+- If the Python GUI appears in the recording, do not use full display capture. Use a source that targets only the game window.
+- Use NVENC on NVIDIA, VAAPI on AMD/Intel, or x264 CPU encoding depending on your GPU and OBS build.
 
 ## Still image scan datasets
 
@@ -157,10 +234,31 @@ Run the default street/upper-plane scan:
 python scripts\scan_stills_gui.py
 ```
 
+Linux:
+
+```bash
+bash scripts/scan_scene01_gui.sh
+```
+
 Run the two-scene scan example:
 
 ```powershell
 python scripts\scan_new_scenes_gui.py
+```
+
+Linux direct CLI equivalent:
+
+```bash
+python -m re9_pose_recorder.cli scan-stills-gui \
+  --config configs/linux.local.yaml \
+  --obs-password YOUR_PASSWORD \
+  --layers-config configs/scene01_scan_layers.yaml \
+  --session-id scene_1 \
+  --settle-seconds 0.4 \
+  --image-format jpg \
+  --image-width 1920 \
+  --image-height 1080 \
+  --image-quality 100
 ```
 
 The scan definitions live in:
@@ -456,10 +554,28 @@ To pre-download and load the live-score model before recording:
 python -m re9_pose_recorder.cli warmup-laion --device cuda
 ```
 
+Linux uses the same command with the Linux config:
+
+```bash
+python -m re9_pose_recorder.cli one-click-record --config configs/linux.local.yaml --obs-password YOUR_PASSWORD --device auto
+```
+
 ## Analyze existing video and pose log
 
 ```powershell
 python -m re9_pose_recorder.cli analyze-video --video data/videos/session.mp4 --pose-log data/pose_logs/pose_log.csv --fps 2 --device cuda --top-k 50
+```
+
+Linux:
+
+```bash
+python -m re9_pose_recorder.cli analyze-video \
+  --config configs/linux.local.yaml \
+  --video data/videos/session.mp4 \
+  --pose-log data/pose_logs/pose_log.csv \
+  --fps 2 \
+  --device auto \
+  --top-k 50
 ```
 
 ## Individual commands
@@ -478,6 +594,23 @@ python -m re9_pose_recorder.cli build-trajectory --scores-with-pose outputs/scor
 
 The CSV is ordered low/starting pose to best sampled pose. Read it in reverse order for a high-to-low score trajectory.
 
+Replay one trajectory through FreeCam and OBS:
+
+```powershell
+python -m re9_pose_recorder.cli replay-trajectory --obs-password YOUR_PASSWORD --trajectory-json data/trajectories/scene_1.1_low_to_high/trajectories.json --trajectory-index 1 --output-dir data/videos/trajectories/scene_1.1_low_to_high
+```
+
+Linux:
+
+```bash
+bash scripts/replay_trajectory.sh \
+  --trajectory-json data/trajectories/scene_1.1_low_to_high/trajectories.json \
+  --trajectory-index 1 \
+  --output-dir data/videos/trajectories/scene_1.1_low_to_high
+```
+
+Every trajectory replay creates a new timestamped run folder so repeated captures do not overwrite previous videos or pose logs.
+
 Pose logging only:
 
 ```powershell
@@ -489,6 +622,12 @@ python -m re9_pose_recorder.cli stop-pose-log --session-id 20260522_123000
 
 ```powershell
 python -m re9_pose_recorder.cli restore-lua --backup backups/lua/RE9FreeCam.lua.TIMESTAMP.bak
+```
+
+Linux:
+
+```bash
+python -m re9_pose_recorder.cli restore-lua --config configs/linux.local.yaml --backup backups/lua/RE9FreeCam.lua.TIMESTAMP.bak
 ```
 
 The restore command copies the selected backup over the configured `RE9FreeCam.lua`.
@@ -509,10 +648,10 @@ If existing output files would be overwritten and `video.overwrite` is false, a 
 
 ## Error handling notes
 
-- Wrong Lua path: edit `configs/default.yaml` and rerun `check-lua`.
+- Wrong Lua path: edit `configs/default.yaml` on Windows or `configs/linux.local.yaml` on Linux, then rerun `check-lua`.
 - Missing Lua patch: run `patch-lua-logger`.
 - OBS connection failure: open OBS, enable WebSocket, confirm port `4455`, and check the password.
-- Missing Git: install Git for Windows and rerun `setup-laion`.
+- Missing Git: install Git and rerun `setup-laion`.
 - Missing LAION repo: run `setup-laion`.
 - CUDA unavailable: the scorer falls back to CPU when `device` is `auto`, and warns when `cuda` was requested.
 - Missing pose log after recording: video scoring can still continue, but pose alignment is marked invalid.
