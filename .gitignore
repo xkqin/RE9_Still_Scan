@@ -15,6 +15,7 @@ data/frames/*
 data/pose_logs/*
 data/stills/*
 outputs/*
+docs/assets/*
 
 !third_party/.gitkeep
 !data/videos/.gitkeep
@@ -32,3 +33,9 @@ outputs/*
 *.jpeg
 *.png
 *.zip
+
+!docs/assets/*.png
+!docs/assets/*.gif
+!docs/assets/*.webp
+!docs/assets/*.mp4
+!docs/assets/*.jpg
