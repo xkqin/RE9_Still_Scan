@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import json
+import os
+import shlex
+import subprocess
 import threading
+import time
 import traceback
 import tkinter as tk
 from pathlib import Path
@@ -37,6 +41,7 @@ TOPSTART20_TRAJECTORY_OUTPUT_DIR = (
     PROJECT_ROOT / "data" / "videos" / "trajectories" / "scene_1.1_topstart20_gain1p3_primitives_sample"
 )
 DEFAULT_TRAJECTORY_SET_ID = "scene_1_1_topstart20"
+MIN_VALID_TRAJECTORY_VIDEO_BYTES = 1_000_000
 TRAJECTORY_SETS = {
     "scene_1_1_topstart20": {
         "label": "scene_1.1 topstart20 gain1p3 primitives",
@@ -105,6 +110,10 @@ class StillScanApp:
         self.pose_plan_config = pose_plan_config
         self.stop_event = threading.Event()
         self.trajectory_stop_event = threading.Event()
+        self.topmost = topmost
+        self.obs_restart_every = self._read_int_env("RE9_OBS_RESTART_EVERY_N", 0)
+        self.obs_restart_command = os.environ.get("RE9_OBS_RESTART_COMMAND", "")
+        self.obs_restart_wait_sec = self._read_float_env("RE9_OBS_RESTART_WAIT_SEC", 20.0)
         self.running = False
         self.qa_running = False
         self.trajectory_running = False
@@ -129,6 +138,9 @@ class StillScanApp:
         self.trajectory_output_dir = Path(self.trajectory_sets[self.trajectory_set_id]["output_dir"])
         self.trajectory_session_prefix = str(self.trajectory_sets[self.trajectory_set_id]["session_prefix"])
         self.current_trajectory_run_dir: Path | None = None
+        self.trajectory_state_path: Path | None = None
+        self.planned_trajectory_indices: list[int] = []
+        self.completed_trajectory_indices: set[int] = set()
         self.trajectory_count = self._load_trajectory_count()
 
         if pose_plan_config is not None:
@@ -154,7 +166,9 @@ class StillScanApp:
         self.root.title("RE9 Still Scan Progress")
         self.root.geometry("840x560")
         self.root.resizable(False, False)
-        self.root.attributes("-topmost", topmost)
+        self.root.attributes("-topmost", self.topmost)
+        if self.topmost:
+            self.root.after(250, self._keep_window_on_top)
 
         self.status_var = tk.StringVar(value="Ready")
         if max_samples is not None and self.total != len(planned):
@@ -168,6 +182,7 @@ class StillScanApp:
         self.trajectory_set_var = tk.StringVar(value=self._trajectory_set_label(self.trajectory_set_id))
         self.trajectory_var = tk.StringVar(value=self._trajectory_status_text())
         self.trajectory_output_var = tk.StringVar(value=f"Output: {self.trajectory_output_dir}")
+        self.trajectory_resume_var = tk.StringVar(value=self._trajectory_resume_status_text())
 
         frame = ttk.Frame(self.root)
         frame.pack(fill="both", expand=True, padx=16, pady=14)
@@ -225,6 +240,12 @@ class StillScanApp:
             command=self.record_all_trajectories,
         )
         self.record_all_trajectories_button.pack(side="left", fill="x", expand=True, padx=(6, 0))
+        self.resume_trajectory_button = ttk.Button(
+            trajectory_frame,
+            text="Resume Latest Run",
+            command=self.resume_latest_trajectory_run,
+        )
+        self.resume_trajectory_button.pack(fill="x", padx=8, pady=(0, 4))
         self.stop_trajectory_button = ttk.Button(
             trajectory_frame,
             text="Stop After Current Trajectory",
@@ -232,6 +253,7 @@ class StillScanApp:
             state="disabled",
         )
         self.stop_trajectory_button.pack(fill="x", padx=8, pady=(0, 8))
+        ttk.Label(trajectory_frame, textvariable=self.trajectory_resume_var, wraplength=760).pack(anchor="w", padx=8, pady=(0, 8))
 
         ttk.Label(frame, textvariable=self.status_var, font=("Segoe UI", 11, "bold"), wraplength=720).pack(anchor="w", pady=5)
         ttk.Label(frame, textvariable=self.plan_var, wraplength=720).pack(anchor="w", pady=5)
@@ -242,6 +264,16 @@ class StillScanApp:
         ttk.Label(frame, textvariable=self.output_var, wraplength=720).pack(anchor="w", pady=5)
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+
+    def _keep_window_on_top(self) -> None:
+        if not self.topmost:
+            return
+        try:
+            self.root.attributes("-topmost", True)
+            self.root.lift()
+        except tk.TclError:
+            return
+        self.root.after(2000, self._keep_window_on_top)
 
     def run(self) -> None:
         self.root.mainloop()
@@ -317,6 +349,31 @@ class StillScanApp:
         ):
             return
         self._start_trajectory_worker(list(range(1, self.trajectory_count + 1)))
+
+    def resume_latest_trajectory_run(self) -> None:
+        if self.running or self.trajectory_running:
+            return
+        run_dir = self._latest_trajectory_run_dir()
+        if run_dir is None:
+            messagebox.showerror("Resume unavailable", f"No run folder was found under:\n{self.trajectory_output_dir}")
+            return
+        planned = self._load_planned_indices_for_run(run_dir)
+        completed = self._detect_completed_trajectory_indices(run_dir, planned)
+        remaining = [index for index in planned if index not in completed]
+        if not remaining:
+            messagebox.showinfo("Resume unavailable", f"No missing trajectories were found in:\n{run_dir}")
+            return
+        if not self._confirm_trajectory_ready(
+            f"Resume {run_dir.name} from trajectory {remaining[0]:02d}? "
+            f"Completed {len(completed)}/{len(planned)}, remaining {len(remaining)}."
+        ):
+            return
+        self._start_trajectory_worker(
+            remaining,
+            run_dir=run_dir,
+            planned_indices=planned,
+            completed_indices=completed,
+        )
 
     def stop_after_current_trajectory(self) -> None:
         self.trajectory_stop_event.set()
@@ -400,32 +457,46 @@ class StillScanApp:
             status = "Stopped." if self.stop_event.is_set() and done < self.total else "Done."
             self._set_done(status, outputs["output_dir"])
         except Exception as exc:
+            message = str(exc)
             error_log = ensure_dir(self.config.output_dir) / "still_scan_errors.log"
             with error_log.open("a", encoding="utf-8") as handle:
                 handle.write(traceback.format_exc())
                 handle.write("\n")
-            self.root.after(0, lambda: self._set_error(str(exc), error_log))
+            self.root.after(0, lambda message=message: self._set_error(message, error_log))
 
-    def _start_trajectory_worker(self, indices: list[int]) -> None:
+    def _start_trajectory_worker(
+        self,
+        indices: list[int],
+        run_dir: Path | None = None,
+        planned_indices: list[int] | None = None,
+        completed_indices: set[int] | None = None,
+    ) -> None:
         self.trajectory_running = True
         self.trajectory_stop_event.clear()
         label = "all" if len(indices) > 1 else f"traj_{indices[0]:02d}"
-        self.current_trajectory_run_dir = ensure_dir(self.trajectory_output_dir / f"run_{timestamp_id()}_{label}_low_to_high")
-        self.progress_var.set(0)
-        self.progress.configure(maximum=max(1, len(indices)))
+        self.current_trajectory_run_dir = ensure_dir(run_dir or (self.trajectory_output_dir / f"run_{timestamp_id()}_{label}_low_to_high"))
+        self.trajectory_state_path = self.current_trajectory_run_dir / "trajectory_run_state.json"
+        self.planned_trajectory_indices = list(planned_indices or indices)
+        self.completed_trajectory_indices = set(completed_indices or set())
+        completed_start = len(self.completed_trajectory_indices)
+        planned_total = len(self.planned_trajectory_indices)
+        self.progress_var.set(completed_start)
+        self.progress.configure(maximum=max(1, planned_total))
         self.start_button.configure(state="disabled")
         self.qa_button.configure(state="disabled")
         self._set_trajectory_buttons("disabled")
         self.stop_trajectory_button.configure(state="normal")
         self.status_var.set("Starting trajectory recording. Hide REFramework UI before countdown finishes.")
         self.output_var.set(f"Output: {self.current_trajectory_run_dir}")
-        threading.Thread(target=self._trajectory_worker, args=(indices,), daemon=True).start()
+        self._write_trajectory_run_state(status="starting")
+        threading.Thread(target=self._trajectory_worker, args=(indices, completed_start, planned_total), daemon=True).start()
 
-    def _trajectory_worker(self, indices: list[int]) -> None:
-        completed = 0
+    def _trajectory_worker(self, indices: list[int], completed_start: int, planned_total: int) -> None:
+        completed = completed_start
         try:
             run_dir = self.current_trajectory_run_dir or ensure_dir(self.trajectory_output_dir / f"run_{timestamp_id()}_low_to_high")
-            for position, trajectory_index in enumerate(indices, start=1):
+            self._write_trajectory_run_state(status="recording")
+            for position, trajectory_index in enumerate(indices, start=completed_start + 1):
                 if self.trajectory_stop_event.is_set():
                     break
                 trajectory = load_replay_trajectory(
@@ -441,7 +512,7 @@ class StillScanApp:
                         pos, total, idx, traj.trajectory_id
                     ),
                 )
-                replay_trajectory_to_obs(
+                result = replay_trajectory_to_obs(
                     self.config,
                     trajectory,
                     obs_password=self.obs_password,
@@ -455,19 +526,34 @@ class StillScanApp:
                     record=True,
                     write_pose_log=True,
                 )
-                completed += 1
+                video_path = self._validate_trajectory_result(result, trajectory_index)
+                self.completed_trajectory_indices.add(trajectory_index)
+                completed = len(self.completed_trajectory_indices)
+                self._write_trajectory_run_state(status="recording", current_index=trajectory_index, last_video=video_path)
                 self.root.after(0, lambda value=completed: self.progress_var.set(value))
+                if (
+                    self.obs_restart_every > 0
+                    and completed < planned_total
+                    and completed % self.obs_restart_every == 0
+                    and not self.trajectory_stop_event.is_set()
+                ):
+                    self._write_trajectory_run_state(status="restarting_obs", current_index=trajectory_index)
+                    self._restart_obs_between_batches(completed, planned_total)
+                    self._write_trajectory_run_state(status="recording")
 
-            status = f"Trajectory recording done. Recorded {completed}/{len(indices)} low -> high videos."
+            status = f"Trajectory recording done. Recorded {completed}/{planned_total} low -> high videos."
             if self.trajectory_stop_event.is_set():
-                status = f"Trajectory recording stopped. Recorded {completed}/{len(indices)} videos."
+                status = f"Trajectory recording stopped. Recorded {completed}/{planned_total} videos."
+            self._write_trajectory_run_state(status="stopped" if self.trajectory_stop_event.is_set() else "done")
             self.root.after(0, lambda: self._set_trajectory_done(status))
         except Exception as exc:
+            message = str(exc)
             error_log = ensure_dir(self.config.output_dir) / "trajectory_replay_gui_errors.log"
             with error_log.open("a", encoding="utf-8") as handle:
                 handle.write(traceback.format_exc())
                 handle.write("\n")
-            self.root.after(0, lambda: self._set_trajectory_error(str(exc), error_log))
+            self._write_trajectory_run_state(status="failed", error=message)
+            self.root.after(0, lambda message=message: self._set_trajectory_error(message, error_log))
 
     def _qa_worker(self, samples_csv: Path) -> None:
         try:
@@ -480,11 +566,12 @@ class StillScanApp:
             )
             self.root.after(0, lambda: self._set_qa_done(outputs))
         except Exception as exc:
+            message = str(exc)
             error_log = ensure_dir(self.config.output_dir) / "still_scan_errors.log"
             with error_log.open("a", encoding="utf-8") as handle:
                 handle.write(traceback.format_exc())
                 handle.write("\n")
-            self.root.after(0, lambda: self._set_qa_error(str(exc), error_log))
+            self.root.after(0, lambda message=message: self._set_qa_error(message, error_log))
 
     def _progress(self, sample: StillSample, total: int, image_path: Path) -> None:
         self.captured_count = sample.sample_index
@@ -535,6 +622,7 @@ class StillScanApp:
         self.trajectory_running = False
         self.status_var.set(status)
         self.output_var.set(f"Output: {self.current_trajectory_run_dir or self.trajectory_output_dir}")
+        self.trajectory_resume_var.set(self._trajectory_resume_status_text())
         self.start_button.configure(state="normal")
         self._set_trajectory_buttons("normal")
         self.stop_trajectory_button.configure(state="disabled")
@@ -544,11 +632,202 @@ class StillScanApp:
         self.trajectory_running = False
         self.status_var.set(f"Trajectory failed: {message}")
         self.output_var.set(f"Error log: {error_log}")
+        self.trajectory_resume_var.set(self._trajectory_resume_status_text())
         self.start_button.configure(state="normal")
         self._set_trajectory_buttons("normal")
         self.stop_trajectory_button.configure(state="disabled")
         self._refresh_qa_button()
         messagebox.showerror("Trajectory replay failed", message)
+
+    def _latest_trajectory_run_dir(self) -> Path | None:
+        if not self.trajectory_output_dir.exists():
+            return None
+        candidates = [
+            path
+            for path in self.trajectory_output_dir.iterdir()
+            if path.is_dir() and path.name.startswith("run_") and (path / "trajectory_run_state.json").exists()
+        ]
+        if not candidates:
+            candidates = [path for path in self.trajectory_output_dir.iterdir() if path.is_dir() and path.name.startswith("run_")]
+        if not candidates:
+            return None
+        candidates.sort(key=lambda path: path.stat().st_mtime, reverse=True)
+        return candidates[0]
+
+    def _load_planned_indices_for_run(self, run_dir: Path) -> list[int]:
+        state_path = run_dir / "trajectory_run_state.json"
+        if state_path.exists():
+            try:
+                payload = json.loads(state_path.read_text(encoding="utf-8"))
+                planned = payload.get("planned_indices")
+                if isinstance(planned, list):
+                    indices = sorted({int(item) for item in planned if int(item) > 0})
+                    if indices:
+                        return indices
+            except Exception:
+                pass
+        return list(range(1, self.trajectory_count + 1))
+
+    def _detect_completed_trajectory_indices(self, run_dir: Path, planned: list[int]) -> set[int]:
+        return {index for index in planned if self._valid_video_for_trajectory(run_dir, index) is not None}
+
+    def _valid_video_for_trajectory(self, run_dir: Path, trajectory_index: int) -> Path | None:
+        trajectory_dir = run_dir / f"traj_{trajectory_index:02d}"
+        result_json = trajectory_dir / "replay_result.json"
+        if result_json.exists():
+            try:
+                payload = json.loads(result_json.read_text(encoding="utf-8"))
+                video_text = str(payload.get("video_path") or "")
+                if video_text:
+                    video_path = Path(video_text)
+                    if video_path.exists() and video_path.stat().st_size >= MIN_VALID_TRAJECTORY_VIDEO_BYTES:
+                        return video_path
+            except Exception:
+                pass
+        raw_dir = trajectory_dir / "raw"
+        if raw_dir.exists():
+            candidates = [
+                path
+                for path in raw_dir.iterdir()
+                if path.is_file()
+                and path.suffix.lower() in {".mp4", ".mkv", ".mov", ".flv", ".avi"}
+                and path.stat().st_size >= MIN_VALID_TRAJECTORY_VIDEO_BYTES
+            ]
+            if candidates:
+                candidates.sort(key=lambda path: path.stat().st_mtime, reverse=True)
+                return candidates[0]
+        return None
+
+    def _validate_trajectory_result(self, result: dict[str, Path | str], trajectory_index: int) -> Path:
+        video_value = result.get("video_path")
+        video_path = Path(video_value) if video_value else None
+        if video_path is None or not video_path.exists() or video_path.stat().st_size < MIN_VALID_TRAJECTORY_VIDEO_BYTES:
+            run_dir = self.current_trajectory_run_dir or self.trajectory_output_dir
+            fallback = self._valid_video_for_trajectory(run_dir, trajectory_index)
+            if fallback is not None:
+                return fallback
+            raise RuntimeError(f"Trajectory {trajectory_index:02d} did not produce a valid video file.")
+        return video_path
+
+    def _write_trajectory_run_state(
+        self,
+        status: str,
+        current_index: int | None = None,
+        last_video: Path | None = None,
+        error: str = "",
+    ) -> None:
+        if self.current_trajectory_run_dir is None:
+            return
+        state_path = self.trajectory_state_path or (self.current_trajectory_run_dir / "trajectory_run_state.json")
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        planned = list(self.planned_trajectory_indices)
+        completed = sorted(self.completed_trajectory_indices)
+        remaining = [index for index in planned if index not in self.completed_trajectory_indices]
+        payload = {
+            "status": status,
+            "updated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "trajectory_label": self._trajectory_set_label(self.trajectory_set_id),
+            "trajectory_json": str(self.trajectory_json),
+            "run_dir": str(self.current_trajectory_run_dir),
+            "restart_every": self.obs_restart_every,
+            "current_index": current_index,
+            "planned_total": len(planned),
+            "completed_total": len(completed),
+            "remaining_total": len(remaining),
+            "next_index": remaining[0] if remaining else None,
+            "planned_indices": planned,
+            "completed_indices": completed,
+            "last_video": str(last_video) if last_video else "",
+            "error": error,
+        }
+        state_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        if remaining:
+            text = (
+                f"Resume: next missing trajectory {remaining[0]:02d}, "
+                f"completed {len(completed)}/{len(planned)} in {self.current_trajectory_run_dir.name}"
+            )
+        else:
+            text = f"Resume: latest run complete ({len(completed)}/{len(planned)})"
+        self.root.after(0, lambda text=text: self.trajectory_resume_var.set(text))
+
+    @staticmethod
+    def _read_int_env(name: str, default: int) -> int:
+        try:
+            return max(0, int(os.environ.get(name, str(default)) or default))
+        except ValueError:
+            return default
+
+    @staticmethod
+    def _read_float_env(name: str, default: float) -> float:
+        try:
+            return max(0.0, float(os.environ.get(name, str(default)) or default))
+        except ValueError:
+            return default
+
+    def _restart_obs_between_batches(self, completed: int, total: int) -> None:
+        if not self.obs_restart_command:
+            raise RuntimeError("RE9_OBS_RESTART_COMMAND must be set when RE9_OBS_RESTART_EVERY_N is enabled.")
+        self.root.after(
+            0,
+            lambda: self.status_var.set(f"Restarting OBS to release GPU memory after {completed}/{total} trajectories..."),
+        )
+        self.root.after(0, lambda: self.file_var.set("Current mode: restarting OBS WebSocket"))
+        self._terminate_obs_processes()
+        self._clear_obs_sentinel_files()
+        log_path = ensure_dir(self.config.output_dir) / "obs_restart.log"
+        with log_path.open("ab") as log_handle:
+            subprocess.Popen(
+                shlex.split(self.obs_restart_command),
+                stdout=log_handle,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+                env=os.environ.copy(),
+            )
+        self._wait_for_obs_websocket()
+
+    def _terminate_obs_processes(self) -> None:
+        try:
+            subprocess.run(["pkill", "-x", "obs"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        except OSError:
+            return
+        deadline = time.monotonic() + 10.0
+        while time.monotonic() < deadline:
+            result = subprocess.run(["pgrep", "-x", "obs"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if result.returncode != 0:
+                return
+            time.sleep(0.25)
+        subprocess.run(["pkill", "-9", "-x", "obs"], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(1.0)
+
+    def _clear_obs_sentinel_files(self) -> None:
+        sentinel_dir = Path.home() / ".config" / "obs-studio" / ".sentinel"
+        if not sentinel_dir.exists():
+            return
+        backup_dir = sentinel_dir.with_name(".sentinel.backup-re9")
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        suffix = timestamp_id()
+        for path in sentinel_dir.glob("run_*"):
+            try:
+                path.rename(backup_dir / f"{path.name}.{suffix}")
+            except OSError:
+                pass
+
+    def _wait_for_obs_websocket(self) -> None:
+        from .obs_control import connect_obs
+
+        obs_cfg = self.config.raw["obs"]
+        password = self.obs_password or obs_cfg.get("password", "")
+        deadline = time.monotonic() + self.obs_restart_wait_sec
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            try:
+                client = connect_obs(obs_cfg["host"], int(obs_cfg["port"]), password)
+                client.get_version()
+                return
+            except Exception as exc:
+                last_error = exc
+                time.sleep(0.5)
+        raise RuntimeError(f"OBS did not reconnect after restart: {last_error}")
 
     def _set_qa_done(self, outputs: dict[str, Path]) -> None:
         self.qa_running = False
@@ -576,6 +855,7 @@ class StillScanApp:
             state = "disabled"
         self.record_one_trajectory_button.configure(state=state)
         self.record_all_trajectories_button.configure(state=state)
+        self.resume_trajectory_button.configure(state=state)
         self.trajectory_spinbox.configure(state=state)
         self.trajectory_set_combo.configure(state="disabled" if self.trajectory_running else "readonly")
 
@@ -615,10 +895,26 @@ class StillScanApp:
         return str(self.trajectory_sets[set_id]["label"])
 
     def _trajectory_status_text(self) -> str:
+        restart_text = (
+            f"OBS restart every {self.obs_restart_every} completed paths"
+            if self.obs_restart_every > 0
+            else "OBS auto-restart disabled"
+        )
         return (
             f"Trajectory replay: {self._trajectory_set_label(self.trajectory_set_id)} "
-            f"loaded {self.trajectory_count} paths, direction low -> high"
+            f"loaded {self.trajectory_count} paths, direction low -> high, {restart_text}"
         )
+
+    def _trajectory_resume_status_text(self) -> str:
+        run_dir = self.current_trajectory_run_dir or self._latest_trajectory_run_dir()
+        if run_dir is None:
+            return "Resume: no previous run found"
+        planned = self._load_planned_indices_for_run(run_dir)
+        completed = self._detect_completed_trajectory_indices(run_dir, planned)
+        remaining = [index for index in planned if index not in completed]
+        if not remaining:
+            return f"Resume: latest run complete ({len(completed)}/{len(planned)})"
+        return f"Resume: next missing trajectory {remaining[0]:02d}, completed {len(completed)}/{len(planned)} in {run_dir.name}"
 
     def _on_trajectory_set_change(self, _event: object | None = None) -> None:
         if self.trajectory_running:
@@ -637,11 +933,15 @@ class StillScanApp:
         self.trajectory_output_dir = Path(item["output_dir"])
         self.trajectory_session_prefix = str(item["session_prefix"])
         self.current_trajectory_run_dir = None
+        self.trajectory_state_path = None
+        self.planned_trajectory_indices = []
+        self.completed_trajectory_indices = set()
         self.trajectory_count = self._load_trajectory_count()
         self.trajectory_index_var.set(1)
         self.trajectory_spinbox.configure(to=max(1, self.trajectory_count))
         self.trajectory_var.set(self._trajectory_status_text())
         self.trajectory_output_var.set(f"Output: {self.trajectory_output_dir}")
+        self.trajectory_resume_var.set(self._trajectory_resume_status_text())
         self.output_var.set("Output: -")
         self._set_trajectory_buttons("normal")
 
@@ -700,4 +1000,3 @@ def run_still_scan_gui(
         trajectory_session_prefix=trajectory_session_prefix,
         topmost=topmost,
     ).run()
-
