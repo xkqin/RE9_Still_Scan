@@ -1,0 +1,35 @@
+{
+  "batch_dir": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.1/trajectories_low_to_high_4000_gain1p3",
+  "trajectory_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.1/trajectories_low_to_high_4000_gain1p3/scene_1_1_low_to_high_4000_gain1p3_trajectories.json",
+  "summary_csv": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.1/trajectories_low_to_high_4000_gain1p3/trajectory_summary.csv",
+  "ready_for_capture_under_available_checks": true,
+  "direction": "low_score_to_high_score",
+  "checks": {
+    "json_count_is_4000": true,
+    "summary_count_is_4000": true,
+    "all_keyframes_80": true,
+    "all_time_step_0p2": true,
+    "all_start_score_lower_than_end_score": true,
+    "all_score_gain_ge_1p3": true,
+    "all_score_curves_monotonic_increase": true,
+    "all_physical_signatures_unique": true,
+    "unique_low_score_start_nodes": true,
+    "all_end_at_same_top_score_node": true
+  },
+  "warnings": [
+    "No scene mesh/depth/collision volume is available, so this validation cannot prove no clipping through geometry.",
+    "Only endpoints are exact scored nodes in the source straight-line batch; middle keyframes are interpolation."
+  ],
+  "stats": {
+    "trajectory_count": 4000,
+    "unique_physical_signatures": 4000,
+    "unique_low_score_start_nodes": 4000,
+    "top_score_endpoint_node_id": "scene_1|scene_1.1_y02_medium_dense_y02_1p86|2666|17",
+    "start_score_min": 1.918309,
+    "start_score_max": 5.827006,
+    "end_score_min": 7.127104,
+    "end_score_max": 7.127104,
+    "score_gain_min": 1.300098,
+    "score_gain_max": 5.208795
+  }
+}
