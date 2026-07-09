@@ -1,0 +1,58 @@
+{
+  "batch_dir": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.1/trajectories_topstart_4000_gain1p3",
+  "trajectory_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.1/trajectories_topstart_4000_gain1p3/scene_1_1_topstart_4000_trajectories.json",
+  "summary_csv": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.1/trajectories_topstart_4000_gain1p3/trajectory_summary.csv",
+  "ready_for_capture_under_available_checks": true,
+  "checks": {
+    "json_count_is_4000": true,
+    "summary_count_is_4000": true,
+    "all_keyframes_80": true,
+    "all_duration_15p8": true,
+    "all_time_step_0p2": true,
+    "all_start_from_scene11_top_score_node": true,
+    "all_start_score_matches_top": true,
+    "all_score_gain_ge_1p3": true,
+    "all_path_length_ge_10m": true,
+    "all_path_length_le_50m": true,
+    "all_physical_signatures_unique": true,
+    "all_endpoints_unique": true,
+    "all_keyframes_inside_scene11_scored_xyz_bounds": true,
+    "all_score_curves_monotonic_decrease": true,
+    "all_paths_straight_interpolation": true
+  },
+  "failures": [],
+  "warnings": [
+    "No scene mesh/depth/collision volume is available, so this validation cannot prove no clipping through geometry.",
+    "Only start/end keyframes are exact scored nodes; middle keyframes are straight interpolation and are not exact sampled nodes."
+  ],
+  "stats": {
+    "trajectory_count": 4000,
+    "summary_rows": 4000,
+    "unique_physical_signatures": 4000,
+    "unique_endpoints": 4000,
+    "start_node_id": "scene_1|scene_1.1_y02_medium_dense_y02_1p86|2666|17",
+    "start_score": 7.127104,
+    "expected_scene11_top_node_id": "scene_1|scene_1.1_y02_medium_dense_y02_1p86|2666|17",
+    "expected_scene11_top_score": 7.127104,
+    "score_gain_min": 1.300098,
+    "score_gain_max": 5.208795,
+    "path_length_min": 10.345,
+    "path_length_max": 47.225386,
+    "net_distance_min": 10.345,
+    "net_distance_max": 47.225386,
+    "max_xyz_step_max": 0.597791,
+    "max_yaw_step_max": 2.278482,
+    "max_abs_score_step_max": 0.204263,
+    "out_of_bounds_keyframes": 0,
+    "non_monotonic_score_trajectories": 0,
+    "non_linear_path_trajectories": 0,
+    "scene11_scored_xyz_bounds": {
+      "x_min": -9.97,
+      "x_max": 93.48,
+      "y_min": 0.6,
+      "y_max": 4.39,
+      "z_min": -1.81,
+      "z_max": 5.719999999999999
+    }
+  }
+}

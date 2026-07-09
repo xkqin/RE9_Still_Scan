@@ -1,0 +1,47 @@
+{
+  "batch": "scene_1/datasets/scene_1.1/trajectories_topstart_4000_gain1p3/scene_1_1_topstart_4000_trajectories.json",
+  "trajectory_count": 4000,
+  "legal_unique_xyz_count": 420,
+  "proof_type": "proxy_only_nearest_sampled_legal_xyz_distance",
+  "true_mesh_collision_checked": false,
+  "interpretation": {
+    "important": "This is not a real collision probability because no scene mesh/depth/collision volume is available.",
+    "metric": "For each interpolated keyframe, distance to nearest existing scored camera xyz point.",
+    "risk_bins": {
+      "low_proxy_risk": "max middle-keyframe distance <= 0.5m",
+      "medium_proxy_risk": "0.5m < max middle-keyframe distance <= 1.0m",
+      "high_proxy_risk": "1.0m < max middle-keyframe distance <= 2.0m",
+      "very_high_proxy_risk": "max middle-keyframe distance > 2.0m"
+    }
+  },
+  "risk_label_counts": {
+    "very_high_proxy_risk": 4000
+  },
+  "risk_label_rates": {
+    "very_high_proxy_risk": 1.0
+  },
+  "max_mid_dist_distribution": {
+    "min": 2.5535130000000024,
+    "mean": 2.6343927080040914,
+    "p50": 2.6300682801870465,
+    "p90": 2.7231993095862537,
+    "p95": 2.7337228283366644,
+    "p99": 2.7490765758041458,
+    "max": 2.789328750690755
+  },
+  "trajectory_count_with_max_mid_dist_gt_threshold": {
+    "0.5": 4000,
+    "1.0": 4000,
+    "1.5": 4000,
+    "2.0": 4000,
+    "2.5": 4000
+  },
+  "trajectory_rate_with_max_mid_dist_gt_threshold": {
+    "0.5": 1.0,
+    "1.0": 1.0,
+    "1.5": 1.0,
+    "2.0": 1.0,
+    "2.5": 1.0
+  },
+  "csv": "scene_1/datasets/scene_1.1/trajectories_topstart_4000_gain1p3/clipping_risk_proxy_summary.csv"
+}
