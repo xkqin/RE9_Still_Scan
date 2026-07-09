@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 
@@ -9,7 +10,7 @@ DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "default.yaml"
 
 def resolve_project_path(value: str | Path) -> Path:
     """Resolve relative paths against the project root and expand user paths."""
-    path = Path(value).expanduser()
+    path = Path(os.path.expandvars(str(value))).expanduser()
     if path.is_absolute():
         return path
     return PROJECT_ROOT / path

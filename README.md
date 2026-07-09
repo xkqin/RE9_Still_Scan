@@ -204,7 +204,21 @@ lua_logger:
   pose_log_file: "/absolute/path/to/game/reframework/data/re9_freecam_pose_log.csv"
 ```
 
-Use forward slashes. `~` is supported, but `$HOME` inside YAML is not expanded by the config loader.
+Use forward slashes. `~` and environment variables such as `$HOME` are expanded by the config loader.
+
+On Linux, when `--config` is omitted, the CLI automatically tries:
+
+```text
+configs/linux.local.yaml
+configs/linux.yaml
+configs/default.yaml
+```
+
+You can also set a shell-wide override:
+
+```bash
+export RE9_CONFIG=configs/linux.local.yaml
+```
 
 Download/update the official LAION aesthetic-predictor repo:
 
@@ -284,6 +298,12 @@ Linux:
 bash scripts/scan_scene01_gui.sh
 ```
 
+Or use the generic Linux launcher, which selects `configs/linux.local.yaml` when it exists and otherwise falls back to `configs/linux.yaml`:
+
+```bash
+bash scripts/scan_gui.sh
+```
+
 Run the two-scene scan example:
 
 ```powershell
@@ -303,6 +323,16 @@ python -m re9_pose_recorder.cli scan-stills-gui \
   --image-width 1920 \
   --image-height 1080 \
   --image-quality 100
+```
+
+The same GUI also includes the trajectory-video recorder. To load a custom trajectory JSON on Linux without editing Python files:
+
+```bash
+TRAJECTORY_JSON=/path/to/sample_trajectories.json \
+TRAJECTORY_OUTPUT_DIR=data/videos/trajectories/my_scene \
+TRAJECTORY_LABEL="my scene trajectories" \
+TRAJECTORY_SESSION_PREFIX=my_scene_traj \
+bash scripts/scan_gui.sh
 ```
 
 The scan definitions live in:

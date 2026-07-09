@@ -26,6 +26,31 @@ from .utils import timestamp_id
 
 DEFAULT_TRAJECTORY_JSON = PROJECT_ROOT / "data" / "trajectories" / "scene_1.1" / "scene_1_1_trajectories.json"
 DEFAULT_TRAJECTORY_OUTPUT_DIR = PROJECT_ROOT / "data" / "videos" / "trajectories" / "scene_1.1_low_to_high"
+TOPSTART20_TRAJECTORY_JSON = (
+    PROJECT_ROOT
+    / "data"
+    / "trajectories"
+    / "scene_1.1_topstart20_gain1p3_primitives_sample"
+    / "scene_1_1_topstart_20_gain1p3_primitives_sample_trajectories.json"
+)
+TOPSTART20_TRAJECTORY_OUTPUT_DIR = (
+    PROJECT_ROOT / "data" / "videos" / "trajectories" / "scene_1.1_topstart20_gain1p3_primitives_sample"
+)
+DEFAULT_TRAJECTORY_SET_ID = "scene_1_1_topstart20"
+TRAJECTORY_SETS = {
+    "scene_1_1_topstart20": {
+        "label": "scene_1.1 topstart20 gain1p3 primitives",
+        "json": TOPSTART20_TRAJECTORY_JSON,
+        "output_dir": TOPSTART20_TRAJECTORY_OUTPUT_DIR,
+        "session_prefix": "scene_1_1_topstart20_traj",
+    },
+    "scene_1_1_low_to_high": {
+        "label": "scene_1.1 original low -> high",
+        "json": DEFAULT_TRAJECTORY_JSON,
+        "output_dir": DEFAULT_TRAJECTORY_OUTPUT_DIR,
+        "session_prefix": "scene_1_1_low_to_high_traj",
+    },
+}
 
 
 class StillScanApp:
@@ -52,6 +77,11 @@ class StillScanApp:
         session_id: str | None,
         layers_config: Path | None = None,
         pose_plan_config: Path | None = None,
+        trajectory_set_id: str = DEFAULT_TRAJECTORY_SET_ID,
+        trajectory_json: Path | None = None,
+        trajectory_output_dir: Path | None = None,
+        trajectory_label: str | None = None,
+        trajectory_session_prefix: str | None = None,
         topmost: bool = True,
     ) -> None:
         self.config = config
@@ -80,8 +110,24 @@ class StillScanApp:
         self.trajectory_running = False
         self.output_dir: Path | None = None
         self.captured_count = 0
-        self.trajectory_json = DEFAULT_TRAJECTORY_JSON
-        self.trajectory_output_dir = DEFAULT_TRAJECTORY_OUTPUT_DIR
+        self.trajectory_sets = dict(TRAJECTORY_SETS)
+        if trajectory_json is not None:
+            custom_output = trajectory_output_dir or (
+                PROJECT_ROOT / "data" / "videos" / "trajectories" / (trajectory_json.stem or "custom_trajectory")
+            )
+            self.trajectory_sets["custom"] = {
+                "label": trajectory_label or f"custom: {trajectory_json.stem}",
+                "json": trajectory_json,
+                "output_dir": custom_output,
+                "session_prefix": trajectory_session_prefix or "custom_traj",
+            }
+            trajectory_set_id = "custom"
+        if trajectory_set_id not in self.trajectory_sets:
+            trajectory_set_id = DEFAULT_TRAJECTORY_SET_ID
+        self.trajectory_set_id = trajectory_set_id
+        self.trajectory_json = Path(self.trajectory_sets[self.trajectory_set_id]["json"])
+        self.trajectory_output_dir = Path(self.trajectory_sets[self.trajectory_set_id]["output_dir"])
+        self.trajectory_session_prefix = str(self.trajectory_sets[self.trajectory_set_id]["session_prefix"])
         self.current_trajectory_run_dir: Path | None = None
         self.trajectory_count = self._load_trajectory_count()
 
@@ -106,7 +152,7 @@ class StillScanApp:
 
         self.root = tk.Tk()
         self.root.title("RE9 Still Scan Progress")
-        self.root.geometry("820x520")
+        self.root.geometry("840x560")
         self.root.resizable(False, False)
         self.root.attributes("-topmost", topmost)
 
@@ -119,9 +165,9 @@ class StillScanApp:
         self.output_var = tk.StringVar(value="Output: -")
         self.progress_var = tk.IntVar(value=0)
         self.trajectory_index_var = tk.IntVar(value=1)
-        self.trajectory_var = tk.StringVar(
-            value=f"Trajectory replay: scene_1.1 loaded {self.trajectory_count} paths, direction low -> high"
-        )
+        self.trajectory_set_var = tk.StringVar(value=self._trajectory_set_label(self.trajectory_set_id))
+        self.trajectory_var = tk.StringVar(value=self._trajectory_status_text())
+        self.trajectory_output_var = tk.StringVar(value=f"Output: {self.trajectory_output_dir}")
 
         frame = ttk.Frame(self.root)
         frame.pack(fill="both", expand=True, padx=16, pady=14)
@@ -142,8 +188,20 @@ class StillScanApp:
 
         trajectory_frame = ttk.LabelFrame(frame, text="Trajectory video capture")
         trajectory_frame.pack(fill="x", pady=(0, 8))
+        trajectory_picker = ttk.Frame(trajectory_frame)
+        trajectory_picker.pack(fill="x", padx=8, pady=(5, 2))
+        ttk.Label(trajectory_picker, text="Set").pack(side="left")
+        self.trajectory_set_combo = ttk.Combobox(
+            trajectory_picker,
+            textvariable=self.trajectory_set_var,
+            values=self._trajectory_set_choices(),
+            state="readonly",
+            width=42,
+        )
+        self.trajectory_set_combo.pack(side="left", fill="x", expand=True, padx=(8, 0))
+        self.trajectory_set_combo.bind("<<ComboboxSelected>>", self._on_trajectory_set_change)
         ttk.Label(trajectory_frame, textvariable=self.trajectory_var, wraplength=760).pack(anchor="w", padx=8, pady=(5, 2))
-        ttk.Label(trajectory_frame, text=f"Output: {self.trajectory_output_dir}", wraplength=760).pack(anchor="w", padx=8, pady=(0, 5))
+        ttk.Label(trajectory_frame, textvariable=self.trajectory_output_var, wraplength=760).pack(anchor="w", padx=8, pady=(0, 5))
         trajectory_controls = ttk.Frame(trajectory_frame)
         trajectory_controls.pack(fill="x", padx=8, pady=(0, 8))
         ttk.Label(trajectory_controls, text="Index").pack(side="left")
@@ -254,7 +312,9 @@ class StillScanApp:
         if self.trajectory_count <= 0:
             messagebox.showerror("Trajectory unavailable", f"No trajectory JSON found:\n{self.trajectory_json}")
             return
-        if not self._confirm_trajectory_ready(f"Record all {self.trajectory_count} scene_1.1 trajectories low -> high?"):
+        if not self._confirm_trajectory_ready(
+            f"Record all {self.trajectory_count} {self._trajectory_set_label(self.trajectory_set_id)} trajectories low -> high?"
+        ):
             return
         self._start_trajectory_worker(list(range(1, self.trajectory_count + 1)))
 
@@ -373,7 +433,7 @@ class StillScanApp:
                     trajectory_index=trajectory_index,
                     reverse=False,
                 )
-                session = f"scene_1_1_low_to_high_traj_{trajectory_index:02d}"
+                session = f"{self.trajectory_session_prefix}_{trajectory_index:02d}"
                 output_dir = run_dir / f"traj_{trajectory_index:02d}"
                 self.root.after(
                     0,
@@ -517,6 +577,7 @@ class StillScanApp:
         self.record_one_trajectory_button.configure(state=state)
         self.record_all_trajectories_button.configure(state=state)
         self.trajectory_spinbox.configure(state=state)
+        self.trajectory_set_combo.configure(state="disabled" if self.trajectory_running else "readonly")
 
     def _confirm_trajectory_ready(self, title: str) -> bool:
         return messagebox.askyesno(
@@ -547,6 +608,43 @@ class StillScanApp:
             return 0
         return 0
 
+    def _trajectory_set_choices(self) -> list[str]:
+        return [str(item["label"]) for item in self.trajectory_sets.values()]
+
+    def _trajectory_set_label(self, set_id: str) -> str:
+        return str(self.trajectory_sets[set_id]["label"])
+
+    def _trajectory_status_text(self) -> str:
+        return (
+            f"Trajectory replay: {self._trajectory_set_label(self.trajectory_set_id)} "
+            f"loaded {self.trajectory_count} paths, direction low -> high"
+        )
+
+    def _on_trajectory_set_change(self, _event: object | None = None) -> None:
+        if self.trajectory_running:
+            self.trajectory_set_var.set(self._trajectory_set_label(self.trajectory_set_id))
+            return
+        label = self.trajectory_set_var.get()
+        for set_id, item in self.trajectory_sets.items():
+            if item["label"] == label:
+                self._set_trajectory_set(set_id)
+                return
+
+    def _set_trajectory_set(self, set_id: str) -> None:
+        self.trajectory_set_id = set_id
+        item = self.trajectory_sets[set_id]
+        self.trajectory_json = Path(item["json"])
+        self.trajectory_output_dir = Path(item["output_dir"])
+        self.trajectory_session_prefix = str(item["session_prefix"])
+        self.current_trajectory_run_dir = None
+        self.trajectory_count = self._load_trajectory_count()
+        self.trajectory_index_var.set(1)
+        self.trajectory_spinbox.configure(to=max(1, self.trajectory_count))
+        self.trajectory_var.set(self._trajectory_status_text())
+        self.trajectory_output_var.set(f"Output: {self.trajectory_output_dir}")
+        self.output_var.set("Output: -")
+        self._set_trajectory_buttons("normal")
+
 
 def run_still_scan_gui(
     config: AppConfig,
@@ -568,6 +666,11 @@ def run_still_scan_gui(
     session_id: str | None = None,
     layers_config: Path | None = None,
     pose_plan_config: Path | None = None,
+    trajectory_set_id: str = DEFAULT_TRAJECTORY_SET_ID,
+    trajectory_json: Path | None = None,
+    trajectory_output_dir: Path | None = None,
+    trajectory_label: str | None = None,
+    trajectory_session_prefix: str | None = None,
     topmost: bool = True,
 ) -> None:
     StillScanApp(
@@ -590,6 +693,11 @@ def run_still_scan_gui(
         session_id=session_id,
         layers_config=layers_config,
         pose_plan_config=pose_plan_config,
+        trajectory_set_id=trajectory_set_id,
+        trajectory_json=trajectory_json,
+        trajectory_output_dir=trajectory_output_dir,
+        trajectory_label=trajectory_label,
+        trajectory_session_prefix=trajectory_session_prefix,
         topmost=topmost,
     ).run()
 

@@ -466,6 +466,11 @@ def scan_stills_gui(
     session_id: Optional[str] = typer.Option(None, "--session-id"),
     layers_config: Optional[Path] = typer.Option(None, "--layers-config"),
     pose_plan_config: Optional[Path] = typer.Option(None, "--pose-plan-config"),
+    trajectory_set: str = typer.Option("scene_1_1_topstart20", "--trajectory-set"),
+    trajectory_json: Optional[Path] = typer.Option(None, "--trajectory-json"),
+    trajectory_output_dir: Optional[Path] = typer.Option(None, "--trajectory-output-dir"),
+    trajectory_label: Optional[str] = typer.Option(None, "--trajectory-label"),
+    trajectory_session_prefix: Optional[str] = typer.Option(None, "--trajectory-session-prefix"),
     topmost: bool = typer.Option(True, "--topmost/--no-topmost"),
     config: Optional[Path] = typer.Option(None, "--config"),
 ) -> None:
@@ -493,6 +498,11 @@ def scan_stills_gui(
         session_id=session_id,
         layers_config=layers_config,
         pose_plan_config=pose_plan_config,
+        trajectory_set_id=trajectory_set,
+        trajectory_json=trajectory_json,
+        trajectory_output_dir=trajectory_output_dir,
+        trajectory_label=trajectory_label,
+        trajectory_session_prefix=trajectory_session_prefix,
         topmost=topmost,
     )
 

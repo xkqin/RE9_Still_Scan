@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -9,6 +11,24 @@ import yaml
 from .paths import DEFAULT_CONFIG_PATH, resolve_project_path
 
 
+ENV_CONFIG_PATH = "RE9_CONFIG"
+
+
+def _expand_path(value: str | Path) -> Path:
+    return Path(os.path.expandvars(str(value))).expanduser()
+
+
+def _default_config_path() -> Path:
+    if sys.platform.startswith("linux"):
+        local_linux = resolve_project_path("configs/linux.local.yaml")
+        if local_linux.exists():
+            return local_linux
+        linux = resolve_project_path("configs/linux.yaml")
+        if linux.exists():
+            return linux
+    return DEFAULT_CONFIG_PATH
+
+
 @dataclass(frozen=True)
 class AppConfig:
     raw: dict[str, Any]
@@ -16,19 +36,19 @@ class AppConfig:
 
     @property
     def lua_path(self) -> Path:
-        return Path(self.raw["game"]["lua_path"]).expanduser()
+        return _expand_path(self.raw["game"]["lua_path"])
 
     @property
     def control_file(self) -> Path:
-        return Path(self.raw["lua_logger"]["control_file"]).expanduser()
+        return _expand_path(self.raw["lua_logger"]["control_file"])
 
     @property
     def status_file(self) -> Path:
-        return Path(self.raw["lua_logger"]["status_file"]).expanduser()
+        return _expand_path(self.raw["lua_logger"]["status_file"])
 
     @property
     def pose_log_file(self) -> Path:
-        return Path(self.raw["lua_logger"]["pose_log_file"]).expanduser()
+        return _expand_path(self.raw["lua_logger"]["pose_log_file"])
 
     @property
     def lua_backup_dir(self) -> Path:
@@ -52,7 +72,8 @@ class AppConfig:
 
 
 def load_config(config_path: str | Path | None = None) -> AppConfig:
-    path = Path(config_path).expanduser() if config_path else DEFAULT_CONFIG_PATH
+    selected = config_path or os.environ.get(ENV_CONFIG_PATH) or _default_config_path()
+    path = _expand_path(selected)
     if not path.is_absolute():
         path = resolve_project_path(path)
     if not path.exists():
