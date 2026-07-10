@@ -1,0 +1,1381 @@
+{
+  "version": 1,
+  "scene_id": "scene_1.1",
+  "trajectory_type": "ui_capture_low_to_high",
+  "trajectory_count": 10,
+  "coordinate_system": {
+    "position_axes": "RE9 world x,y,z",
+    "vertical_axis": "y",
+    "yaw_unit": "degrees",
+    "pitch_unit": "degrees"
+  },
+  "trajectories": [
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_01",
+      "direction": "low_to_high",
+      "keyframe_count": 12,
+      "duration_sec": 12.720883,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 5.72,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.069877
+        },
+        {
+          "step": 1,
+          "time_sec": 1.15,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 5.72,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.20087
+        },
+        {
+          "step": 2,
+          "time_sec": 2.179664,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 3.8375,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.425893
+        },
+        {
+          "step": 3,
+          "time_sec": 3.304664,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.609385
+        },
+        {
+          "step": 4,
+          "time_sec": 5.110768,
+          "x": 77.9625,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.9117
+        },
+        {
+          "step": 5,
+          "time_sec": 5.580995,
+          "x": 76.928,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 99.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.06576
+        },
+        {
+          "step": 6,
+          "time_sec": 6.818495,
+          "x": 75.3762,
+          "y": 1.86,
+          "z": -1.4335,
+          "yaw": 148.5,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.3872
+        },
+        {
+          "step": 7,
+          "time_sec": 8.838946,
+          "x": 72.79,
+          "y": 0.6,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.457129
+        },
+        {
+          "step": 8,
+          "time_sec": 9.988946,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.532983
+        },
+        {
+          "step": 9,
+          "time_sec": 11.113946,
+          "x": 72.79,
+          "y": 4.39,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.624327
+        },
+        {
+          "step": 10,
+          "time_sec": 12.14361,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 11,
+          "time_sec": 12.720883,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_02",
+      "direction": "low_to_high",
+      "keyframe_count": 10,
+      "duration_sec": 11.600152,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 3.8375,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.92341
+        },
+        {
+          "step": 1,
+          "time_sec": 1.722727,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 3.8375,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.246149
+        },
+        {
+          "step": 2,
+          "time_sec": 2.578409,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 1.955,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.297375
+        },
+        {
+          "step": 3,
+          "time_sec": 4.289772,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": -1.81,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.447334
+        },
+        {
+          "step": 4,
+          "time_sec": 6.0125,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.74929
+        },
+        {
+          "step": 5,
+          "time_sec": 7.1375,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 0.0725,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.067009
+        },
+        {
+          "step": 6,
+          "time_sec": 8.2875,
+          "x": 77.9625,
+          "y": 1.86,
+          "z": 0.0725,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.259636
+        },
+        {
+          "step": 7,
+          "time_sec": 9.270424,
+          "x": 76.4107,
+          "y": 1.86,
+          "z": -1.4335,
+          "yaw": 112.5,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.601817
+        },
+        {
+          "step": 8,
+          "time_sec": 11.022879,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 9,
+          "time_sec": 11.600152,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_03",
+      "direction": "low_to_high",
+      "keyframe_count": 11,
+      "duration_sec": 14.809191,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 67.6175,
+          "y": 4.39,
+          "z": 5.72,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.880631
+        },
+        {
+          "step": 1,
+          "time_sec": 1.8,
+          "x": 67.6175,
+          "y": 1.86,
+          "z": 5.72,
+          "yaw": 180.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 5.127128
+        },
+        {
+          "step": 2,
+          "time_sec": 3.3,
+          "x": 67.6175,
+          "y": 0.6,
+          "z": 5.72,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 5.359549
+        },
+        {
+          "step": 3,
+          "time_sec": 5.1,
+          "x": 67.6175,
+          "y": 0.6,
+          "z": 3.8375,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.593239
+        },
+        {
+          "step": 4,
+          "time_sec": 6.225,
+          "x": 67.6175,
+          "y": 0.6,
+          "z": 1.955,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.887689
+        },
+        {
+          "step": 5,
+          "time_sec": 8.260003,
+          "x": 69.6865,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 108.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.108908
+        },
+        {
+          "step": 6,
+          "time_sec": 10.271151,
+          "x": 72.79,
+          "y": 4.39,
+          "z": 0.0725,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.194633
+        },
+        {
+          "step": 7,
+          "time_sec": 11.300815,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.532983
+        },
+        {
+          "step": 8,
+          "time_sec": 12.425815,
+          "x": 72.79,
+          "y": 1.86,
+          "z": 1.955,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.645759
+        },
+        {
+          "step": 9,
+          "time_sec": 14.231918,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 10,
+          "time_sec": 14.809191,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_04",
+      "direction": "low_to_high",
+      "keyframe_count": 13,
+      "duration_sec": 12.979633,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 62.445,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 315.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.575851
+        },
+        {
+          "step": 1,
+          "time_sec": 1.032199,
+          "x": 62.445,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 315.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.847811
+        },
+        {
+          "step": 2,
+          "time_sec": 1.604926,
+          "x": 62.445,
+          "y": 4.39,
+          "z": 0.0725,
+          "yaw": 315.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.008657
+        },
+        {
+          "step": 3,
+          "time_sec": 2.460608,
+          "x": 62.445,
+          "y": 4.39,
+          "z": 1.955,
+          "yaw": 315.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.302782
+        },
+        {
+          "step": 4,
+          "time_sec": 3.610608,
+          "x": 62.445,
+          "y": 1.86,
+          "z": 1.955,
+          "yaw": 315.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.60797
+        },
+        {
+          "step": 5,
+          "time_sec": 4.183335,
+          "x": 62.445,
+          "y": 0.6,
+          "z": 1.955,
+          "yaw": 315.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.85231
+        },
+        {
+          "step": 6,
+          "time_sec": 6.382188,
+          "x": 67.1003,
+          "y": 1.86,
+          "z": 2.3315,
+          "yaw": 283.5,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.106609
+        },
+        {
+          "step": 7,
+          "time_sec": 7.45394,
+          "x": 69.4279,
+          "y": 1.86,
+          "z": 1.955,
+          "yaw": 270.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.163071
+        },
+        {
+          "step": 8,
+          "time_sec": 9.296678,
+          "x": 72.79,
+          "y": 0.6,
+          "z": 0.0725,
+          "yaw": 225.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.240248
+        },
+        {
+          "step": 9,
+          "time_sec": 10.421678,
+          "x": 72.79,
+          "y": 1.86,
+          "z": 0.0725,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.339943
+        },
+        {
+          "step": 10,
+          "time_sec": 11.546678,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.682645
+        },
+        {
+          "step": 11,
+          "time_sec": 12.40236,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 12,
+          "time_sec": 12.979633,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_05",
+      "direction": "low_to_high",
+      "keyframe_count": 12,
+      "duration_sec": 13.382717,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 67.6175,
+          "y": 4.39,
+          "z": 3.8375,
+          "yaw": 180.0,
+          "pitch": -45.0,
+          "fov": null,
+          "score": 5.012167
+        },
+        {
+          "step": 1,
+          "time_sec": 0.572727,
+          "x": 67.6175,
+          "y": 3.13,
+          "z": 3.8375,
+          "yaw": 180.0,
+          "pitch": -45.0,
+          "fov": null,
+          "score": 5.141961
+        },
+        {
+          "step": 2,
+          "time_sec": 2.372727,
+          "x": 67.6175,
+          "y": 1.86,
+          "z": 3.8375,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.385474
+        },
+        {
+          "step": 3,
+          "time_sec": 3.402391,
+          "x": 67.6175,
+          "y": 0.6,
+          "z": 1.955,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.708388
+        },
+        {
+          "step": 4,
+          "time_sec": 5.325924,
+          "x": 67.6175,
+          "y": 4.39,
+          "z": 0.0725,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.953828
+        },
+        {
+          "step": 5,
+          "time_sec": 7.421198,
+          "x": 70.9796,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.201614
+        },
+        {
+          "step": 6,
+          "time_sec": 8.959022,
+          "x": 74.3418,
+          "y": 1.86,
+          "z": -2.1865,
+          "yaw": 157.5,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.255353
+        },
+        {
+          "step": 7,
+          "time_sec": 9.521522,
+          "x": 74.3418,
+          "y": 1.23,
+          "z": -2.1865,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.373782
+        },
+        {
+          "step": 8,
+          "time_sec": 10.799762,
+          "x": 72.79,
+          "y": 0.6,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.615758
+        },
+        {
+          "step": 9,
+          "time_sec": 11.949762,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.682645
+        },
+        {
+          "step": 10,
+          "time_sec": 12.805444,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 11,
+          "time_sec": 13.382717,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_06",
+      "direction": "low_to_high",
+      "keyframe_count": 12,
+      "duration_sec": 12.219774,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 67.6175,
+          "y": 3.13,
+          "z": 5.72,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 4.932883
+        },
+        {
+          "step": 1,
+          "time_sec": 0.577273,
+          "x": 67.6175,
+          "y": 1.86,
+          "z": 5.72,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 5.195972
+        },
+        {
+          "step": 2,
+          "time_sec": 2.377273,
+          "x": 67.6175,
+          "y": 0.6,
+          "z": 3.8375,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.334417
+        },
+        {
+          "step": 3,
+          "time_sec": 3.406937,
+          "x": 67.6175,
+          "y": 1.86,
+          "z": 1.955,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.639138
+        },
+        {
+          "step": 4,
+          "time_sec": 4.556937,
+          "x": 67.6175,
+          "y": 4.39,
+          "z": 1.955,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.723839
+        },
+        {
+          "step": 5,
+          "time_sec": 6.2683,
+          "x": 67.6175,
+          "y": 4.39,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.893509
+        },
+        {
+          "step": 6,
+          "time_sec": 6.841028,
+          "x": 67.6175,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.086037
+        },
+        {
+          "step": 7,
+          "time_sec": 8.47465,
+          "x": 70.9796,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.201614
+        },
+        {
+          "step": 8,
+          "time_sec": 9.661819,
+          "x": 72.79,
+          "y": 1.86,
+          "z": 0.0725,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.339943
+        },
+        {
+          "step": 9,
+          "time_sec": 10.786819,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.682645
+        },
+        {
+          "step": 10,
+          "time_sec": 11.642501,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 11,
+          "time_sec": 12.219774,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_07",
+      "direction": "low_to_high",
+      "keyframe_count": 12,
+      "duration_sec": 13.269791,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 5.72,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 4.351713
+        },
+        {
+          "step": 1,
+          "time_sec": 0.572728,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 5.72,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 4.599333
+        },
+        {
+          "step": 2,
+          "time_sec": 2.006147,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 3.8375,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 4.91099
+        },
+        {
+          "step": 3,
+          "time_sec": 3.506147,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 60.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 5.152845
+        },
+        {
+          "step": 4,
+          "time_sec": 5.306147,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 0.0725,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.331844
+        },
+        {
+          "step": 5,
+          "time_sec": 6.431147,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": -1.81,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.587144
+        },
+        {
+          "step": 6,
+          "time_sec": 7.916729,
+          "x": 75.8935,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 108.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.867135
+        },
+        {
+          "step": 7,
+          "time_sec": 10.134564,
+          "x": 72.79,
+          "y": 1.86,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.185687
+        },
+        {
+          "step": 8,
+          "time_sec": 10.711836,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.532983
+        },
+        {
+          "step": 9,
+          "time_sec": 11.836836,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.682645
+        },
+        {
+          "step": 10,
+          "time_sec": 12.692518,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 11,
+          "time_sec": 13.269791,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_08",
+      "direction": "low_to_high",
+      "keyframe_count": 12,
+      "duration_sec": 11.863451,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 5.72,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.069877
+        },
+        {
+          "step": 1,
+          "time_sec": 1.125,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 3.8375,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.246149
+        },
+        {
+          "step": 2,
+          "time_sec": 2.275,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 3.8375,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.402075
+        },
+        {
+          "step": 3,
+          "time_sec": 3.130682,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.609385
+        },
+        {
+          "step": 4,
+          "time_sec": 4.280682,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.918043
+        },
+        {
+          "step": 5,
+          "time_sec": 6.145594,
+          "x": 76.928,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 99.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.06576
+        },
+        {
+          "step": 6,
+          "time_sec": 7.045594,
+          "x": 76.928,
+          "y": 0.852,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.220677
+        },
+        {
+          "step": 7,
+          "time_sec": 8.013549,
+          "x": 74.859,
+          "y": 1.356,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.275081
+        },
+        {
+          "step": 8,
+          "time_sec": 9.305496,
+          "x": 72.79,
+          "y": 1.86,
+          "z": 0.0725,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.339943
+        },
+        {
+          "step": 9,
+          "time_sec": 10.430496,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.682645
+        },
+        {
+          "step": 10,
+          "time_sec": 11.286178,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 11,
+          "time_sec": 11.863451,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_09",
+      "direction": "low_to_high",
+      "keyframe_count": 12,
+      "duration_sec": 13.060228,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 67.6175,
+          "y": 3.13,
+          "z": 5.72,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 4.932883
+        },
+        {
+          "step": 1,
+          "time_sec": 1.5,
+          "x": 67.6175,
+          "y": 1.86,
+          "z": 5.72,
+          "yaw": 180.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 5.127128
+        },
+        {
+          "step": 2,
+          "time_sec": 3.3,
+          "x": 67.6175,
+          "y": 1.86,
+          "z": 3.8375,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.385474
+        },
+        {
+          "step": 3,
+          "time_sec": 3.877273,
+          "x": 67.6175,
+          "y": 3.13,
+          "z": 3.8375,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.603544
+        },
+        {
+          "step": 4,
+          "time_sec": 5.002273,
+          "x": 67.6175,
+          "y": 4.39,
+          "z": 1.955,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.764397
+        },
+        {
+          "step": 5,
+          "time_sec": 6.435692,
+          "x": 67.6175,
+          "y": 1.86,
+          "z": 0.0725,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.043143
+        },
+        {
+          "step": 6,
+          "time_sec": 7.707166,
+          "x": 69.6865,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 108.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.108908
+        },
+        {
+          "step": 7,
+          "time_sec": 9.925001,
+          "x": 72.79,
+          "y": 1.86,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.185687
+        },
+        {
+          "step": 8,
+          "time_sec": 10.502273,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.532983
+        },
+        {
+          "step": 9,
+          "time_sec": 11.627273,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.682645
+        },
+        {
+          "step": 10,
+          "time_sec": 12.482955,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 11,
+          "time_sec": 13.060228,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_1_1_coverage_smoke10_low_to_high_10",
+      "direction": "low_to_high",
+      "keyframe_count": 11,
+      "duration_sec": 11.907487,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 3.8375,
+          "yaw": 120.0,
+          "pitch": -45.0,
+          "fov": null,
+          "score": 5.121564
+        },
+        {
+          "step": 1,
+          "time_sec": 1.8,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 5.72,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.278062
+        },
+        {
+          "step": 2,
+          "time_sec": 2.372727,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 5.72,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.49181
+        },
+        {
+          "step": 3,
+          "time_sec": 4.177383,
+          "x": 77.9625,
+          "y": 4.39,
+          "z": 1.955,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.807174
+        },
+        {
+          "step": 4,
+          "time_sec": 4.75011,
+          "x": 77.9625,
+          "y": 3.13,
+          "z": 1.955,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.01866
+        },
+        {
+          "step": 5,
+          "time_sec": 6.18353,
+          "x": 77.9625,
+          "y": 0.6,
+          "z": 0.0725,
+          "yaw": 180.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.270282
+        },
+        {
+          "step": 6,
+          "time_sec": 7.578041,
+          "x": 75.8935,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 162.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.330016
+        },
+        {
+          "step": 7,
+          "time_sec": 9.324532,
+          "x": 72.79,
+          "y": 0.6,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.615758
+        },
+        {
+          "step": 8,
+          "time_sec": 10.474532,
+          "x": 72.79,
+          "y": 3.13,
+          "z": 0.0725,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.682645
+        },
+        {
+          "step": 9,
+          "time_sec": 11.330214,
+          "x": 72.79,
+          "y": 3.13,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.924417
+        },
+        {
+          "step": 10,
+          "time_sec": 11.907487,
+          "x": 72.79,
+          "y": 1.86,
+          "z": -1.81,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 7.127104
+        }
+      ]
+    }
+  ]
+}
