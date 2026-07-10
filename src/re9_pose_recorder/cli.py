@@ -466,7 +466,7 @@ def scan_stills_gui(
     session_id: Optional[str] = typer.Option(None, "--session-id"),
     layers_config: Optional[Path] = typer.Option(None, "--layers-config"),
     pose_plan_config: Optional[Path] = typer.Option(None, "--pose-plan-config"),
-    trajectory_set: str = typer.Option("scene_1_1_topstart20", "--trajectory-set"),
+    trajectory_set: str = typer.Option("scene_1_1_true_gain2_smoke10", "--trajectory-set"),
     trajectory_json: Optional[Path] = typer.Option(None, "--trajectory-json"),
     trajectory_output_dir: Optional[Path] = typer.Option(None, "--trajectory-output-dir"),
     trajectory_label: Optional[str] = typer.Option(None, "--trajectory-label"),

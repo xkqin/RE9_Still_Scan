@@ -40,9 +40,25 @@ TOPSTART20_TRAJECTORY_JSON = (
 TOPSTART20_TRAJECTORY_OUTPUT_DIR = (
     PROJECT_ROOT / "data" / "videos" / "trajectories" / "scene_1.1_topstart20_gain1p3_primitives_sample"
 )
-DEFAULT_TRAJECTORY_SET_ID = "scene_1_1_topstart20"
+TRUE_GAIN2_TRAJECTORY_JSON = (
+    PROJECT_ROOT
+    / "data"
+    / "trajectory_exports"
+    / "scene_1_1_true_keyframes_gain2_smoke10"
+    / "scene_1_1_true_gain2_optimal_10_trajectories.json"
+)
+TRUE_GAIN2_TRAJECTORY_OUTPUT_DIR = (
+    PROJECT_ROOT / "data" / "videos" / "trajectories" / "scene_1_1_true_keyframes_gain2_smoke10"
+)
+DEFAULT_TRAJECTORY_SET_ID = "scene_1_1_true_gain2_smoke10"
 MIN_VALID_TRAJECTORY_VIDEO_BYTES = 1_000_000
 TRAJECTORY_SETS = {
+    "scene_1_1_true_gain2_smoke10": {
+        "label": "scene_1.1 true keyframes gain2 smoke10",
+        "json": TRUE_GAIN2_TRAJECTORY_JSON,
+        "output_dir": TRUE_GAIN2_TRAJECTORY_OUTPUT_DIR,
+        "session_prefix": "scene_1_1_true_gain2_smoke10_traj",
+    },
     "scene_1_1_topstart20": {
         "label": "scene_1.1 topstart20 gain1p3 primitives",
         "json": TOPSTART20_TRAJECTORY_JSON,
