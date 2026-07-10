@@ -1,0 +1,51 @@
+{
+  "validation_passed": true,
+  "requested_trajectory_count": 10,
+  "generated_trajectory_count": 10,
+  "failure_counts": {},
+  "all_exported_keyframes_are_real_scored_source_poses": true,
+  "materialized_interpolated_keyframe_count": 0,
+  "all_real_scores_strictly_increasing": true,
+  "all_score_gains_at_least": 2.0,
+  "all_end_at_global_max": true,
+  "unique_physical_geometry_signatures": 10,
+  "unique_real_node_path_signatures": 10,
+  "keyframe_count": {
+    "min": 13.0,
+    "mean": 14.6,
+    "median": 15.0,
+    "max": 16.0
+  },
+  "duration_sec": {
+    "min": 13.225,
+    "mean": 13.851598,
+    "median": 13.476082,
+    "max": 14.936364
+  },
+  "score_gain": {
+    "min": 2.057227,
+    "mean": 2.107504,
+    "median": 2.073844,
+    "max": 2.295413
+  },
+  "path_xyz_length": {
+    "min": 19.885838,
+    "mean": 24.164099,
+    "median": 24.975599,
+    "max": 26.130143
+  },
+  "net_xyz_distance": {
+    "min": 3.153523,
+    "mean": 6.629442,
+    "median": 7.705099,
+    "max": 9.22189
+  },
+  "max_control_turn_deg": {
+    "min": 90.0,
+    "mean": 101.596224,
+    "median": 96.472912,
+    "max": 115.754104
+  },
+  "true_video_frame_monotonicity_guaranteed": false,
+  "true_video_note": "Every exported keyframe is real and monotonic; runtime frames between keyframes remain unscored until capture and rescoring."
+}

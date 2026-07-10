@@ -1,0 +1,45 @@
+{
+  "scene_id": "scene_1.1",
+  "input_node_count": 9522,
+  "original_node_count": 9240,
+  "extra_node_count": 282,
+  "global_max_node_id": "scene_1|scene_1.1_y02_medium_dense_y02_1p86|2666|17",
+  "global_max_score": 7.127104,
+  "hard_constraints": {
+    "minimum_score_gain": 2.0,
+    "strict_real_score_monotonicity": true,
+    "real_keyframes_only": true,
+    "minimum_xyz_step": 0.2,
+    "maximum_xyz_step": 3.0,
+    "maximum_yaw_step": 45.0,
+    "maximum_pitch_step": 45.0,
+    "maximum_score_step": 0.25,
+    "maximum_control_turn_deg": 120.0,
+    "maximum_path_length": 45.0
+  },
+  "objective": {
+    "physical_distance_weight": 1.0,
+    "yaw_change_weight": 0.01,
+    "pitch_change_weight": 0.015,
+    "turn_angle_weight": 0.01
+  },
+  "graph_stats": {
+    "radius_pair_count": 817338,
+    "accepted_directed_edge_count": 24134,
+    "rejected_pair_reasons": {
+      "xyz_too_small": 98751,
+      "score_step": 128297,
+      "yaw": 523294,
+      "pitch": 42862
+    }
+  },
+  "search_stats": {
+    "eligible_start_count": 30,
+    "expanded_state_count": 124,
+    "remaining_queue_size": 134,
+    "rejected_duplicate_geometry_count": 3,
+    "search_exhausted": false,
+    "state_limit_reached": false
+  },
+  "generated_count": 10
+}
