@@ -1,0 +1,102 @@
+{
+  "validation_passed": true,
+  "requested_trajectory_count": 4000,
+  "generated_trajectory_count": 4000,
+  "failure_counts": {},
+  "all_exported_keyframes_are_real_scored_source_poses": true,
+  "materialized_interpolated_keyframe_count": 0,
+  "all_real_scores_strictly_monotonic": true,
+  "monotonic_direction": "low_to_high",
+  "all_real_scores_strictly_increasing": true,
+  "all_real_scores_strictly_decreasing": null,
+  "all_score_gains_at_least": 2.0,
+  "all_start_at_global_max": null,
+  "all_end_at_global_max": true,
+  "unique_physical_geometry_signatures": 4000,
+  "unique_real_node_path_signatures": 4000,
+  "set_diversity": {
+    "diversity_scope": "global_incremental_balanced",
+    "overlap_group_count": null,
+    "requested_overlap_group_size": null,
+    "checked_pair_count": 7998000,
+    "unique_start_node_ids": 1255,
+    "unique_start_positions": 163,
+    "unique_end_node_ids": 1,
+    "unique_end_positions": 1,
+    "unique_first_physical_edges": 1359,
+    "pairwise_route_overlap_min": null,
+    "pairwise_route_overlap_mean": 0.10268,
+    "pairwise_route_overlap_median": 0.042553,
+    "pairwise_route_overlap_max": 0.9,
+    "pairwise_start_distance_min": null,
+    "group_summaries": [],
+      "note": "The exact global maximum overlap was checked incrementally for every selected pair; mean, median, p95, and target-pass fraction are estimated from the sampled pair audit.",
+    "pairwise_route_overlap_p95": 0.318841,
+    "pairwise_route_overlap_sample_count": 50000,
+    "pair_fraction_at_or_below_overlap_target": 0.96898,
+    "overlap_target": 0.4,
+    "overlap_maximum_allowed_after_relaxation": 1.0
+  },
+  "keyframe_count": {
+    "min": 6.0,
+    "mean": 8.98175,
+    "median": 9.0,
+    "max": 13.0
+  },
+  "duration_sec": {
+    "min": 6.723189,
+    "mean": 13.514386,
+    "median": 13.307261,
+    "max": 18.853621
+  },
+  "score_gain": {
+    "min": 2.000209,
+    "mean": 2.705797,
+    "median": 2.703926,
+    "max": 4.12871
+  },
+  "min_real_score_step": {
+    "min": 0.050638,
+    "mean": 0.168963,
+    "median": 0.171745,
+    "max": 0.399149
+  },
+  "path_xyz_length": {
+    "min": 14.478768,
+    "mean": 28.575167,
+    "median": 27.922023,
+    "max": 39.987658
+  },
+  "net_xyz_distance": {
+    "min": 10.591305,
+    "mean": 24.471235,
+    "median": 22.053675,
+    "max": 38.578102
+  },
+  "path_to_net_ratio": {
+    "min": 1.021061,
+    "mean": 1.20649,
+    "median": 1.161908,
+    "max": 1.499867
+  },
+  "target_distance_total_increase": {
+    "min": 0.0,
+    "mean": 0.032867,
+    "median": 0.0,
+    "max": 0.299913
+  },
+  "minimum_nonadjacent_distance": {
+    "min": 1.59682,
+    "mean": 3.130691,
+    "median": 2.270838,
+    "max": 11.639686
+  },
+  "max_control_turn_deg": {
+    "min": 18.569813,
+    "mean": 89.895122,
+    "median": 96.23172,
+    "max": 99.870482
+  },
+  "true_video_frame_monotonicity_guaranteed": false,
+  "true_video_note": "Every exported keyframe is real and monotonic in the declared direction; runtime frames between keyframes remain unscored until capture and rescoring."
+}

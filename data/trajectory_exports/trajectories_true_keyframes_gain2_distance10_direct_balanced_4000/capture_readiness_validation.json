@@ -1,0 +1,47 @@
+{
+  "scene_id": "scene_1.1",
+  "status": "planning_valid_ui_load_valid_smoke_capture_still_required",
+  "trajectory_count": 4000,
+  "ui_json": "scene_1_1_distance10_direct_balanced_4000_low_to_high_ui.json",
+  "planning_validation_passed": true,
+  "ui_schema_validation_passed": true,
+  "ui_loader_sample_validation_passed": true,
+  "ui_loader_sample_indices": [
+    1,
+    2000,
+    4000
+  ],
+  "guaranteed": {
+    "all_exported_keyframes_are_real_scored_source_poses": true,
+    "materialized_interpolated_keyframe_count": 0,
+    "all_real_keyframe_scores_strictly_increase": true,
+    "minimum_score_gain": 2.000209,
+    "all_end_at_same_global_max_pose": true,
+    "global_max_score": 7.127104,
+    "unique_physical_geometry_signatures": 4000,
+    "unique_real_node_path_signatures": 4000,
+    "minimum_net_xyz_distance_m": 10.591305,
+    "maximum_path_to_net_ratio": 1.499867,
+    "maximum_planning_target_distance_backtrack_m": 0.299913,
+    "near_revisit_pair_count": 0
+  },
+  "diversity": {
+    "selected_low_score_start_node_count": 1255,
+    "selected_low_score_start_position_count": 163,
+    "unique_first_physical_edges": 1359,
+    "route_overlap_target": 0.4,
+    "strict_all_pairs_at_or_below_target": false,
+    "sampled_pair_count": 50000,
+    "sampled_pair_fraction_at_or_below_target": 0.96898,
+    "sampled_pairwise_overlap_mean": 0.10268,
+    "sampled_pairwise_overlap_median": 0.042553,
+    "sampled_pairwise_overlap_p95": 0.318841,
+    "exact_pairwise_overlap_max": 0.9,
+    "strict_capacity_note": "A global hard maximum of 0.4 retained only 143 trajectories; 0.6 retained about 400. The 4000 set treats 0.4 as a preference and minimizes overlap before filling the requested count."
+  },
+  "not_guaranteed_until_capture_validation": {
+    "runtime_interpolated_video_frame_score_monotonicity_guaranteed": false,
+    "continuous_segment_collision_clearance_guaranteed": false,
+    "reason": "Only real control poses have EZCAM scores and no collision mesh is available. Runtime interpolation between controls must be smoke-captured and checked separately."
+  }
+}

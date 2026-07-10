@@ -1,0 +1,101 @@
+{
+  "validation_passed": false,
+  "requested_trajectory_count": 4000,
+  "generated_trajectory_count": 376,
+  "failure_counts": {},
+  "all_exported_keyframes_are_real_scored_source_poses": true,
+  "materialized_interpolated_keyframe_count": 0,
+  "all_real_scores_strictly_monotonic": true,
+  "monotonic_direction": "low_to_high",
+  "all_real_scores_strictly_increasing": true,
+  "all_real_scores_strictly_decreasing": null,
+  "all_score_gains_at_least": 2.0,
+  "all_start_at_global_max": null,
+  "all_end_at_global_max": true,
+  "unique_physical_geometry_signatures": 376,
+  "unique_real_node_path_signatures": 376,
+  "set_diversity": {
+    "diversity_scope": "global_incremental_balanced",
+    "overlap_group_count": null,
+    "requested_overlap_group_size": null,
+    "checked_pair_count": 70500,
+    "unique_start_node_ids": 356,
+    "unique_start_positions": 136,
+    "unique_end_node_ids": 1,
+    "unique_end_positions": 1,
+    "unique_first_physical_edges": 322,
+    "pairwise_route_overlap_min": null,
+    "pairwise_route_overlap_mean": 0.084294,
+    "pairwise_route_overlap_median": 0.040816,
+    "pairwise_route_overlap_max": 0.6,
+    "pairwise_start_distance_min": 0.0,
+    "group_summaries": [],
+    "pairwise_route_overlap_p95": 0.272727,
+    "pairwise_route_overlap_sample_count": 50000,
+    "pair_fraction_at_or_below_overlap_target": 0.98712,
+    "overlap_target": 0.4,
+    "overlap_maximum_allowed_after_relaxation": 0.6
+  },
+  "keyframe_count": {
+    "min": 6.0,
+    "mean": 8.297872,
+    "median": 8.0,
+    "max": 12.0
+  },
+  "duration_sec": {
+    "min": 7.326305,
+    "mean": 12.265967,
+    "median": 11.563803,
+    "max": 18.029393
+  },
+  "score_gain": {
+    "min": 2.000209,
+    "mean": 2.478695,
+    "median": 2.434319,
+    "max": 3.547174
+  },
+  "min_real_score_step": {
+    "min": 0.0536,
+    "mean": 0.177825,
+    "median": 0.171745,
+    "max": 0.399149
+  },
+  "path_xyz_length": {
+    "min": 15.91371,
+    "mean": 25.853645,
+    "median": 23.944975,
+    "max": 39.664666
+  },
+  "net_xyz_distance": {
+    "min": 10.649879,
+    "mean": 21.781756,
+    "median": 20.794551,
+    "max": 38.578102
+  },
+  "path_to_net_ratio": {
+    "min": 1.022433,
+    "mean": 1.231879,
+    "median": 1.199654,
+    "max": 1.499137
+  },
+  "target_distance_total_increase": {
+    "min": 0.0,
+    "mean": 0.029694,
+    "median": 0.0,
+    "max": 0.295749
+  },
+  "minimum_nonadjacent_distance": {
+    "min": 1.59682,
+    "mean": 3.321744,
+    "median": 2.270838,
+    "max": 10.433903
+  },
+  "max_control_turn_deg": {
+    "min": 19.178571,
+    "mean": 89.944774,
+    "median": 96.23172,
+    "max": 99.846328
+  },
+  "true_video_frame_monotonicity_guaranteed": false,
+  "true_video_note": "Every exported keyframe is real and monotonic in the declared direction; runtime frames between keyframes remain unscored until capture and rescoring."
+}
