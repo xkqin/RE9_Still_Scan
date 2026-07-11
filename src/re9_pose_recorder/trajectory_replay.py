@@ -5,6 +5,7 @@ import json
 import math
 import shutil
 import time
+from bisect import bisect_right
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -104,6 +105,8 @@ def replay_trajectory_to_obs(
     duration_sec: float | None = None,
     record: bool = True,
     write_pose_log: bool = True,
+    smooth_playback: bool = True,
+    playback_hz: float = 60.0,
 ) -> dict[str, Path | str]:
     """Replay a loaded trajectory through Lua set_pose controls and optionally record OBS."""
     if len(trajectory.keyframes) < 2:
@@ -112,6 +115,8 @@ def replay_trajectory_to_obs(
         raise ValueError("speed must be positive.")
     if countdown_sec < 0 or settle_sec < 0 or post_roll_sec < 0:
         raise ValueError("countdown/settle/post-roll values must be non-negative.")
+    if playback_hz <= 0:
+        raise ValueError("playback_hz must be positive.")
 
     session = session_id or f"replay_{make_session_id()}_{_safe_name(trajectory.trajectory_id)}"
     base_output = ensure_dir(output_dir or (Path("data/videos/trajectories") / session))
@@ -126,6 +131,7 @@ def replay_trajectory_to_obs(
     started_at = time.time()
 
     scaled = _scaled_keyframes(trajectory.keyframes, speed=speed, duration_sec=duration_sec)
+    playback_frames = _smooth_resample_keyframes(scaled, sample_rate_hz=playback_hz) if smooth_playback else scaled
     _write_keyframe_csv(metadata_csv, trajectory, scaled)
 
     try:
@@ -154,7 +160,7 @@ def replay_trajectory_to_obs(
             controller.start_recording()
             time.sleep(0.25)
 
-        _run_lua_trajectory(control, session, trajectory.trajectory_id, scaled)
+        _run_lua_trajectory(control, session, trajectory.trajectory_id, playback_frames)
 
         if post_roll_sec > 0:
             time.sleep(post_roll_sec)
@@ -204,6 +210,10 @@ def replay_trajectory_to_obs(
                 "metadata_csv": str(metadata_csv),
                 "duration_sec": scaled[-1].time_sec if scaled else 0.0,
                 "replay_mode": "lua_play_trajectory",
+                "source_keyframe_count": len(scaled),
+                "playback_frame_count": len(playback_frames),
+                "smooth_playback": smooth_playback,
+                "playback_hz": playback_hz,
                 "recorded": bool(record),
             },
             indent=2,
@@ -412,6 +422,154 @@ def _scaled_keyframes(frames: list[ReplayKeyframe], speed: float, duration_sec: 
     ]
 
 
+def _smooth_resample_keyframes(
+    frames: list[ReplayKeyframe],
+    sample_rate_hz: float = 60.0,
+    position_tangent_scale: float = 0.45,
+) -> list[ReplayKeyframe]:
+    """Create dense, C1-continuous playback poses while preserving every source pose."""
+    if len(frames) < 2:
+        return frames
+    if sample_rate_hz <= 0:
+        raise ValueError("sample_rate_hz must be positive.")
+
+    times = [frame.time_sec for frame in frames]
+    duration = times[-1]
+    if duration <= 0:
+        return frames
+
+    position_values = {
+        "x": [frame.x for frame in frames],
+        "y": [frame.y for frame in frames],
+        "z": [frame.z for frame in frames],
+    }
+    position_tangents = {
+        key: _path_tangents(values, times, scale=position_tangent_scale)
+        for key, values in position_values.items()
+    }
+    yaw_values = [frame.yaw for frame in frames]
+    pitch_values = [frame.pitch for frame in frames]
+    yaw_tangents = _monotone_tangents(yaw_values, times)
+    pitch_tangents = _monotone_tangents(pitch_values, times)
+
+    interval = 1.0 / sample_rate_hz
+    sample_count = max(1, int(math.ceil(duration * sample_rate_hz)))
+    sample_times = [min(duration, index * interval) for index in range(sample_count + 1)]
+    for source_time in times:
+        sample_times = [
+            value for value in sample_times
+            if value == source_time or abs(value - source_time) >= interval * 0.4
+        ]
+        sample_times.append(source_time)
+    ordered_times = sorted(set(sample_times))
+    source_by_time = {frame.time_sec: frame for frame in frames}
+
+    dense: list[ReplayKeyframe] = []
+    for step, sample_time in enumerate(ordered_times):
+        source = source_by_time.get(sample_time)
+        segment = min(len(frames) - 2, max(0, bisect_right(times, sample_time) - 1))
+        start_time = times[segment]
+        end_time = times[segment + 1]
+        span = max(1e-9, end_time - start_time)
+        u = min(1.0, max(0.0, (sample_time - start_time) / span))
+
+        x = _hermite_value(position_values["x"], position_tangents["x"], segment, span, u)
+        y = _hermite_value(position_values["y"], position_tangents["y"], segment, span, u)
+        z = _hermite_value(position_values["z"], position_tangents["z"], segment, span, u)
+        yaw = _hermite_value(yaw_values, yaw_tangents, segment, span, u)
+        pitch = _hermite_value(pitch_values, pitch_tangents, segment, span, u)
+        fov = _interpolate_optional(frames[segment].fov, frames[segment + 1].fov, u)
+
+        if source is not None:
+            x, y, z = source.x, source.y, source.z
+            yaw, pitch, fov = source.yaw, source.pitch, source.fov
+
+        dense.append(
+            ReplayKeyframe(
+                step=step,
+                time_sec=sample_time,
+                x=x,
+                y=y,
+                z=z,
+                yaw=yaw,
+                pitch=pitch,
+                fov=fov,
+                score=source.score if source is not None else None,
+                image_path=source.image_path if source is not None else "",
+            )
+        )
+    return dense
+
+
+def _path_tangents(values: list[float], times: list[float], scale: float) -> list[float]:
+    """Estimate damped path derivatives; endpoints stop gently before recording roll-off."""
+    if len(values) != len(times):
+        raise ValueError("values and times must have equal length.")
+    if len(values) < 2:
+        return [0.0] * len(values)
+    tangents = [0.0] * len(values)
+    for index in range(1, len(values) - 1):
+        span = max(1e-9, times[index + 1] - times[index - 1])
+        tangents[index] = scale * (values[index + 1] - values[index - 1]) / span
+    return tangents
+
+
+def _monotone_tangents(values: list[float], times: list[float]) -> list[float]:
+    """Compute shape-preserving angle derivatives without overshoot or direction wobble."""
+    if len(values) != len(times):
+        raise ValueError("values and times must have equal length.")
+    if len(values) < 2:
+        return [0.0] * len(values)
+
+    slopes = [
+        (values[index + 1] - values[index]) / max(1e-9, times[index + 1] - times[index])
+        for index in range(len(values) - 1)
+    ]
+    tangents = [0.0] * len(values)
+    for index in range(1, len(values) - 1):
+        left = slopes[index - 1]
+        right = slopes[index]
+        if left == 0.0 or right == 0.0 or left * right <= 0.0:
+            tangents[index] = 0.0
+            continue
+        left_span = times[index] - times[index - 1]
+        right_span = times[index + 1] - times[index]
+        weight_left = 2.0 * right_span + left_span
+        weight_right = right_span + 2.0 * left_span
+        tangents[index] = (weight_left + weight_right) / (
+            weight_left / left + weight_right / right
+        )
+    return tangents
+
+
+def _hermite_value(
+    values: list[float],
+    tangents: list[float],
+    segment: int,
+    span: float,
+    u: float,
+) -> float:
+    u2 = u * u
+    u3 = u2 * u
+    return (
+        (2.0 * u3 - 3.0 * u2 + 1.0) * values[segment]
+        + (u3 - 2.0 * u2 + u) * span * tangents[segment]
+        + (-2.0 * u3 + 3.0 * u2) * values[segment + 1]
+        + (u3 - u2) * span * tangents[segment + 1]
+    )
+
+
+def _interpolate_optional(start: float | None, end: float | None, u: float) -> float | None:
+    if start is None and end is None:
+        return None
+    if start is None:
+        return end
+    if end is None:
+        return start
+    eased = u * u * (3.0 - 2.0 * u)
+    return start + (end - start) * eased
+
+
 def _ensure_strictly_increasing_time(frames: list[ReplayKeyframe], interval: float) -> list[ReplayKeyframe]:
     fixed: list[ReplayKeyframe] = []
     previous = -float("inf")
@@ -518,3 +676,4 @@ def _safe_name(value: str) -> str:
     for char in value:
         cleaned.append(char if char.isalnum() or char in "._-" else "_")
     return "".join(cleaned).strip("._") or "trajectory"
+
