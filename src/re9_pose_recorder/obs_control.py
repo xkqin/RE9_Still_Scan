@@ -204,25 +204,39 @@ def find_latest_video_file(
     directory: str | Path,
     before_time: float | None = None,
     supported_extensions: set[str] | None = None,
+    wait_seconds: float = 20.0,
+    stable_checks: int = 3,
 ) -> Path | None:
     root = Path(directory).expanduser()
-    if not root.exists():
-        return None
     suffixes = supported_extensions or DEFAULT_VIDEO_EXTENSIONS
-    candidates: list[Path] = []
-    for path in root.iterdir():
-        if path.is_file() and path.suffix.lower() in suffixes:
-            if before_time is None or path.stat().st_mtime >= before_time:
-                candidates.append(path)
-    if not candidates:
-        return None
-    candidates.sort(key=lambda item: item.stat().st_mtime, reverse=True)
-    newest = candidates[0]
-    stable_size = -1
-    for _ in range(10):
-        size = newest.stat().st_size
-        if size == stable_size:
+    deadline = time.monotonic() + max(0.0, wait_seconds)
+    newest: Path | None = None
+    while True:
+        candidates: list[Path] = []
+        if root.exists():
+            for path in root.iterdir():
+                if path.is_file() and path.suffix.lower() in suffixes:
+                    if before_time is None or path.stat().st_mtime >= before_time - 2.0:
+                        candidates.append(path)
+        if candidates:
+            candidates.sort(key=lambda item: item.stat().st_mtime, reverse=True)
+            newest = candidates[0]
             break
-        stable_size = size
+        if time.monotonic() >= deadline:
+            return None
         time.sleep(0.5)
+
+    stable_size = -1
+    stable_seen = 0
+    while time.monotonic() < deadline:
+        size = newest.stat().st_size
+        if size > 0 and size == stable_size:
+            stable_seen += 1
+            if stable_seen >= max(1, stable_checks):
+                break
+        else:
+            stable_seen = 0
+            stable_size = size
+        time.sleep(1.0)
     return newest
+
