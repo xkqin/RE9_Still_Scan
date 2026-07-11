@@ -50,9 +50,27 @@ TRUE_GAIN2_TRAJECTORY_JSON = (
 TRUE_GAIN2_TRAJECTORY_OUTPUT_DIR = (
     PROJECT_ROOT / "data" / "videos" / "trajectories" / "scene_1_1_true_keyframes_gain2_smoke10"
 )
-DEFAULT_TRAJECTORY_SET_ID = "scene_1_1_true_gain2_smoke10"
-MIN_VALID_TRAJECTORY_VIDEO_BYTES = 1_000_000
+COVERAGE_SMOKE10_TRAJECTORY_JSON = (
+    PROJECT_ROOT
+    / "data"
+    / "trajectory_exports"
+    / "scene_1_1_true_keyframes_gain2_no_backtrack_coverage_smoke10_low_to_high"
+    / "scene_1_1_coverage_smoke10_low_to_high_trajectories.json"
+)
+COVERAGE_SMOKE10_TRAJECTORY_OUTPUT_DIR = (
+    PROJECT_ROOT / "data" / "videos" / "trajectories" / "scene_1_1_coverage_smoke10_low_to_high"
+)
+DEFAULT_TRAJECTORY_SET_ID = "scene_1_1_coverage_smoke10_low_to_high"
+MIN_VALID_TRAJECTORY_VIDEO_BYTES = 64_000
+TRAJECTORY_VIDEO_SETTLE_TIMEOUT_SEC = 20.0
+TRAJECTORY_VIDEO_STABLE_CHECKS = 3
 TRAJECTORY_SETS = {
+    "scene_1_1_coverage_smoke10_low_to_high": {
+        "label": "scene_1.1 coverage smoke10 low-to-high",
+        "json": COVERAGE_SMOKE10_TRAJECTORY_JSON,
+        "output_dir": COVERAGE_SMOKE10_TRAJECTORY_OUTPUT_DIR,
+        "session_prefix": "scene_1_1_coverage_smoke10_traj",
+    },
     "scene_1_1_true_gain2_smoke10": {
         "label": "scene_1.1 true keyframes gain2 smoke10",
         "json": TRUE_GAIN2_TRAJECTORY_JSON,
@@ -180,8 +198,9 @@ class StillScanApp:
 
         self.root = tk.Tk()
         self.root.title("RE9 Still Scan Progress")
-        self.root.geometry("840x560")
-        self.root.resizable(False, False)
+        self.root.geometry("860x640")
+        self.root.minsize(760, 500)
+        self.root.resizable(True, True)
         self.root.attributes("-topmost", self.topmost)
         if self.topmost:
             self.root.after(250, self._keep_window_on_top)
@@ -200,10 +219,41 @@ class StillScanApp:
         self.trajectory_output_var = tk.StringVar(value=f"Output: {self.trajectory_output_dir}")
         self.trajectory_resume_var = tk.StringVar(value=self._trajectory_resume_status_text())
 
-        frame = ttk.Frame(self.root)
-        frame.pack(fill="both", expand=True, padx=16, pady=14)
+        outer = ttk.Frame(self.root)
+        outer.pack(fill="both", expand=True)
+        canvas = tk.Canvas(outer, highlightthickness=0)
+        scrollbar = ttk.Scrollbar(outer, orient="vertical", command=canvas.yview)
+        canvas.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side="right", fill="y")
+        canvas.pack(side="left", fill="both", expand=True)
 
-        capture_frame = ttk.LabelFrame(frame, text="Still image capture")
+        frame = ttk.Frame(canvas)
+        window_id = canvas.create_window((0, 0), window=frame, anchor="nw")
+
+        def update_scroll_region(_event: object | None = None) -> None:
+            canvas.configure(scrollregion=canvas.bbox("all"))
+
+        def fit_frame_width(event: tk.Event) -> None:
+            canvas.itemconfigure(window_id, width=event.width)
+
+        def on_mousewheel(event: tk.Event) -> None:
+            if getattr(event, "num", None) == 4:
+                canvas.yview_scroll(-3, "units")
+            elif getattr(event, "num", None) == 5:
+                canvas.yview_scroll(3, "units")
+            elif getattr(event, "delta", 0):
+                canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+        frame.bind("<Configure>", update_scroll_region)
+        canvas.bind("<Configure>", fit_frame_width)
+        self.root.bind_all("<MouseWheel>", on_mousewheel)
+        self.root.bind_all("<Button-4>", on_mousewheel)
+        self.root.bind_all("<Button-5>", on_mousewheel)
+
+        content = ttk.Frame(frame)
+        content.pack(fill="both", expand=True, padx=16, pady=14)
+
+        capture_frame = ttk.LabelFrame(content, text="Still image capture")
         capture_frame.pack(fill="x", pady=(0, 8))
         self.start_button = ttk.Button(capture_frame, text="Start Still Scan", command=self.start)
         self.start_button.pack(fill="x", padx=8, pady=4)
@@ -217,7 +267,7 @@ class StillScanApp:
         )
         self.qa_button.pack(fill="x", padx=8, pady=4)
 
-        trajectory_frame = ttk.LabelFrame(frame, text="Trajectory video capture")
+        trajectory_frame = ttk.LabelFrame(content, text="Trajectory video capture")
         trajectory_frame.pack(fill="x", pady=(0, 8))
         trajectory_picker = ttk.Frame(trajectory_frame)
         trajectory_picker.pack(fill="x", padx=8, pady=(5, 2))
@@ -271,13 +321,13 @@ class StillScanApp:
         self.stop_trajectory_button.pack(fill="x", padx=8, pady=(0, 8))
         ttk.Label(trajectory_frame, textvariable=self.trajectory_resume_var, wraplength=760).pack(anchor="w", padx=8, pady=(0, 8))
 
-        ttk.Label(frame, textvariable=self.status_var, font=("Segoe UI", 11, "bold"), wraplength=720).pack(anchor="w", pady=5)
-        ttk.Label(frame, textvariable=self.plan_var, wraplength=720).pack(anchor="w", pady=5)
-        self.progress = ttk.Progressbar(frame, maximum=max(1, self.total), variable=self.progress_var)
+        ttk.Label(content, textvariable=self.status_var, font=("Segoe UI", 11, "bold"), wraplength=720).pack(anchor="w", pady=5)
+        ttk.Label(content, textvariable=self.plan_var, wraplength=720).pack(anchor="w", pady=5)
+        self.progress = ttk.Progressbar(content, maximum=max(1, self.total), variable=self.progress_var)
         self.progress.pack(fill="x", pady=8)
-        ttk.Label(frame, textvariable=self.pose_var, wraplength=720).pack(anchor="w", pady=5)
-        ttk.Label(frame, textvariable=self.file_var, wraplength=720).pack(anchor="w", pady=5)
-        ttk.Label(frame, textvariable=self.output_var, wraplength=720).pack(anchor="w", pady=5)
+        ttk.Label(content, textvariable=self.pose_var, wraplength=720).pack(anchor="w", pady=5)
+        ttk.Label(content, textvariable=self.file_var, wraplength=720).pack(anchor="w", pady=5)
+        ttk.Label(content, textvariable=self.output_var, wraplength=720).pack(anchor="w", pady=5)
 
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
@@ -687,6 +737,48 @@ class StillScanApp:
     def _detect_completed_trajectory_indices(self, run_dir: Path, planned: list[int]) -> set[int]:
         return {index for index in planned if self._valid_video_for_trajectory(run_dir, index) is not None}
 
+    def _wait_for_stable_video_file(self, video_path: Path, timeout_sec: float = TRAJECTORY_VIDEO_SETTLE_TIMEOUT_SEC) -> bool:
+        deadline = time.monotonic() + max(0.0, timeout_sec)
+        stable_size = -1
+        stable_seen = 0
+        while time.monotonic() < deadline:
+            if not video_path.exists():
+                time.sleep(0.5)
+                continue
+            size = video_path.stat().st_size
+            if size >= MIN_VALID_TRAJECTORY_VIDEO_BYTES and size == stable_size:
+                stable_seen += 1
+                if stable_seen >= TRAJECTORY_VIDEO_STABLE_CHECKS:
+                    return True
+            else:
+                stable_size = size
+                stable_seen = 0
+            time.sleep(1.0)
+        return video_path.exists() and video_path.stat().st_size >= MIN_VALID_TRAJECTORY_VIDEO_BYTES
+
+    def _video_has_frames(self, video_path: Path) -> bool:
+        if not video_path.exists() or video_path.stat().st_size < MIN_VALID_TRAJECTORY_VIDEO_BYTES:
+            return False
+        try:
+            import cv2  # type: ignore
+
+            capture = cv2.VideoCapture(str(video_path))
+            try:
+                frames = int(capture.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+                if frames > 0:
+                    return True
+                ok, _frame = capture.read()
+                return bool(ok)
+            finally:
+                capture.release()
+        except Exception:
+            return True
+
+    def _is_valid_trajectory_video(self, video_path: Path, wait: bool = False) -> bool:
+        if wait and not self._wait_for_stable_video_file(video_path):
+            return False
+        return self._video_has_frames(video_path)
+
     def _valid_video_for_trajectory(self, run_dir: Path, trajectory_index: int) -> Path | None:
         trajectory_dir = run_dir / f"traj_{trajectory_index:02d}"
         result_json = trajectory_dir / "replay_result.json"
@@ -696,7 +788,7 @@ class StillScanApp:
                 video_text = str(payload.get("video_path") or "")
                 if video_text:
                     video_path = Path(video_text)
-                    if video_path.exists() and video_path.stat().st_size >= MIN_VALID_TRAJECTORY_VIDEO_BYTES:
+                    if self._is_valid_trajectory_video(video_path):
                         return video_path
             except Exception:
                 pass
@@ -707,7 +799,7 @@ class StillScanApp:
                 for path in raw_dir.iterdir()
                 if path.is_file()
                 and path.suffix.lower() in {".mp4", ".mkv", ".mov", ".flv", ".avi"}
-                and path.stat().st_size >= MIN_VALID_TRAJECTORY_VIDEO_BYTES
+                and self._is_valid_trajectory_video(path)
             ]
             if candidates:
                 candidates.sort(key=lambda path: path.stat().st_mtime, reverse=True)
@@ -717,7 +809,7 @@ class StillScanApp:
     def _validate_trajectory_result(self, result: dict[str, Path | str], trajectory_index: int) -> Path:
         video_value = result.get("video_path")
         video_path = Path(video_value) if video_value else None
-        if video_path is None or not video_path.exists() or video_path.stat().st_size < MIN_VALID_TRAJECTORY_VIDEO_BYTES:
+        if video_path is None or not self._is_valid_trajectory_video(video_path, wait=True):
             run_dir = self.current_trajectory_run_dir or self.trajectory_output_dir
             fallback = self._valid_video_for_trajectory(run_dir, trajectory_index)
             if fallback is not None:
@@ -1016,3 +1108,4 @@ def run_still_scan_gui(
         trajectory_session_prefix=trajectory_session_prefix,
         topmost=topmost,
     ).run()
+
