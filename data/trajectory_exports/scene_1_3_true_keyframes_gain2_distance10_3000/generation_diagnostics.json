@@ -1,0 +1,43 @@
+{
+  "scene_id": "scene_1.3",
+  "generation_policy": {
+    "real_scored_control_points_only": true,
+    "strict_measured_score_monotonicity": true,
+    "minimum_score_gain": 2.0,
+    "minimum_net_distance_m": 10.0,
+    "maximum_path_to_net_ratio": 1.5,
+    "maximum_target_distance_total_increase_m": 0.3,
+    "near_revisits_forbidden": true,
+    "unique_physical_xyz_geometry_required": true,
+    "export_direction": "low_to_high"
+  },
+  "batch_reports": [
+    {
+      "target_anchor_rank": 1,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.3/trajectories_true_keyframes_gain2_distance10_3000/_batch/scene_1_3_true_gain2_no_backtrack_balanced_3000_trajectories.json",
+      "trajectory_count": 3000,
+      "target_anchor_node_id": "scene_1_extra|scene_1.3_med_probe_y03_12p73|679|21",
+      "target_anchor_score": 6.702875,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 4,
+        "requested_candidate_count": 3415,
+        "expanded_state_count": 23910,
+        "remaining_queue_size": 5,
+        "rejected_duplicate_geometry_count": 7129,
+        "rejected_start_capacity": {},
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 2,
+        "accepted_start_position_count": 2,
+        "accepted_per_start_node_max": 3343,
+        "accepted_per_start_position_max": 3343,
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    }
+  ],
+  "target_anchor_distribution": {
+    "1": 3000
+  },
+  "generated_count": 3000
+}

@@ -1,0 +1,56 @@
+{
+  "validation_passed": true,
+  "scene_id": "scene_1.3",
+  "expected_trajectory_count": 3000,
+  "generated_trajectory_count": 3000,
+  "failure_counts": {},
+  "all_source_batch_validations_passed": true,
+  "all_exported_keyframes_are_real_scored_source_poses": true,
+  "all_scores_are_measured_ezcam_still_scores": true,
+  "materialized_interpolated_keyframe_count": 0,
+  "total_real_scored_keyframe_count": 28009,
+  "all_real_scores_strictly_increasing": true,
+  "all_score_gains_at_least_2": true,
+  "all_net_distances_at_least_10m": true,
+  "all_path_to_net_ratios_at_most_1p5": true,
+  "all_target_distance_backtracking_at_most_0p3m": true,
+  "all_near_revisit_counts_zero": true,
+  "unique_physical_geometry_signatures": 3000,
+  "unique_real_node_path_signatures": 3000,
+  "distinct_target_anchor_poses": 1,
+  "target_anchor_distribution": {
+    "1": 3000
+  },
+  "keyframe_count": {
+    "min": 8.0,
+    "mean": 9.336333,
+    "max": 11.0
+  },
+  "duration_sec": {
+    "min": 16.174744,
+    "mean": 17.823365,
+    "max": 18.414296
+  },
+  "score_gain": {
+    "min": 2.130484,
+    "mean": 2.136584,
+    "max": 2.384662
+  },
+  "path_xyz_length": {
+    "min": 35.584436,
+    "mean": 39.141248,
+    "max": 39.998372
+  },
+  "net_xyz_distance": {
+    "min": 27.425307,
+    "mean": 27.43453,
+    "max": 27.809608
+  },
+  "path_to_net_ratio": {
+    "min": 1.297504,
+    "mean": 1.426715,
+    "max": 1.458448
+  },
+  "true_video_frame_monotonicity_guaranteed": false,
+  "true_video_note": "Every exported keyframe is a measured, strictly increasing EZCAM still pose. Runtime frames between controls remain unscored until capture and rescoring."
+}

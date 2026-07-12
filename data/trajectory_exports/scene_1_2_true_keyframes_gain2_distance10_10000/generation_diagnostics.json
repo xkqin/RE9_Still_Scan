@@ -1,0 +1,127 @@
+{
+  "scene_id": "scene_1.2",
+  "generation_policy": {
+    "real_scored_control_points_only": true,
+    "strict_measured_score_monotonicity": true,
+    "minimum_score_gain": 2.0,
+    "minimum_net_distance_m": 10.0,
+    "maximum_path_to_net_ratio": 1.5,
+    "maximum_target_distance_total_increase_m": 0.3,
+    "near_revisits_forbidden": true,
+    "unique_physical_xyz_geometry_required": true,
+    "export_direction": "low_to_high"
+  },
+  "batch_reports": [
+    {
+      "target_anchor_rank": 1,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.2/trajectories_true_keyframes_gain2_distance10_10000/_batches/anchor_rank_1/scene_1_2_true_gain2_no_backtrack_balanced_2500_trajectories.json",
+      "trajectory_count": 2500,
+      "target_anchor_node_id": "scene_1|scene_1.2_y01_dense_strip_y05_2p75|11513|104",
+      "target_anchor_score": 7.062562,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 5026,
+        "requested_candidate_count": 10000,
+        "expanded_state_count": 1253875,
+        "remaining_queue_size": 6561271,
+        "rejected_duplicate_geometry_count": 6183,
+        "rejected_start_capacity": {
+          "start_node": 765442,
+          "start_position": 18354
+        },
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 786,
+        "accepted_start_position_count": 126,
+        "accepted_per_start_node_max": 15,
+        "accepted_per_start_position_max": 120,
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    },
+    {
+      "target_anchor_rank": 2,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.2/trajectories_true_keyframes_gain2_distance10_10000/_batches/anchor_rank_2/scene_1_2_true_gain2_no_backtrack_balanced_2500_trajectories.json",
+      "trajectory_count": 2500,
+      "target_anchor_node_id": "scene_1_extra|scene_1.2_hig_refine_y02_2p75|619|337",
+      "target_anchor_score": 7.024159,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 7232,
+        "requested_candidate_count": 10000,
+        "expanded_state_count": 652121,
+        "remaining_queue_size": 2253971,
+        "rejected_duplicate_geometry_count": 7671,
+        "rejected_start_capacity": {
+          "start_node": 522469,
+          "start_position": 23492
+        },
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 751,
+        "accepted_start_position_count": 107,
+        "accepted_per_start_node_max": 15,
+        "accepted_per_start_position_max": 120,
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    },
+    {
+      "target_anchor_rank": 3,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.2/trajectories_true_keyframes_gain2_distance10_10000/_batches/anchor_rank_3/scene_1_2_true_gain2_no_backtrack_balanced_2500_trajectories.json",
+      "trajectory_count": 2500,
+      "target_anchor_node_id": "scene_1|scene_1.2_y01_dense_strip_y05_2p75|9661|20",
+      "target_anchor_score": 7.013256,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 6718,
+        "requested_candidate_count": 10000,
+        "expanded_state_count": 414956,
+        "remaining_queue_size": 1453941,
+        "rejected_duplicate_geometry_count": 4743,
+        "rejected_start_capacity": {
+          "start_node": 322400,
+          "start_position": 4430
+        },
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 774,
+        "accepted_start_position_count": 144,
+        "accepted_per_start_node_max": 15,
+        "accepted_per_start_position_max": 120,
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    },
+    {
+      "target_anchor_rank": 4,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_1.2/trajectories_true_keyframes_gain2_distance10_10000/_batches/anchor_rank_4/scene_1_2_true_gain2_no_backtrack_balanced_2500_trajectories.json",
+      "trajectory_count": 2500,
+      "target_anchor_node_id": "scene_1|scene_1.2_y01_dense_strip_y05_2p75|10413|54",
+      "target_anchor_score": 7.007704,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 2338,
+        "requested_candidate_count": 10000,
+        "expanded_state_count": 512258,
+        "remaining_queue_size": 1484303,
+        "rejected_duplicate_geometry_count": 4519,
+        "rejected_start_capacity": {
+          "start_node": 185184,
+          "start_position": 26837
+        },
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 792,
+        "accepted_start_position_count": 109,
+        "accepted_per_start_node_max": 15,
+        "accepted_per_start_position_max": 120,
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    }
+  ],
+  "target_anchor_distribution": {
+    "1": 2500,
+    "2": 2500,
+    "3": 2500,
+    "4": 2500
+  },
+  "generated_count": 10000
+}

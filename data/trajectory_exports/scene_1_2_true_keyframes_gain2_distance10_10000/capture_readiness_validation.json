@@ -1,0 +1,80 @@
+{
+  "validation_passed": true,
+  "trajectory_constraint_validation": {
+    "validation_passed": true,
+    "scene_id": "scene_1.2",
+    "expected_trajectory_count": 10000,
+    "generated_trajectory_count": 10000,
+    "failure_counts": {},
+    "all_source_batch_validations_passed": true,
+    "all_exported_keyframes_are_real_scored_source_poses": true,
+    "all_scores_are_measured_ezcam_still_scores": true,
+    "materialized_interpolated_keyframe_count": 0,
+    "total_real_scored_keyframe_count": 79372,
+    "all_real_scores_strictly_increasing": true,
+    "all_score_gains_at_least_2": true,
+    "all_net_distances_at_least_10m": true,
+    "all_path_to_net_ratios_at_most_1p5": true,
+    "all_target_distance_backtracking_at_most_0p3m": true,
+    "all_near_revisit_counts_zero": true,
+    "unique_physical_geometry_signatures": 10000,
+    "unique_real_node_path_signatures": 10000,
+    "distinct_target_anchor_poses": 4,
+    "target_anchor_distribution": {
+      "1": 2500,
+      "2": 2500,
+      "3": 2500,
+      "4": 2500
+    },
+    "keyframe_count": {
+      "min": 6.0,
+      "mean": 7.9372,
+      "max": 11.0
+    },
+    "duration_sec": {
+      "min": 5.1356,
+      "mean": 8.14888,
+      "max": 13.872332
+    },
+    "score_gain": {
+      "min": 2.000037,
+      "mean": 2.450921,
+      "max": 3.52936
+    },
+    "path_xyz_length": {
+      "min": 11.053503,
+      "mean": 16.141144,
+      "max": 25.184643
+    },
+    "net_xyz_distance": {
+      "min": 10.036708,
+      "mean": 14.341635,
+      "max": 23.427027
+    },
+    "path_to_net_ratio": {
+      "min": 1.000723,
+      "mean": 1.139216,
+      "max": 1.499955
+    },
+    "true_video_frame_monotonicity_guaranteed": false,
+    "true_video_note": "Every exported keyframe is a measured, strictly increasing EZCAM still pose. Runtime frames between controls remain unscored until capture and rescoring."
+  },
+  "ui_loader_contract_validation": {
+    "validation_passed": true,
+    "loader_contract": "RE9_Still_Scan src/re9_pose_recorder/trajectory_replay.py",
+    "checks": {
+      "root_has_trajectories_list": true,
+      "trajectory_count_matches": true,
+      "trajectory_ids_unique": true,
+      "all_have_at_least_two_keyframes": true,
+      "all_steps_are_zero_based": true,
+      "all_times_strictly_increase_from_zero": true,
+      "all_required_ui_pose_fields_are_numeric": true,
+      "all_scores_strictly_increase": true,
+      "endpoint_count_matches": true,
+      "angles_explicitly_declared_degrees": true
+    }
+  },
+  "collision_clearance_mesh_verified": false,
+  "collision_note": "All controls are sampled source poses, but continuous runtime interpolation has not been tested against a scene collision mesh. Perform a smoke capture before full collection."
+}
