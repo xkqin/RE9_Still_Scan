@@ -373,7 +373,7 @@ The scan definitions live in:
 
 ```text
 configs/still_scan_layers.yaml
-configs/new_scene_scan_layers.yaml
+configs/scene_2_scan_layers.yaml
 ```
 
 Each layer/zone defines a rectangular region using two diagonal points and a sampling density:
@@ -396,7 +396,7 @@ Edit one of these YAML files:
 
 ```text
 configs/still_scan_layers.yaml
-configs/new_scene_scan_layers.yaml
+configs/scene_2_scan_layers.yaml
 ```
 
 Use the FreeCam UI in REFramework to read the camera position. The FreeCam panel shows a line like:

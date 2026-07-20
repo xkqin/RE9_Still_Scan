@@ -19,7 +19,7 @@ if __name__ == "__main__":
         "--obs-password",
         "123456",
         "--layers-config",
-        "configs/new_scene_scan_layers.yaml",
+        "configs/scene_2_scan_layers.yaml",
         "--session-id",
         "scene_2",
         "--points-x",
