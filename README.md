@@ -311,6 +311,18 @@ Run the two-scene scan example:
 python scripts\scan_new_scenes_gui.py
 ```
 
+The scene 2 launcher is portable: it loads the no-chandelier six-layer scan
+from `scene_2_y01` and preloads the 15 low-to-high scene 2 trajectories from
+`data/trajectory_exports/scene_2_true_keyframes_gain2p3_distance4_step4_singleanchor_smoke15_cluster3/`.
+It does not depend on a Desktop path.
+
+For another capture machine, copy the files under
+`data/scene_2_capture/reframework/` into the game's `reframework/` directory,
+preserving the `autorun/` and `data/` subdirectories. This installs the tested
+Lua UI snapshot and the recorded scene point files used to build the scan
+volume. Back up an existing `RE9FreeCam.lua` first if that machine has custom
+changes.
+
 Linux direct CLI equivalent:
 
 ```bash

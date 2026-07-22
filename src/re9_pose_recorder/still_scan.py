@@ -3,8 +3,11 @@ from __future__ import annotations
 import csv
 import json
 import math
+import shutil
 import time
 from dataclasses import asdict, dataclass
+from functools import lru_cache
+from itertools import combinations
 from pathlib import Path
 from threading import Event
 from typing import Any, Callable, Iterable
@@ -49,6 +52,8 @@ class StillLayer:
     z_max: float
     points_x: int | None = None
     points_z: int | None = None
+    hull_points: tuple[tuple[float, float, float], ...] | None = None
+    exclude_ellipsoids: tuple[tuple[float, float, float, float, float, float], ...] = ()
 
 
 def linspace(start: float, stop: float, count: int) -> list[float]:
@@ -144,6 +149,11 @@ def build_layered_still_scan_plan(layers: Iterable[StillLayer], points_x: int = 
         point_index = 1
         for z in zs:
             for x in xs:
+                point = (x, layer.y, z)
+                if layer.hull_points and not _point_in_convex_hull(point, layer.hull_points):
+                    continue
+                if any(_point_in_ellipsoid(point, ellipsoid) for ellipsoid in layer.exclude_ellipsoids):
+                    continue
                 for pattern, pitch_deg, yaw_degrees in patterns:
                     for yaw_deg in yaw_degrees:
                         samples.append(
@@ -181,6 +191,8 @@ def load_still_layers(path: str | Path) -> list[StillLayer]:
     if not isinstance(entries, list) or not entries:
         raise ValueError(f"No layers found in {config_path}")
 
+    hull_points = _hull_points(raw.get("space_hull"))
+    exclude_ellipsoids = _exclude_ellipsoids(raw.get("exclude_ellipsoids"))
     layers: list[StillLayer] = []
     for index, entry in enumerate(entries, start=1):
         if not isinstance(entry, dict):
@@ -222,6 +234,8 @@ def load_still_layers(path: str | Path) -> list[StillLayer]:
                     z_max=max(float(point_a["z"]), float(point_b["z"])),
                     points_x=_optional_int(zone.get("points_x")),
                     points_z=_optional_int(zone.get("points_z")),
+                    hull_points=hull_points,
+                    exclude_ellipsoids=exclude_ellipsoids,
                 )
             )
     return layers
@@ -243,8 +257,13 @@ def run_layered_still_scan(
     max_samples: int | None = None,
     progress_callback: Callable[[StillSample, int, Path], None] | None = None,
     stop_event: Event | None = None,
+    resume_from_layer: str | None = None,
 ) -> dict[str, Path]:
     plan = build_layered_still_scan_plan(layers, points_x=points_x, points_z=points_z)
+    replace_layer_ids: set[str] | None = None
+    if resume_from_layer:
+        plan = slice_still_scan_plan_from_layer(plan, resume_from_layer)
+        replace_layer_ids = {sample.layer_id for sample in plan}
     return _run_plan(
         config=config,
         obs_password=obs_password,
@@ -259,7 +278,16 @@ def run_layered_still_scan(
         max_samples=max_samples,
         progress_callback=progress_callback,
         stop_event=stop_event,
+        append_existing=bool(resume_from_layer),
+        replace_layer_ids=replace_layer_ids,
     )
+
+
+def slice_still_scan_plan_from_layer(plan: list[StillSample], layer_id: str) -> list[StillSample]:
+    for index, sample in enumerate(plan):
+        if sample.layer_id == layer_id:
+            return plan[index:]
+    raise ValueError(f"Resume layer was not found in the scan plan: {layer_id}")
 
 
 def load_still_pose_plan(path: str | Path, group_id: str = "scene_1_extra") -> list[StillSample]:
@@ -417,6 +445,8 @@ def _run_plan(
     max_samples: int | None,
     progress_callback: Callable[[StillSample, int, Path], None] | None,
     stop_event: Event | None,
+    append_existing: bool = False,
+    replace_layer_ids: set[str] | None = None,
 ) -> dict[str, Path]:
     obs_cfg = config.raw["obs"]
     session = session_id or f"stills_{make_session_id()}"
@@ -430,7 +460,11 @@ def _run_plan(
 
     controller = OBSController(obs_cfg["host"], int(obs_cfg["port"]), obs_password or obs_cfg.get("password", ""))
     control = LuaControl(config)
-    _write_plan(plan_csv, plan)
+    samples_backup: Path | None = None
+    if append_existing and replace_layer_ids:
+        samples_backup = _remove_sample_rows_for_layers(samples_csv, replace_layer_ids)
+    if not append_existing or not plan_csv.exists():
+        _write_plan(plan_csv, plan)
 
     source_used = ""
     dataset_files: dict[str, tuple[object, csv.DictWriter]] = {}
@@ -456,10 +490,13 @@ def _run_plan(
         "captured_at_unix",
     ]
     try:
-        with samples_csv.open("w", encoding="utf-8", newline="") as handle:
+        write_header = not append_existing or not samples_csv.exists() or samples_csv.stat().st_size == 0
+        mode = "a" if append_existing else "w"
+        with samples_csv.open(mode, encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=fieldnames)
-            writer.writeheader()
-            total = len(plan)
+            if write_header:
+                writer.writeheader()
+            total = plan[-1].sample_index if append_existing and plan else len(plan)
             for sample in plan:
                 if stop_event is not None and stop_event.is_set():
                     break
@@ -514,12 +551,36 @@ def _run_plan(
             dataset_handle.close()
         control.write_clear_pose_control(session)
 
-    return {
+    outputs = {
         "output_dir": output_dir,
         "datasets": datasets_dir,
         "samples_csv": samples_csv,
         "scan_plan_csv": plan_csv,
     }
+    if samples_backup is not None:
+        outputs["samples_backup"] = samples_backup
+    return outputs
+
+
+def _remove_sample_rows_for_layers(path: Path, layer_ids: set[str]) -> Path | None:
+    if not path.exists() or path.stat().st_size == 0:
+        return None
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fieldnames = reader.fieldnames
+        rows = list(reader)
+    if not fieldnames:
+        return None
+    kept = [row for row in rows if row.get("layer_id") not in layer_ids]
+    if len(kept) == len(rows):
+        return None
+    backup = path.with_name(f"samples_before_resume_{int(time.time())}.csv")
+    shutil.copy2(path, backup)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(kept)
+    return backup
 
 
 def _write_plan(path: Path, plan: list[StillSample]) -> None:
@@ -582,6 +643,106 @@ def _point(value: Any, label: str) -> dict[str, float]:
     if not isinstance(value, dict):
         raise ValueError(f"{label} must contain x, y, and z.")
     return {axis: float(value[axis]) for axis in ("x", "y", "z")}
+
+
+def _hull_points(value: Any) -> tuple[tuple[float, float, float], ...] | None:
+    if value is None:
+        return None
+    entries = value.get("points") if isinstance(value, dict) else value
+    if not isinstance(entries, list) or len(entries) < 4:
+        raise ValueError("space_hull must contain at least four 3D points.")
+    parsed = [_point(entry, f"space_hull point {index}") for index, entry in enumerate(entries, start=1)]
+    points = tuple((point["x"], point["y"], point["z"]) for point in parsed)
+    _convex_hull_planes(points)
+    return points
+
+
+def _exclude_ellipsoids(value: Any) -> tuple[tuple[float, float, float, float, float, float], ...]:
+    if value is None:
+        return ()
+    if not isinstance(value, list):
+        raise ValueError("exclude_ellipsoids must be a list.")
+    ellipsoids = []
+    for index, entry in enumerate(value, start=1):
+        if not isinstance(entry, dict):
+            raise ValueError(f"exclude_ellipsoids entry {index} must be a mapping.")
+        center = _point(entry.get("center"), f"exclude_ellipsoids entry {index} center")
+        radius = entry.get("radius")
+        if not isinstance(radius, dict):
+            raise ValueError(f"exclude_ellipsoids entry {index} radius must contain x, y, and z.")
+        radii = tuple(float(radius[axis]) for axis in ("x", "y", "z"))
+        if any(component <= 0 for component in radii):
+            raise ValueError(f"exclude_ellipsoids entry {index} radii must be greater than zero.")
+        ellipsoids.append((center["x"], center["y"], center["z"], *radii))
+    return tuple(ellipsoids)
+
+
+def _point_in_ellipsoid(
+    point: tuple[float, float, float],
+    ellipsoid: tuple[float, float, float, float, float, float],
+) -> bool:
+    center_x, center_y, center_z, radius_x, radius_y, radius_z = ellipsoid
+    return (
+        ((point[0] - center_x) / radius_x) ** 2
+        + ((point[1] - center_y) / radius_y) ** 2
+        + ((point[2] - center_z) / radius_z) ** 2
+        <= 1.0
+    )
+
+
+def _point_in_convex_hull(
+    point: tuple[float, float, float],
+    hull_points: tuple[tuple[float, float, float], ...],
+    tolerance: float = 1e-6,
+) -> bool:
+    return all(_dot3(normal, point) + offset <= tolerance for normal, offset in _convex_hull_planes(hull_points))
+
+
+@lru_cache(maxsize=32)
+def _convex_hull_planes(
+    points: tuple[tuple[float, float, float], ...],
+) -> tuple[tuple[tuple[float, float, float], float], ...]:
+    epsilon = 1e-8
+    planes: dict[tuple[float, float, float, float], tuple[tuple[float, float, float], float]] = {}
+    for first, second, third in combinations(points, 3):
+        normal = _cross3(_subtract3(second, first), _subtract3(third, first))
+        length = math.sqrt(_dot3(normal, normal))
+        if length <= epsilon:
+            continue
+        normal = tuple(component / length for component in normal)
+        distances = [_dot3(normal, _subtract3(candidate, first)) for candidate in points]
+        if max(distances) <= epsilon:
+            pass
+        elif min(distances) >= -epsilon:
+            normal = tuple(-component for component in normal)
+        else:
+            continue
+        offset = -_dot3(normal, first)
+        key = tuple(round(component, 6) for component in (*normal, offset))
+        planes[key] = (normal, offset)
+    if len(planes) < 4:
+        raise ValueError("space_hull points do not form a valid 3D convex volume.")
+    return tuple(planes.values())
+
+
+def _subtract3(
+    left: tuple[float, float, float], right: tuple[float, float, float]
+) -> tuple[float, float, float]:
+    return left[0] - right[0], left[1] - right[1], left[2] - right[2]
+
+
+def _dot3(left: tuple[float, float, float], right: tuple[float, float, float]) -> float:
+    return left[0] * right[0] + left[1] * right[1] + left[2] * right[2]
+
+
+def _cross3(
+    left: tuple[float, float, float], right: tuple[float, float, float]
+) -> tuple[float, float, float]:
+    return (
+        left[1] * right[2] - left[2] * right[1],
+        left[2] * right[0] - left[0] * right[2],
+        left[0] * right[1] - left[1] * right[0],
+    )
 
 
 def _optional_int(value: Any) -> int | None:

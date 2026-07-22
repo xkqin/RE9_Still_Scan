@@ -1,0 +1,117 @@
+{
+  "scene_id": "scene_2",
+  "global_max_score": 6.526478,
+  "no_7plus_available": true,
+  "generation_policy": {
+    "real_scored_control_points_only": true,
+    "strict_measured_score_monotonicity": true,
+    "minimum_score_gain": 2.3,
+    "minimum_net_distance_m": 4.0,
+    "maximum_path_length_m": 40.0,
+    "maximum_path_to_net_ratio": 1.5,
+    "maximum_target_distance_total_increase_m": 0.3,
+    "maximum_control_turn_deg": 100.0,
+    "near_revisits_forbidden": true,
+    "unique_physical_xyz_geometry_required": true,
+    "export_direction": "low_to_high"
+  },
+  "batch_reports": [
+    {
+      "target_anchor_rank": 1,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_2_no_lamp/datasets/scene_2/trajectories_true_keyframes_gain2p3_distance4_step4_singleanchor_smoke15_cluster3/_shards/start_0/scene_2_true_gain2p3_no_backtrack_5_trajectories.json",
+      "trajectory_count": 5,
+      "target_anchor_node_id": "scene_2_no_lamp|scene_2_y01_room_dense_y01_3p17|355|17",
+      "target_anchor_score": 6.526478,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 680,
+        "eligible_start_position_count_before_sharding": 515,
+        "assigned_start_position_count": 172,
+        "planning_start_shard_count": 3,
+        "planning_start_shard_index": 0,
+        "requested_candidate_count": 5,
+        "expanded_state_count": 6271,
+        "remaining_queue_size": 311928,
+        "rejected_duplicate_geometry_count": 1,
+        "rejected_start_capacity": {},
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 3,
+        "accepted_start_position_count": 3,
+        "accepted_per_start_node_max": 3,
+        "accepted_per_start_position_max": 3,
+        "accepted_target_predecessor_position_count": 1,
+        "accepted_target_predecessor_position_distribution": {
+          "(2.095714, 3.17, 38.438571)": 5
+        },
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    },
+    {
+      "target_anchor_rank": 1,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_2_no_lamp/datasets/scene_2/trajectories_true_keyframes_gain2p3_distance4_step4_singleanchor_smoke15_cluster3/_shards/start_1/scene_2_true_gain2p3_no_backtrack_5_trajectories.json",
+      "trajectory_count": 5,
+      "target_anchor_node_id": "scene_2_no_lamp|scene_2_y01_room_dense_y01_3p17|355|17",
+      "target_anchor_score": 6.526478,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 692,
+        "eligible_start_position_count_before_sharding": 515,
+        "assigned_start_position_count": 172,
+        "planning_start_shard_count": 3,
+        "planning_start_shard_index": 1,
+        "requested_candidate_count": 5,
+        "expanded_state_count": 14138,
+        "remaining_queue_size": 478111,
+        "rejected_duplicate_geometry_count": 2,
+        "rejected_start_capacity": {},
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 2,
+        "accepted_start_position_count": 2,
+        "accepted_per_start_node_max": 4,
+        "accepted_per_start_position_max": 4,
+        "accepted_target_predecessor_position_count": 1,
+        "accepted_target_predecessor_position_distribution": {
+          "(2.095714, 3.17, 38.438571)": 5
+        },
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    },
+    {
+      "target_anchor_rank": 1,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_2_no_lamp/datasets/scene_2/trajectories_true_keyframes_gain2p3_distance4_step4_singleanchor_smoke15_cluster3/_shards/start_2/scene_2_true_gain2p3_no_backtrack_5_trajectories.json",
+      "trajectory_count": 5,
+      "target_anchor_node_id": "scene_2_no_lamp|scene_2_y01_room_dense_y01_3p17|355|17",
+      "target_anchor_score": 6.526478,
+      "batch_validation_passed": true,
+      "search_stats": {
+        "eligible_start_count": 650,
+        "eligible_start_position_count_before_sharding": 515,
+        "assigned_start_position_count": 171,
+        "planning_start_shard_count": 3,
+        "planning_start_shard_index": 2,
+        "requested_candidate_count": 5,
+        "expanded_state_count": 15353,
+        "remaining_queue_size": 499024,
+        "rejected_duplicate_geometry_count": 1,
+        "rejected_start_capacity": {},
+        "rejected_completed_route_quality": {},
+        "accepted_start_node_count": 3,
+        "accepted_start_position_count": 3,
+        "accepted_per_start_node_max": 3,
+        "accepted_per_start_position_max": 3,
+        "accepted_target_predecessor_position_count": 1,
+        "accepted_target_predecessor_position_distribution": {
+          "(2.095714, 3.17, 38.438571)": 5
+        },
+        "search_exhausted": false,
+        "state_limit_reached": false
+      }
+    }
+  ],
+  "target_anchor_distribution": {
+    "1": 15
+  },
+  "generated_count": 15
+}

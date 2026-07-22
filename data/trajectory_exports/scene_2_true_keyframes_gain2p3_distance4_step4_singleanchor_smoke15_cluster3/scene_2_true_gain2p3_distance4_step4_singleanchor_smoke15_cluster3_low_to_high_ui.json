@@ -1,0 +1,1377 @@
+{
+  "version": 1,
+  "scene_id": "scene_2",
+  "trajectory_type": "ui_capture_low_to_high",
+  "trajectory_count": 15,
+  "coordinate_system": {
+    "position_axes": "RE9 world x,y,z",
+    "vertical_axis": "y",
+    "yaw_unit": "degrees",
+    "pitch_unit": "degrees"
+  },
+  "trajectories": [
+    {
+      "trajectory_id": "scene_2_smoke_01",
+      "direction": "low_to_high",
+      "keyframe_count": 7,
+      "duration_sec": 5.294007,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.201054
+        },
+        {
+          "step": 1,
+          "time_sec": 1.125,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 2,
+          "time_sec": 1.644481,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.077575
+        },
+        {
+          "step": 3,
+          "time_sec": 3.130046,
+          "x": 0.381429,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.473651
+        },
+        {
+          "step": 4,
+          "time_sec": 4.255046,
+          "x": 0.952857,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.891927
+        },
+        {
+          "step": 5,
+          "time_sec": 4.774527,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 6,
+          "time_sec": 5.294007,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_02",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 3.897585,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.182687
+        },
+        {
+          "step": 1,
+          "time_sec": 0.25974,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.30599
+        },
+        {
+          "step": 2,
+          "time_sec": 0.779221,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.693547
+        },
+        {
+          "step": 3,
+          "time_sec": 1.558442,
+          "x": 0.952857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.948273
+        },
+        {
+          "step": 4,
+          "time_sec": 1.818182,
+          "x": 1.524286,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.387858
+        },
+        {
+          "step": 5,
+          "time_sec": 3.118365,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 3.378105,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 3.897585,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_03",
+      "direction": "low_to_high",
+      "keyframe_count": 7,
+      "duration_sec": 4.372857,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 36.546429,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.20964
+        },
+        {
+          "step": 1,
+          "time_sec": 1.125,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 2,
+          "time_sec": 1.511853,
+          "x": -1.332857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.01501
+        },
+        {
+          "step": 3,
+          "time_sec": 2.105191,
+          "x": -0.19,
+          "y": 5.96,
+          "z": 38.438571,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.388021
+        },
+        {
+          "step": 4,
+          "time_sec": 3.593637,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 5,
+          "time_sec": 3.853377,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 6,
+          "time_sec": 4.372857,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_04",
+      "direction": "low_to_high",
+      "keyframe_count": 7,
+      "duration_sec": 4.428748,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.201054
+        },
+        {
+          "step": 1,
+          "time_sec": 1.125,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 2,
+          "time_sec": 1.644481,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.077575
+        },
+        {
+          "step": 3,
+          "time_sec": 2.163961,
+          "x": 0.381429,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.466209
+        },
+        {
+          "step": 4,
+          "time_sec": 3.649527,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 5,
+          "time_sec": 3.909267,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 6,
+          "time_sec": 4.428748,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_05",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 4.528795,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.182687
+        },
+        {
+          "step": 1,
+          "time_sec": 0.25974,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.30599
+        },
+        {
+          "step": 2,
+          "time_sec": 0.779221,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.693547
+        },
+        {
+          "step": 3,
+          "time_sec": 1.298701,
+          "x": 0.381429,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.080599
+        },
+        {
+          "step": 4,
+          "time_sec": 2.423701,
+          "x": 0.952857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.39577
+        },
+        {
+          "step": 5,
+          "time_sec": 3.749575,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 4.009315,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 4.528795,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_06",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 4.021563,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -3.047143,
+          "y": 5.96,
+          "z": 35.915714,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.102849
+        },
+        {
+          "step": 1,
+          "time_sec": 0.386853,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 36.546429,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.424863
+        },
+        {
+          "step": 2,
+          "time_sec": 0.773706,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 3,
+          "time_sec": 1.160559,
+          "x": -1.332857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.01501
+        },
+        {
+          "step": 4,
+          "time_sec": 1.753897,
+          "x": -0.19,
+          "y": 5.96,
+          "z": 38.438571,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.388021
+        },
+        {
+          "step": 5,
+          "time_sec": 3.242343,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 3.502083,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 4.021563,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_07",
+      "direction": "low_to_high",
+      "keyframe_count": 7,
+      "duration_sec": 4.417159,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.201054
+        },
+        {
+          "step": 1,
+          "time_sec": 1.125,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 2,
+          "time_sec": 1.644481,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.077575
+        },
+        {
+          "step": 3,
+          "time_sec": 3.0446,
+          "x": 0.381429,
+          "y": 3.17,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.482958
+        },
+        {
+          "step": 4,
+          "time_sec": 3.637938,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 5,
+          "time_sec": 3.897679,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 6,
+          "time_sec": 4.417159,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_08",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 3.811251,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.182687
+        },
+        {
+          "step": 1,
+          "time_sec": 0.25974,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.30599
+        },
+        {
+          "step": 2,
+          "time_sec": 0.853078,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.748693
+        },
+        {
+          "step": 3,
+          "time_sec": 1.446417,
+          "x": 0.381429,
+          "y": 5.96,
+          "z": 39.069286,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.197149
+        },
+        {
+          "step": 4,
+          "time_sec": 1.706157,
+          "x": 0.952857,
+          "y": 5.96,
+          "z": 39.069286,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.39061
+        },
+        {
+          "step": 5,
+          "time_sec": 3.03203,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 3.291771,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 3.811251,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_09",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 4.470026,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.084857
+        },
+        {
+          "step": 1,
+          "time_sec": 0.386853,
+          "x": -1.332857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 135.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.353824
+        },
+        {
+          "step": 2,
+          "time_sec": 1.511853,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.748693
+        },
+        {
+          "step": 3,
+          "time_sec": 2.105191,
+          "x": 0.381429,
+          "y": 5.96,
+          "z": 39.069286,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.197149
+        },
+        {
+          "step": 4,
+          "time_sec": 2.364931,
+          "x": 0.952857,
+          "y": 5.96,
+          "z": 39.069286,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.39061
+        },
+        {
+          "step": 5,
+          "time_sec": 3.690805,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 3.950545,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 4.470026,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_10",
+      "direction": "low_to_high",
+      "keyframe_count": 7,
+      "duration_sec": 3.841196,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -3.047143,
+          "y": 5.96,
+          "z": 36.546429,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.194014
+        },
+        {
+          "step": 1,
+          "time_sec": 0.593338,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 2,
+          "time_sec": 0.980191,
+          "x": -1.332857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.01501
+        },
+        {
+          "step": 3,
+          "time_sec": 1.573529,
+          "x": -0.19,
+          "y": 5.96,
+          "z": 38.438571,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.388021
+        },
+        {
+          "step": 4,
+          "time_sec": 3.061975,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 5,
+          "time_sec": 3.321715,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 6,
+          "time_sec": 3.841196,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_11",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 3.939442,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.182687
+        },
+        {
+          "step": 1,
+          "time_sec": 0.25974,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.30599
+        },
+        {
+          "step": 2,
+          "time_sec": 0.779221,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.693547
+        },
+        {
+          "step": 3,
+          "time_sec": 1.298701,
+          "x": 0.381429,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.080599
+        },
+        {
+          "step": 4,
+          "time_sec": 2.566883,
+          "x": 0.381429,
+          "y": 3.17,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.482958
+        },
+        {
+          "step": 5,
+          "time_sec": 3.160221,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 3.419962,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 3.939442,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_12",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 5.173381,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 36.546429,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.20964
+        },
+        {
+          "step": 1,
+          "time_sec": 1.125,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 2,
+          "time_sec": 1.511853,
+          "x": -1.332857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.01501
+        },
+        {
+          "step": 3,
+          "time_sec": 1.898706,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 38.438571,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.200406
+        },
+        {
+          "step": 4,
+          "time_sec": 3.26916,
+          "x": 0.381429,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.473651
+        },
+        {
+          "step": 5,
+          "time_sec": 4.39416,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 4.6539,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 5.173381,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_13",
+      "direction": "low_to_high",
+      "keyframe_count": 7,
+      "duration_sec": 4.525997,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 36.546429,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 4.209934
+        },
+        {
+          "step": 1,
+          "time_sec": 0.386853,
+          "x": -0.19,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 120.0,
+          "pitch": 45.0,
+          "fov": null,
+          "score": 4.49895
+        },
+        {
+          "step": 2,
+          "time_sec": 2.186853,
+          "x": 0.952857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.948273
+        },
+        {
+          "step": 3,
+          "time_sec": 2.446593,
+          "x": 1.524286,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.387858
+        },
+        {
+          "step": 4,
+          "time_sec": 3.746776,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 5,
+          "time_sec": 4.006516,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 6,
+          "time_sec": 4.525997,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_14",
+      "direction": "low_to_high",
+      "keyframe_count": 8,
+      "duration_sec": 4.082968,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -3.618571,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.106986
+        },
+        {
+          "step": 1,
+          "time_sec": 0.519481,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.340476
+        },
+        {
+          "step": 2,
+          "time_sec": 0.779221,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 3,
+          "time_sec": 1.298701,
+          "x": -0.761429,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.077575
+        },
+        {
+          "step": 4,
+          "time_sec": 1.818182,
+          "x": 0.381429,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.466209
+        },
+        {
+          "step": 5,
+          "time_sec": 3.303748,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 6,
+          "time_sec": 3.563488,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 7,
+          "time_sec": 4.082968,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    },
+    {
+      "trajectory_id": "scene_2_smoke_15",
+      "direction": "low_to_high",
+      "keyframe_count": 7,
+      "duration_sec": 4.491814,
+      "keyframes": [
+        {
+          "step": 0,
+          "time_sec": 0.0,
+          "x": -2.475714,
+          "y": 5.96,
+          "z": 36.546429,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.20964
+        },
+        {
+          "step": 1,
+          "time_sec": 1.125,
+          "x": -1.904286,
+          "y": 5.96,
+          "z": 37.177143,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 4.634536
+        },
+        {
+          "step": 2,
+          "time_sec": 1.511853,
+          "x": -1.332857,
+          "y": 5.96,
+          "z": 37.807857,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.01501
+        },
+        {
+          "step": 3,
+          "time_sec": 2.342139,
+          "x": 0.381429,
+          "y": 5.96,
+          "z": 38.438571,
+          "yaw": 45.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.414753
+        },
+        {
+          "step": 4,
+          "time_sec": 3.712594,
+          "x": 1.524286,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 5.831069
+        },
+        {
+          "step": 5,
+          "time_sec": 3.972334,
+          "x": 2.095714,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.101421
+        },
+        {
+          "step": 6,
+          "time_sec": 4.491814,
+          "x": 3.238571,
+          "y": 3.17,
+          "z": 38.438571,
+          "yaw": 90.0,
+          "pitch": 0.0,
+          "fov": null,
+          "score": 6.526478
+        }
+      ]
+    }
+  ]
+}

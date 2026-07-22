@@ -1,0 +1,97 @@
+space_hull:
+  description: Scene 2 convex capture volume from 16 recorded boundary points
+  points:
+    - {x: -3.124358000, y: 6.910953422, z: 30.872187956}
+    - {x: -3.610823018, y: 5.486591567, z: 39.050742938}
+    - {x: -3.610823018, y: 11.936591824, z: 39.050742938}
+    - {x: -3.451148540, y: 11.351380661, z: 32.102170363}
+    - {x: 3.808020432, y: 10.897176623, z: 32.209897867}
+    - {x: 3.808020432, y: 6.772176459, z: 32.209897867}
+    - {x: 3.772644947, y: 5.955729613, z: 38.907039053}
+    - {x: 3.772644947, y: 9.780729765, z: 38.907039053}
+    - {x: -4.190320572, y: 5.865320581, z: 36.920186480}
+    - {x: -3.558486890, y: 3.295129528, z: 37.416617959}
+    - {x: 3.257168457, y: 3.050738009, z: 37.345713804}
+    - {x: 3.257168457, y: 6.425738143, z: 37.345713804}
+    - {x: 3.507591804, y: 5.705325487, z: 39.700106117}
+    - {x: 3.507591804, y: 3.305325391, z: 39.700106117}
+    - {x: -2.405466706, y: 3.192013576, z: 39.610082274}
+    - {x: -2.405466706, y: 6.642013713, z: 39.610082274}
+
+exclude_ellipsoids:
+  - id: chandelier
+    center: {x: -0.01, y: 9.45, z: 35.46}
+    radius: {x: 1.50, y: 2.55, z: 1.50}
+
+layers:
+  - id: scene_2_y01
+    group_id: scene_2
+    y: 3.17
+    point_a: {x: -4.19, y: 3.17, z: 30.87}
+    point_b: {x: 3.81, y: 3.17, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 15
+        points_z: 15
+        point_a: {x: -4.19, y: 3.17, z: 30.87}
+        point_b: {x: 3.81, y: 3.17, z: 39.70}
+
+  - id: scene_2_y02
+    group_id: scene_2
+    y: 5.96
+    point_a: {x: -4.19, y: 5.96, z: 30.87}
+    point_b: {x: 3.81, y: 5.96, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 15
+        points_z: 15
+        point_a: {x: -4.19, y: 5.96, z: 30.87}
+        point_b: {x: 3.81, y: 5.96, z: 39.70}
+
+  - id: scene_2_y03
+    group_id: scene_2
+    y: 7.82
+    point_a: {x: -4.19, y: 7.82, z: 30.87}
+    point_b: {x: 3.81, y: 7.82, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 15
+        points_z: 15
+        point_a: {x: -4.19, y: 7.82, z: 30.87}
+        point_b: {x: 3.81, y: 7.82, z: 39.70}
+
+  - id: scene_2_y04
+    group_id: scene_2
+    y: 9.08
+    point_a: {x: -4.19, y: 9.08, z: 30.87}
+    point_b: {x: 3.81, y: 9.08, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 15
+        points_z: 15
+        point_a: {x: -4.19, y: 9.08, z: 30.87}
+        point_b: {x: 3.81, y: 9.08, z: 39.70}
+
+  - id: scene_2_y05
+    group_id: scene_2
+    y: 10.34
+    point_a: {x: -4.19, y: 10.34, z: 30.87}
+    point_b: {x: 3.81, y: 10.34, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 15
+        points_z: 15
+        point_a: {x: -4.19, y: 10.34, z: 30.87}
+        point_b: {x: 3.81, y: 10.34, z: 39.70}
+
+  - id: scene_2_y06
+    group_id: scene_2
+    y: 11.65
+    point_a: {x: -4.19, y: 11.65, z: 30.87}
+    point_b: {x: 3.81, y: 11.65, z: 39.70}
+    zones:
+      - id: room_dense
+        points_x: 15
+        points_z: 15
+        point_a: {x: -4.19, y: 11.65, z: 30.87}
+        point_b: {x: 3.81, y: 11.65, z: 39.70}

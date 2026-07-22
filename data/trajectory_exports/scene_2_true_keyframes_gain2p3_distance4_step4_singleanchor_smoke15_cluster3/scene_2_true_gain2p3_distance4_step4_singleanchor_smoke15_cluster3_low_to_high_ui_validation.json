@@ -1,0 +1,80 @@
+{
+  "validation_passed": true,
+  "loader_contract": "RE9_Still_Scan src/re9_pose_recorder/trajectory_replay.py",
+  "checks": {
+    "root_has_trajectories_list": true,
+    "trajectory_count_matches": true,
+    "trajectory_ids_unique": true,
+    "all_have_at_least_two_keyframes": true,
+    "all_steps_are_zero_based": true,
+    "all_times_strictly_increase_from_zero": true,
+    "all_required_ui_pose_fields_are_numeric": true,
+    "all_scores_strictly_increase": true,
+    "endpoint_count_matches": true,
+    "angles_explicitly_declared_degrees": true
+  },
+  "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_2_no_lamp/datasets/scene_2/trajectories_true_keyframes_gain2p3_distance4_step4_singleanchor_smoke15_cluster3/scene_2_true_gain2p3_distance4_step4_singleanchor_smoke15_cluster3_trajectories.json",
+  "ui_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_2_no_lamp/datasets/scene_2/trajectories_true_keyframes_gain2p3_distance4_step4_singleanchor_smoke15_cluster3/scene_2_true_gain2p3_distance4_step4_singleanchor_smoke15_cluster3_low_to_high_ui.json",
+  "trajectory_mapping": [
+    {
+      "ui_trajectory_id": "scene_2_smoke_01",
+      "source_trajectory_id": "scene_2_smoke_00001"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_02",
+      "source_trajectory_id": "scene_2_smoke_00002"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_03",
+      "source_trajectory_id": "scene_2_smoke_00003"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_04",
+      "source_trajectory_id": "scene_2_smoke_00004"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_05",
+      "source_trajectory_id": "scene_2_smoke_00005"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_06",
+      "source_trajectory_id": "scene_2_smoke_00006"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_07",
+      "source_trajectory_id": "scene_2_smoke_00007"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_08",
+      "source_trajectory_id": "scene_2_smoke_00008"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_09",
+      "source_trajectory_id": "scene_2_smoke_00009"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_10",
+      "source_trajectory_id": "scene_2_smoke_00010"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_11",
+      "source_trajectory_id": "scene_2_smoke_00011"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_12",
+      "source_trajectory_id": "scene_2_smoke_00012"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_13",
+      "source_trajectory_id": "scene_2_smoke_00013"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_14",
+      "source_trajectory_id": "scene_2_smoke_00014"
+    },
+    {
+      "ui_trajectory_id": "scene_2_smoke_15",
+      "source_trajectory_id": "scene_2_smoke_00015"
+    }
+  ]
+}

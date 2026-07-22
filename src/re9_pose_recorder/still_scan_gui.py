@@ -23,6 +23,7 @@ from .still_scan import (
     run_layered_still_scan,
     run_still_pose_plan,
     run_still_scan,
+    slice_still_scan_plan_from_layer,
 )
 from .trajectory_replay import load_replay_trajectory, replay_trajectory_to_obs
 from .utils import timestamp_id
@@ -115,6 +116,7 @@ class StillScanApp:
         max_samples: int | None,
         session_id: str | None,
         layers_config: Path | None = None,
+        resume_from_layer: str | None = None,
         pose_plan_config: Path | None = None,
         trajectory_set_id: str = DEFAULT_TRAJECTORY_SET_ID,
         trajectory_json: Path | None = None,
@@ -141,6 +143,7 @@ class StillScanApp:
         self.max_samples = max_samples
         self.session_id = session_id
         self.layers_config = layers_config
+        self.resume_from_layer = resume_from_layer
         self.pose_plan_config = pose_plan_config
         self.stop_event = threading.Event()
         self.trajectory_stop_event = threading.Event()
@@ -188,6 +191,13 @@ class StillScanApp:
             layer_count = len({layer.layer_id for layer in layers})
             zone_count = len(layers)
             plan_text = f"Plan: {layer_count} layers, {zone_count} zones, 22 views per point, {len(planned)} images"
+            if resume_from_layer:
+                remaining = slice_still_scan_plan_from_layer(planned, resume_from_layer)
+                self.captured_count = remaining[0].sample_index - 1
+                plan_text = (
+                    f"Resume from {resume_from_layer}: {len(remaining)} images remaining; "
+                    f"preserving {self.captured_count} earlier images, total {len(planned)}"
+                )
         else:
             heights = parse_float_list(y_values)
             planned = build_still_scan_plan(x_min, x_max, z_min, z_max, heights, points_x, points_z)
@@ -212,7 +222,7 @@ class StillScanApp:
         self.pose_var = tk.StringVar(value="Current pose: -")
         self.file_var = tk.StringVar(value="Last image: -")
         self.output_var = tk.StringVar(value="Output: -")
-        self.progress_var = tk.IntVar(value=0)
+        self.progress_var = tk.IntVar(value=self.captured_count)
         self.trajectory_index_var = tk.IntVar(value=1)
         self.trajectory_set_var = tk.StringVar(value=self._trajectory_set_label(self.trajectory_set_id))
         self.trajectory_var = tk.StringVar(value=self._trajectory_status_text())
@@ -494,6 +504,7 @@ class StillScanApp:
                     max_samples=self.max_samples,
                     progress_callback=self._progress,
                     stop_event=self.stop_event,
+                    resume_from_layer=self.resume_from_layer,
                 )
             else:
                 heights = parse_float_list(self.y_values)
@@ -1073,6 +1084,7 @@ def run_still_scan_gui(
     max_samples: int | None = None,
     session_id: str | None = None,
     layers_config: Path | None = None,
+    resume_from_layer: str | None = None,
     pose_plan_config: Path | None = None,
     trajectory_set_id: str = DEFAULT_TRAJECTORY_SET_ID,
     trajectory_json: Path | None = None,
@@ -1100,6 +1112,7 @@ def run_still_scan_gui(
         max_samples=max_samples,
         session_id=session_id,
         layers_config=layers_config,
+        resume_from_layer=resume_from_layer,
         pose_plan_config=pose_plan_config,
         trajectory_set_id=trajectory_set_id,
         trajectory_json=trajectory_json,
