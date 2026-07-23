@@ -1,0 +1,28 @@
+{
+  "validation_passed": true,
+  "input_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.2/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_globaloverlap90_fast64_13000/scene_3_2_true_gain2p5_distance10_step8_singlemax_globaloverlap90_fast64_13000_trajectories.json",
+  "trajectory_count": 13000,
+  "checked_pair_count": 84493500,
+  "route_overlap_definition": {
+    "sample_spacing_m": 0.25,
+    "voxel_size_m": 0.5,
+    "denominator": "minimum occupied voxel count of the two routes"
+  },
+  "overlap_target": 0.4,
+  "hard_maximum_allowed": 0.9,
+  "maximum_pairwise_route_overlap_exact": 0.9,
+  "maximum_overlap_pair_indices": [
+    208,
+    10719
+  ],
+  "maximum_overlap_pair_trajectory_ids": [
+    "scene_3_2_traj_00209",
+    "scene_3_2_traj_10720"
+  ],
+  "pair_count_above_overlap_target": 1316417,
+  "pair_fraction_at_or_below_overlap_target": 0.9844199,
+  "pair_count_above_hard_maximum": 0,
+  "pairwise_route_overlap_p95_upper_bound": 0.277,
+  "p95_histogram_resolution": 10000,
+  "all_complete_routes_are_geometry_unique": true
+}

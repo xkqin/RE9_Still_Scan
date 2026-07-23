@@ -1,0 +1,107 @@
+{
+  "validation_passed": true,
+  "trajectory_constraint_validation": {
+    "validation_passed": true,
+    "scene_id": "scene_3.2",
+    "expected_trajectory_count": 13000,
+    "generated_trajectory_count": 13000,
+    "failure_counts": {},
+    "all_source_batch_validations_passed": true,
+    "all_exported_keyframes_are_real_scored_source_poses": true,
+    "all_scores_are_measured_ezcam_still_scores": true,
+    "materialized_interpolated_keyframe_count": 0,
+    "total_real_scored_keyframe_count": 115278,
+    "all_real_scores_strictly_increasing": true,
+    "minimum_score_gain_required": 2.5,
+    "all_score_gains_passed": true,
+    "minimum_net_distance_required_m": 10.0,
+    "all_net_distances_passed": true,
+    "maximum_path_length_required_m": 60.0,
+    "all_path_lengths_passed": true,
+    "maximum_path_to_net_ratio_required": 1.8,
+    "all_path_to_net_ratios_passed": true,
+    "maximum_target_distance_total_increase_required_m": 1.0,
+    "all_target_distance_backtracking_passed": true,
+    "maximum_control_turn_required_deg": 100.0,
+    "all_control_turns_passed": true,
+    "all_near_revisit_counts_zero": true,
+    "unique_physical_geometry_signatures": 13000,
+    "unique_real_node_path_signatures": 13000,
+    "distinct_target_anchor_poses": 1,
+    "global_max_score": 6.735721,
+    "global_max_node_ids": [
+      "scene_3.2|scene_3.2_y01_hull_dense_y01_14p63|466|22"
+    ],
+    "global_max_endpoint_required": true,
+    "all_endpoints_are_global_maximum": true,
+    "no_7plus_available": true,
+    "target_anchor_distribution": {
+      "1": 13000
+    },
+    "keyframe_count": {
+      "min": 7.0,
+      "mean": 8.867538,
+      "max": 13.0
+    },
+    "duration_sec": {
+      "min": 13.251278,
+      "mean": 21.312106,
+      "max": 27.961465
+    },
+    "score_gain": {
+      "min": 2.500137,
+      "mean": 2.988072,
+      "max": 3.950951
+    },
+    "path_xyz_length": {
+      "min": 27.909537,
+      "mean": 46.574978,
+      "max": 59.995197
+    },
+    "net_xyz_distance": {
+      "min": 17.346369,
+      "mean": 36.971417,
+      "max": 55.265752
+    },
+    "path_to_net_ratio": {
+      "min": 1.012799,
+      "mean": 1.297768,
+      "max": 1.799896
+    },
+    "true_video_frame_monotonicity_guaranteed": false,
+    "true_video_note": "Every exported keyframe is a measured, strictly increasing EZCAM still pose. Runtime frames between controls remain unscored until capture and rescoring."
+  },
+  "ui_loader_contract_validation": {
+    "validation_passed": true,
+    "loader_contract": "RE9_Still_Scan src/re9_pose_recorder/trajectory_replay.py",
+    "checks": {
+      "root_has_trajectories_list": true,
+      "trajectory_count_matches": true,
+      "trajectory_ids_unique": true,
+      "all_have_at_least_two_keyframes": true,
+      "all_steps_are_zero_based": true,
+      "all_times_strictly_increase_from_zero": true,
+      "all_required_ui_pose_fields_are_numeric": true,
+      "all_scores_strictly_increase": true,
+      "endpoint_count_matches": true,
+      "angles_explicitly_declared_degrees": true
+    }
+  },
+  "global_route_overlap_validation": {
+    "validation_passed": true,
+    "report": "global_route_overlap_audit.json",
+    "trajectory_count": 13000,
+    "checked_pair_count": 84493500,
+    "sample_spacing_m": 0.25,
+    "voxel_size_m": 0.5,
+    "overlap_target": 0.4,
+    "hard_maximum_allowed": 0.9,
+    "maximum_pairwise_route_overlap_exact": 0.9,
+    "pair_count_above_hard_maximum": 0,
+    "pair_fraction_at_or_below_overlap_target": 0.9844199,
+    "pairwise_route_overlap_p95_upper_bound": 0.277,
+    "all_complete_routes_are_geometry_unique": true
+  },
+  "collision_clearance_mesh_verified": false,
+  "collision_note": "All controls are sampled source poses, but continuous runtime interpolation has not been tested against a scene collision mesh. Perform a smoke capture before full collection."
+}

@@ -1,0 +1,34 @@
+{
+  "scene_id": "scene_3.1",
+  "global_max_score": 6.873469,
+  "no_7plus_available": true,
+  "generation_policy": {
+    "real_scored_control_points_only": true,
+    "strict_measured_score_monotonicity": true,
+    "minimum_score_gain": 2.5,
+    "minimum_net_distance_m": 10.0,
+    "maximum_path_length_m": 60.0,
+    "maximum_path_to_net_ratio": 1.8,
+    "maximum_target_distance_total_increase_m": 1.0,
+    "maximum_control_turn_deg": 100.0,
+    "near_revisits_forbidden": true,
+    "unique_physical_xyz_geometry_required": true,
+    "global_max_endpoint_required": true,
+    "export_direction": "low_to_high"
+  },
+  "batch_reports": [
+    {
+      "target_anchor_rank": 1,
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_globaloverlap90_fast64_15000/_selection/global_nonoverlap_selected_trajectories.json",
+      "trajectory_count": 15000,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469,
+      "batch_validation_passed": true,
+      "search_stats": null
+    }
+  ],
+  "target_anchor_distribution": {
+    "1": 15000
+  },
+  "generated_count": 15000
+}

@@ -1,0 +1,916 @@
+{
+  "target_rank": 1,
+  "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+  "target_anchor_score": 6.873469,
+  "selection_method": "global_voxel_conflict_graph_vertex_cover_then_balanced_subset",
+  "sample_spacing_m": 0.25,
+  "voxel_size_m": 0.5,
+  "hard_maximum_pairwise_route_overlap": 0.9,
+  "input_trajectory_count": 30000,
+  "duplicate_geometry_count_removed": 5403,
+  "unique_candidate_count": 24597,
+  "pool_conflict_pair_count": 16038,
+  "pool_maximum_pairwise_route_overlap": 1.0,
+  "vertices_removed_to_break_all_conflicts": 5664,
+  "conflict_free_candidate_count": 18933,
+  "selected_count": 15000,
+  "selected_start_position_count": 398,
+  "source_reports": [
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_00/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_01/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_02/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_03/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_04/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_05/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_06/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_07/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_08/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_09/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_10/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_11/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_12/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_13/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_14/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_15/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_16/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_17/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_18/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_19/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_20/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_21/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_22/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_23/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_24/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_25/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_26/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_27/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_28/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_29/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_30/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_31/scene_3_1_true_gain2p5_no_backtrack_balanced_313_trajectories.json",
+      "trajectory_count": 313,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_32/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_33/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_34/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_35/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_36/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_37/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_38/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_39/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_40/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_41/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_42/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_43/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_44/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_45/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_46/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_47/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_48/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_49/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_50/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_51/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_52/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_53/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_54/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_55/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_56/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_57/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_58/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_59/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_60/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_61/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_62/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_altpool_fast64_20000/_shards/start_63/scene_3_1_true_gain2p5_no_backtrack_balanced_312_trajectories.json",
+      "trajectory_count": 312,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_00/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_01/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_02/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_03/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_04/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_05/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_06/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_07/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_08/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_09/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_10/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_11/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_12/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_13/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_14/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_15/scene_3_1_true_gain2p5_no_backtrack_balanced_157_trajectories.json",
+      "trajectory_count": 157,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_16/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_17/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_18/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_19/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_20/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_21/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_22/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_23/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_24/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_25/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_26/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_27/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_28/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_29/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_30/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_31/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_32/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_33/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_34/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_35/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_36/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_37/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_38/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_39/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_40/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_41/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_42/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_43/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_44/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_45/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_46/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_47/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_48/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_49/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_50/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_51/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_52/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_53/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_54/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_55/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_56/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_57/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_58/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_59/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_60/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_61/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_62/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    },
+    {
+      "source_json": "/mnt/hwfile/qinxukun/datatrans/scene_1/datasets/scene_3.1/trajectories_true_keyframes_gain2p5_distance10_step8_singlemax_balanced_fast64_10000/_shards/start_63/scene_3_1_true_gain2p5_no_backtrack_balanced_156_trajectories.json",
+      "trajectory_count": 156,
+      "target_rank": 1,
+      "target_anchor_node_id": "scene_3.1|scene_3.1_y04_hull_dense_y04_14p13|8872|83",
+      "target_anchor_score": 6.873469
+    }
+  ]
+}
